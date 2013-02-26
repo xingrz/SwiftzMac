@@ -29,6 +29,7 @@
 		FC1DE55516DCD03D008CE989 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC1DE55616DCD03D008CE989 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FC1DE55916DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		FC1DE56016DCE76C008CE989 /* SwiftzMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SwiftzMac.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +83,7 @@
 		FC1DE54916DCD03D008CE989 /* SwiftzMac */ = {
 			isa = PBXGroup;
 			children = (
+				FC1DE56016DCE76C008CE989 /* SwiftzMac.entitlements */,
 				FC1DE55516DCD03D008CE989 /* AppDelegate.h */,
 				FC1DE55616DCD03D008CE989 /* AppDelegate.m */,
 				FC1DE55816DCD03D008CE989 /* MainMenu.xib */,
@@ -257,6 +259,8 @@
 		FC1DE55E16DCD03D008CE989 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SwiftzMac/SwiftzMac.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SwiftzMac/SwiftzMac-Prefix.pch";
@@ -269,6 +273,8 @@
 		FC1DE55F16DCD03D008CE989 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SwiftzMac/SwiftzMac.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SwiftzMac/SwiftzMac-Prefix.pch";
