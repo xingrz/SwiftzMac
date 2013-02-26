@@ -1,0 +1,304 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC1DE54416DCD03D008CE989 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1DE54316DCD03D008CE989 /* Cocoa.framework */; };
+		FC1DE54E16DCD03D008CE989 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */; };
+		FC1DE55016DCD03D008CE989 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE54F16DCD03D008CE989 /* main.m */; };
+		FC1DE55416DCD03D008CE989 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55216DCD03D008CE989 /* Credits.rtf */; };
+		FC1DE55716DCD03D008CE989 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE55616DCD03D008CE989 /* AppDelegate.m */; };
+		FC1DE55A16DCD03D008CE989 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55816DCD03D008CE989 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FC1DE53F16DCD03D008CE989 /* SwiftzMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftzMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC1DE54316DCD03D008CE989 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FC1DE54616DCD03D008CE989 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		FC1DE54716DCD03D008CE989 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FC1DE54816DCD03D008CE989 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FC1DE54B16DCD03D008CE989 /* SwiftzMac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SwiftzMac-Info.plist"; sourceTree = "<group>"; };
+		FC1DE54D16DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC1DE54F16DCD03D008CE989 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FC1DE55116DCD03D008CE989 /* SwiftzMac-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftzMac-Prefix.pch"; sourceTree = "<group>"; };
+		FC1DE55316DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		FC1DE55516DCD03D008CE989 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FC1DE55616DCD03D008CE989 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FC1DE55916DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC1DE53C16DCD03D008CE989 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC1DE54416DCD03D008CE989 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC1DE53416DCD03D008CE989 = {
+			isa = PBXGroup;
+			children = (
+				FC1DE54916DCD03D008CE989 /* SwiftzMac */,
+				FC1DE54216DCD03D008CE989 /* Frameworks */,
+				FC1DE54016DCD03D008CE989 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC1DE54016DCD03D008CE989 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC1DE53F16DCD03D008CE989 /* SwiftzMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC1DE54216DCD03D008CE989 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC1DE54316DCD03D008CE989 /* Cocoa.framework */,
+				FC1DE54516DCD03D008CE989 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC1DE54516DCD03D008CE989 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC1DE54616DCD03D008CE989 /* AppKit.framework */,
+				FC1DE54716DCD03D008CE989 /* CoreData.framework */,
+				FC1DE54816DCD03D008CE989 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		FC1DE54916DCD03D008CE989 /* SwiftzMac */ = {
+			isa = PBXGroup;
+			children = (
+				FC1DE55516DCD03D008CE989 /* AppDelegate.h */,
+				FC1DE55616DCD03D008CE989 /* AppDelegate.m */,
+				FC1DE55816DCD03D008CE989 /* MainMenu.xib */,
+				FC1DE54A16DCD03D008CE989 /* Supporting Files */,
+			);
+			path = SwiftzMac;
+			sourceTree = "<group>";
+		};
+		FC1DE54A16DCD03D008CE989 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC1DE54B16DCD03D008CE989 /* SwiftzMac-Info.plist */,
+				FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */,
+				FC1DE54F16DCD03D008CE989 /* main.m */,
+				FC1DE55116DCD03D008CE989 /* SwiftzMac-Prefix.pch */,
+				FC1DE55216DCD03D008CE989 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC1DE53E16DCD03D008CE989 /* SwiftzMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC1DE55D16DCD03D008CE989 /* Build configuration list for PBXNativeTarget "SwiftzMac" */;
+			buildPhases = (
+				FC1DE53B16DCD03D008CE989 /* Sources */,
+				FC1DE53C16DCD03D008CE989 /* Frameworks */,
+				FC1DE53D16DCD03D008CE989 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftzMac;
+			productName = SwiftzMac;
+			productReference = FC1DE53F16DCD03D008CE989 /* SwiftzMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC1DE53616DCD03D008CE989 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = XiNGRZ;
+			};
+			buildConfigurationList = FC1DE53916DCD03D008CE989 /* Build configuration list for PBXProject "SwiftzMac" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FC1DE53416DCD03D008CE989;
+			productRefGroup = FC1DE54016DCD03D008CE989 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC1DE53E16DCD03D008CE989 /* SwiftzMac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC1DE53D16DCD03D008CE989 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC1DE54E16DCD03D008CE989 /* InfoPlist.strings in Resources */,
+				FC1DE55416DCD03D008CE989 /* Credits.rtf in Resources */,
+				FC1DE55A16DCD03D008CE989 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC1DE53B16DCD03D008CE989 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC1DE55016DCD03D008CE989 /* main.m in Sources */,
+				FC1DE55716DCD03D008CE989 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC1DE54D16DCD03D008CE989 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FC1DE55216DCD03D008CE989 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC1DE55316DCD03D008CE989 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		FC1DE55816DCD03D008CE989 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC1DE55916DCD03D008CE989 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC1DE55B16DCD03D008CE989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FC1DE55C16DCD03D008CE989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FC1DE55E16DCD03D008CE989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SwiftzMac/SwiftzMac-Prefix.pch";
+				INFOPLIST_FILE = "SwiftzMac/SwiftzMac-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FC1DE55F16DCD03D008CE989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SwiftzMac/SwiftzMac-Prefix.pch";
+				INFOPLIST_FILE = "SwiftzMac/SwiftzMac-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC1DE53916DCD03D008CE989 /* Build configuration list for PBXProject "SwiftzMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC1DE55B16DCD03D008CE989 /* Debug */,
+				FC1DE55C16DCD03D008CE989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC1DE55D16DCD03D008CE989 /* Build configuration list for PBXNativeTarget "SwiftzMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC1DE55E16DCD03D008CE989 /* Debug */,
+				FC1DE55F16DCD03D008CE989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC1DE53616DCD03D008CE989 /* Project object */;
+}
