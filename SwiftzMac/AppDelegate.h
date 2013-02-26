@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Amtium.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
@@ -17,6 +18,8 @@
 @property (weak) IBOutlet NSButton *remember;
 @property (weak) IBOutlet NSButton *autologin;
 @property (weak) IBOutlet NSTextField *account;
+
+@property Amtium *amtium;
 
 - (IBAction)checkRemember:(id)sender;
 - (IBAction)checkAutologin:(id)sender;

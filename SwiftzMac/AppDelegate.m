@@ -12,7 +12,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    [self setAmtium:[Amtium alloc]];
 }
 
 - (IBAction)checkRemember:(id)sender {
@@ -28,6 +28,39 @@
 }
 
 - (IBAction)login:(id)sender {
+    NSDictionary *result = [self.amtium loginWithUsername:self.username.stringValue
+                                                 password:self.password.stringValue];
+    
+    BOOL success = [[result objectForKey:@"success"] boolValue];
+    NSString *message = [result objectForKey:@"message"];
+    
+    NSLog(@"%@", message);
+    
+    if (success) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Login Success!"
+                                         defaultButton:@"OK"
+                                       alternateButton:@""
+                                           otherButton:@""
+                             informativeTextWithFormat:@""];
+    
+        [alert beginSheetModalForWindow:[self window]
+                          modalDelegate:self
+                         didEndSelector:nil
+                            contextInfo:nil];
+    } else {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Login Failed!"
+                                         defaultButton:@"OK"
+                                       alternateButton:@""
+                                           otherButton:@""
+                             informativeTextWithFormat:@""];
+        
+        [alert setInformativeText:message];
+        
+        [alert beginSheetModalForWindow:[self window]
+                          modalDelegate:self
+                         didEndSelector:nil
+                            contextInfo:nil];
+    }
 }
 
 - (IBAction)logout:(id)sender {

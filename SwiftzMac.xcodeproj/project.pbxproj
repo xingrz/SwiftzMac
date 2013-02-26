@@ -13,6 +13,7 @@
 		FC1DE55416DCD03D008CE989 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55216DCD03D008CE989 /* Credits.rtf */; };
 		FC1DE55716DCD03D008CE989 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE55616DCD03D008CE989 /* AppDelegate.m */; };
 		FC1DE55A16DCD03D008CE989 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55816DCD03D008CE989 /* MainMenu.xib */; };
+		FC1DE56316DCF03D008CE989 /* Amtium.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE56216DCF03D008CE989 /* Amtium.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +30,8 @@
 		FC1DE55516DCD03D008CE989 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC1DE55616DCD03D008CE989 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FC1DE55916DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		FC1DE56016DCE76C008CE989 /* SwiftzMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SwiftzMac.entitlements; sourceTree = "<group>"; };
+		FC1DE56116DCF03D008CE989 /* Amtium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Amtium.h; sourceTree = "<group>"; };
+		FC1DE56216DCF03D008CE989 /* Amtium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Amtium.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +85,12 @@
 		FC1DE54916DCD03D008CE989 /* SwiftzMac */ = {
 			isa = PBXGroup;
 			children = (
-				FC1DE56016DCE76C008CE989 /* SwiftzMac.entitlements */,
 				FC1DE55516DCD03D008CE989 /* AppDelegate.h */,
 				FC1DE55616DCD03D008CE989 /* AppDelegate.m */,
 				FC1DE55816DCD03D008CE989 /* MainMenu.xib */,
 				FC1DE54A16DCD03D008CE989 /* Supporting Files */,
+				FC1DE56116DCF03D008CE989 /* Amtium.h */,
+				FC1DE56216DCF03D008CE989 /* Amtium.m */,
 			);
 			path = SwiftzMac;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			files = (
 				FC1DE55016DCD03D008CE989 /* main.m in Sources */,
 				FC1DE55716DCD03D008CE989 /* AppDelegate.m in Sources */,
+				FC1DE56316DCF03D008CE989 /* Amtium.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +263,7 @@
 		FC1DE55E16DCD03D008CE989 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SwiftzMac/SwiftzMac.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SwiftzMac/SwiftzMac-Prefix.pch";
@@ -273,8 +276,7 @@
 		FC1DE55F16DCD03D008CE989 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SwiftzMac/SwiftzMac.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SwiftzMac/SwiftzMac-Prefix.pch";
