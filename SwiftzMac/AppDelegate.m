@@ -28,6 +28,16 @@
 }
 
 - (IBAction)login:(id)sender {
+    [self.username setHidden:YES];
+    [self.password setHidden:YES];
+    [self.remember setHidden:YES];
+    [self.autologin setHidden:YES];
+    [self.login setHidden:YES];
+    
+    [self.account setHidden:NO];
+    [self.loading setHidden:NO];
+    [self.logout setHidden:NO];
+    
     NSDictionary *result = [self.amtium loginWithUsername:self.username.stringValue
                                                  password:self.password.stringValue];
     
@@ -64,6 +74,15 @@
 }
 
 - (IBAction)logout:(id)sender {
+    [self.account setHidden:YES];
+    [self.loading setHidden:YES];
+    [self.logout setHidden:YES];
+    
+    [self.username setHidden:NO];
+    [self.password setHidden:NO];
+    [self.remember setHidden:NO];
+    [self.autologin setHidden:NO];
+    [self.login setHidden:NO];
 }
 
 @end

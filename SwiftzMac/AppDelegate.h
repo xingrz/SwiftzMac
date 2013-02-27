@@ -18,6 +18,9 @@
 @property (weak) IBOutlet NSButton *remember;
 @property (weak) IBOutlet NSButton *autologin;
 @property (weak) IBOutlet NSTextField *account;
+@property (weak) IBOutlet NSProgressIndicator *loading;
+@property (weak) IBOutlet NSButton *login;
+@property (weak) IBOutlet NSButton *logout;
 
 @property Amtium *amtium;
 
