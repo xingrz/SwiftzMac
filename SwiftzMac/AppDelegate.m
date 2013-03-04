@@ -7,82 +7,53 @@
 //
 
 #import "AppDelegate.h"
+#import "MainWindow.h"
+#import "PreferencesWindow.h"
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self setAmtium:[Amtium alloc]];
+    statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    [statusItem setMenu:self.statusMenu];
+    [statusItem setTitle:@"Swiftz"];
+    [statusItem setHighlightMode:YES];
+    
+    [self showMainWindow:self];
 }
 
-- (IBAction)checkRemember:(id)sender {
-    if (self.remember.state == 0) {
-        self.autologin.state = 0;
+- (IBAction)showMainWindow:(id)sender
+{
+    if (!mainWindow) {
+        mainWindow = [[MainWindow alloc] init];
     }
+    
+    [mainWindow showWindow:self];
 }
 
-- (IBAction)checkAutologin:(id)sender {
-    if (self.autologin.state == 1) {
-        self.remember.state = 1;
+- (IBAction)showPreferencesWindow:(id)sender
+{
+    if (!preferencesWindow) {
+        preferencesWindow = [[PreferencesWindow alloc] init];
     }
+    
+    [preferencesWindow showWindow:self];
 }
 
-- (IBAction)login:(id)sender {
-    [self.username setHidden:YES];
-    [self.password setHidden:YES];
-    [self.remember setHidden:YES];
-    [self.autologin setHidden:YES];
-    [self.login setHidden:YES];
-    
-    [self.account setHidden:NO];
-    [self.loading setHidden:NO];
-    [self.logout setHidden:NO];
-    
-    NSDictionary *result = [self.amtium loginWithUsername:self.username.stringValue
-                                                 password:self.password.stringValue];
-    
-    BOOL success = [[result objectForKey:@"success"] boolValue];
-    NSString *message = [result objectForKey:@"message"];
-    
-    NSLog(@"%@", message);
-    
-    if (success) {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Login Success!"
-                                         defaultButton:@"OK"
-                                       alternateButton:@""
-                                           otherButton:@""
-                             informativeTextWithFormat:@""];
-    
-        [alert beginSheetModalForWindow:[self window]
-                          modalDelegate:self
-                         didEndSelector:nil
-                            contextInfo:nil];
-    } else {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Login Failed!"
-                                         defaultButton:@"OK"
-                                       alternateButton:@""
-                                           otherButton:@""
-                             informativeTextWithFormat:@""];
-        
-        [alert setInformativeText:message];
-        
-        [alert beginSheetModalForWindow:[self window]
-                          modalDelegate:self
-                         didEndSelector:nil
-                            contextInfo:nil];
-    }
+- (IBAction)login:(id)sender
+{
+    NSLog(@"login clicked");
+    [self.loginMenuItem setHidden:YES];
+    [self.logoutMenuItem setHidden:NO];
+    [self.accountMenuItem setHidden:NO];
+    [self.accountMenuItem setTitle:@"Account: 114033xxxx"];
 }
 
-- (IBAction)logout:(id)sender {
-    [self.account setHidden:YES];
-    [self.loading setHidden:YES];
-    [self.logout setHidden:YES];
-    
-    [self.username setHidden:NO];
-    [self.password setHidden:NO];
-    [self.remember setHidden:NO];
-    [self.autologin setHidden:NO];
-    [self.login setHidden:NO];
+- (IBAction)logout:(id)sender
+{
+    [self.accountMenuItem setHidden:YES];
+    [self.logoutMenuItem setHidden:YES];
+    [self.loginMenuItem setHidden:NO];
 }
 
 @end

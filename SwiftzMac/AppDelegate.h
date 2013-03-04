@@ -7,25 +7,24 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Amtium.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@class MainWindow;
+@class PreferencesWindow;
 
-@property (assign) IBOutlet NSWindow *window;
+@interface AppDelegate : NSObject <NSApplicationDelegate> {
+    MainWindow *mainWindow;
+    PreferencesWindow *preferencesWindow;
+    NSStatusItem *statusItem;
+}
 
-@property (weak) IBOutlet NSComboBox *username;
-@property (weak) IBOutlet NSSecureTextField *password;
-@property (weak) IBOutlet NSButton *remember;
-@property (weak) IBOutlet NSButton *autologin;
-@property (weak) IBOutlet NSTextField *account;
-@property (weak) IBOutlet NSProgressIndicator *loading;
-@property (weak) IBOutlet NSButton *login;
-@property (weak) IBOutlet NSButton *logout;
+@property (weak) IBOutlet NSMenu *statusMenu;
+@property (weak) IBOutlet NSMenuItem *accountMenuItem;
+@property (weak) IBOutlet NSMenuItem *logoutMenuItem;
+@property (weak) IBOutlet NSMenuItem *loginMenuItem;
 
-@property Amtium *amtium;
+- (IBAction)showMainWindow:(id)sender;
+- (IBAction)showPreferencesWindow:(id)sender;
 
-- (IBAction)checkRemember:(id)sender;
-- (IBAction)checkAutologin:(id)sender;
 - (IBAction)login:(id)sender;
 - (IBAction)logout:(id)sender;
 
