@@ -30,9 +30,7 @@
 
 - (NSString *)account
 {
-    //NSLog(account);
     return account;
-    //return @"account";
 }
 
 @end

@@ -105,8 +105,7 @@
 				FCBD31F516E4E224002B1ED1 /* PreferencesWindow.h */,
 				FCBD31F616E4E224002B1ED1 /* PreferencesWindow.m */,
 				FCBD31F716E4E224002B1ED1 /* PreferencesWindow.xib */,
-				FCBD320716E5BAD4002B1ED1 /* Amtium.h */,
-				FCBD320816E5BAD4002B1ED1 /* Amtium.m */,
+				FCBD321816E601AD002B1ED1 /* Amtium */,
 			);
 			path = SwiftzMac;
 			sourceTree = "<group>";
@@ -121,6 +120,15 @@
 				FC1DE55216DCD03D008CE989 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FCBD321816E601AD002B1ED1 /* Amtium */ = {
+			isa = PBXGroup;
+			children = (
+				FCBD320716E5BAD4002B1ED1 /* Amtium.h */,
+				FCBD320816E5BAD4002B1ED1 /* Amtium.m */,
+			);
+			name = Amtium;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

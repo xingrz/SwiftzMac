@@ -14,12 +14,9 @@
 
 - (id)init
 {
-    NSLog(@"init:");
     if (![super initWithWindowNibName:@"MainWindow"]) {
-        NSLog(@"initWithWindowNibName: failed");
         return nil;
     }
-    NSLog(@"inited");
     return self;
 }
 
@@ -27,7 +24,7 @@
 {
     self = [super initWithWindow:window];
     if (self) {
-        // Initialization code here.
+        amtium = [[Amtium alloc] init];
     }
     
     return self;
@@ -36,28 +33,28 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    amtium = [[Amtium alloc] init];
 }
 
 - (IBAction)login:(id)sender
 {
     NSLog(@"login");
     
-    [amtium login:@"1234"
-         password:@"5678"];
+    [amtium login:[[self username] stringValue]
+         password:[[self password] stringValue]];
     
-    NSLog(@"account: %@", [amtium account]);
+    [self close];
 }
 
 - (IBAction)logout:(id)sender
 {
     NSLog(@"logout");
     [amtium logout];
+    [self showWindow:sender];
 }
 
 - (IBAction)account:(id)sender
 {
+    NSLog(@"show account");
 }
 
 - (Amtium *)amtium

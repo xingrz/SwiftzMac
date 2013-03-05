@@ -29,17 +29,22 @@
 {
     if ([menuItem action] == @selector(showMainWindow:)) {
         [menuItem setHidden:[[mainWindow amtium] isOnline]];
+        return YES;
     }
     
     if ([menuItem action] == @selector(logout:)) {
         [menuItem setHidden:![[mainWindow amtium] isOnline]];
+        return YES;
     }
     
     if ([menuItem action] == @selector(showAccount:)) {
         [menuItem setHidden:![[mainWindow amtium] isOnline]];
         if ([[mainWindow amtium] isOnline]) {
-            [menuItem setTitle:[[mainWindow amtium] account]];
+            NSString *account = [[mainWindow amtium] account];
+            NSString *title = [NSString stringWithFormat:@"Online: %@", account];
+            [menuItem setTitle:title];
         }
+        return NO;
     }
     
     return YES;
@@ -47,7 +52,6 @@
 
 - (IBAction)showMainWindow:(id)sender
 {
-    NSLog(@"showMainWindow:");
     if (!mainWindow) {
         mainWindow = [[MainWindow alloc] init];
     }
@@ -66,6 +70,7 @@
 
 - (IBAction)showAccount:(id)sender
 {
+    [mainWindow account:sender];
 }
 
 - (IBAction)logout:(id)sender
