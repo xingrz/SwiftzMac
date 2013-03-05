@@ -18,6 +18,8 @@
 		FCBD31F816E4E224002B1ED1 /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD31F616E4E224002B1ED1 /* PreferencesWindow.m */; };
 		FCBD31F916E4E224002B1ED1 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBD31F716E4E224002B1ED1 /* PreferencesWindow.xib */; };
 		FCBD320916E5BAD4002B1ED1 /* Amtium.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD320816E5BAD4002B1ED1 /* Amtium.m */; };
+		FCBD321B16E6115E002B1ED1 /* NetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */; };
+		FCBD322116E6209E002B1ED1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +35,6 @@
 		FC1DE55316DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		FC1DE55516DCD03D008CE989 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC1DE55616DCD03D008CE989 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FC1DE55916DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FCBD31F016E4E1FF002B1ED1 /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
 		FCBD31F116E4E1FF002B1ED1 /* MainWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
 		FCBD31F216E4E200002B1ED1 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -42,6 +43,11 @@
 		FCBD31F716E4E224002B1ED1 /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
 		FCBD320716E5BAD4002B1ED1 /* Amtium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Amtium.h; sourceTree = "<group>"; };
 		FCBD320816E5BAD4002B1ED1 /* Amtium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Amtium.m; sourceTree = "<group>"; };
+		FCBD321916E6115E002B1ED1 /* NetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkInterface.h; sourceTree = "<group>"; };
+		FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkInterface.m; sourceTree = "<group>"; };
+		FCBD321F16E61B52002B1ED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FCBD322216E62901002B1ED1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCBD322116E6209E002B1ED1 /* SystemConfiguration.framework in Frameworks */,
 				FC1DE54416DCD03D008CE989 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,6 +83,7 @@
 		FC1DE54216DCD03D008CE989 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */,
 				FC1DE54316DCD03D008CE989 /* Cocoa.framework */,
 				FC1DE54516DCD03D008CE989 /* Other Frameworks */,
 			);
@@ -127,6 +135,8 @@
 			children = (
 				FCBD320716E5BAD4002B1ED1 /* Amtium.h */,
 				FCBD320816E5BAD4002B1ED1 /* Amtium.m */,
+				FCBD321916E6115E002B1ED1 /* NetworkInterface.h */,
+				FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */,
 			);
 			name = Amtium;
 			sourceTree = "<group>";
@@ -166,6 +176,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
+				"zh-Hans",
 			);
 			mainGroup = FC1DE53416DCD03D008CE989;
 			productRefGroup = FC1DE54016DCD03D008CE989 /* Products */;
@@ -202,6 +214,7 @@
 				FCBD31F316E4E200002B1ED1 /* MainWindow.m in Sources */,
 				FCBD31F816E4E224002B1ED1 /* PreferencesWindow.m in Sources */,
 				FCBD320916E5BAD4002B1ED1 /* Amtium.m in Sources */,
+				FCBD321B16E6115E002B1ED1 /* NetworkInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +233,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				FC1DE55316DCD03D008CE989 /* en */,
+				FCBD322216E62901002B1ED1 /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -227,7 +241,7 @@
 		FC1DE55816DCD03D008CE989 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FC1DE55916DCD03D008CE989 /* en */,
+				FCBD321F16E61B52002B1ED1 /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

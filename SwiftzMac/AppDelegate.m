@@ -13,6 +13,8 @@
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 
+#import "NetworkInterface.h"
+
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -21,6 +23,9 @@
     [statusItem setMenu:[self statusMenu]];
     [statusItem setTitle:@"Swiftz"];
     [statusItem setHighlightMode:YES];
+    
+    NSArray *adapters = [NetworkInterface getAllInterfaces];
+    NSLog(@"%@", adapters);
     
     [self showMainWindow:self];
 }
