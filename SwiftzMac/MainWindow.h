@@ -8,10 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MainWindow : NSWindowController
+@class Amtium;
+
+@interface MainWindow : NSWindowController {
+    Amtium *amtium;
+}
 
 @property (weak) IBOutlet NSTextField *username;
 @property (weak) IBOutlet NSSecureTextField *password;
 @property (weak) IBOutlet NSButton *remember;
+
+- (IBAction)login:(id)sender;
+- (IBAction)logout:(id)sender;
+- (IBAction)account:(id)sender;
+
+- (Amtium *)amtium;
 
 @end

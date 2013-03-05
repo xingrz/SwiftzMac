@@ -17,6 +17,7 @@
 		FCBD31F416E4E200002B1ED1 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBD31F216E4E200002B1ED1 /* MainWindow.xib */; };
 		FCBD31F816E4E224002B1ED1 /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD31F616E4E224002B1ED1 /* PreferencesWindow.m */; };
 		FCBD31F916E4E224002B1ED1 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBD31F716E4E224002B1ED1 /* PreferencesWindow.xib */; };
+		FCBD320916E5BAD4002B1ED1 /* Amtium.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD320816E5BAD4002B1ED1 /* Amtium.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		FCBD31F516E4E224002B1ED1 /* PreferencesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindow.h; sourceTree = "<group>"; };
 		FCBD31F616E4E224002B1ED1 /* PreferencesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindow.m; sourceTree = "<group>"; };
 		FCBD31F716E4E224002B1ED1 /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
+		FCBD320716E5BAD4002B1ED1 /* Amtium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Amtium.h; sourceTree = "<group>"; };
+		FCBD320816E5BAD4002B1ED1 /* Amtium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Amtium.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +105,8 @@
 				FCBD31F516E4E224002B1ED1 /* PreferencesWindow.h */,
 				FCBD31F616E4E224002B1ED1 /* PreferencesWindow.m */,
 				FCBD31F716E4E224002B1ED1 /* PreferencesWindow.xib */,
+				FCBD320716E5BAD4002B1ED1 /* Amtium.h */,
+				FCBD320816E5BAD4002B1ED1 /* Amtium.m */,
 			);
 			path = SwiftzMac;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				FC1DE55716DCD03D008CE989 /* AppDelegate.m in Sources */,
 				FCBD31F316E4E200002B1ED1 /* MainWindow.m in Sources */,
 				FCBD31F816E4E224002B1ED1 /* PreferencesWindow.m in Sources */,
+				FCBD320916E5BAD4002B1ED1 /* Amtium.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

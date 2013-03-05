@@ -2,7 +2,7 @@
 //  Amtium.m
 //  SwiftzMac
 //
-//  Created by XiNGRZ on 13-2-26.
+//  Created by XiNGRZ on 13-3-5.
 //  Copyright (c) 2013年 XiNGRZ. All rights reserved.
 //
 
@@ -10,40 +10,29 @@
 
 @implementation Amtium
 
-- (void)initialize {
-    
+- (BOOL)login:(NSString *)username password:(NSString *)password
+{
+    account = username;
+    online = YES;
+    return YES;
 }
 
-- (NSDictionary *)loginWithUsername:(NSString *)username
-                        password:(NSString *)password
-                           entry:(NSString *)entry {
-    
-    BOOL success = (username == password);
-    NSString *message = username;
-    
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-                [NSNumber numberWithBool:success]   , @"success",
-                message                             , @"message",
-                nil];
+- (BOOL)logout
+{
+    online = NO;
+    return YES;
 }
 
-- (NSDictionary *)loginWithUsername:(NSString *)username
-                        password:(NSString *)password {
-    return [self loginWithUsername:username
-                          password:password
-                             entry:@"internet"];
+- (BOOL)isOnline
+{
+    return online;
 }
 
-- (void)logout {
-    
-}
-
-- (NSString *)getServerIp {
-    return @"172.16.1.180";
-}
-
-- (NSArray *)getEntries {
-    return [NSArray arrayWithObjects:@"internet", @"local", nil];
+- (NSString *)account
+{
+    //NSLog(account);
+    return account;
+    //return @"account";
 }
 
 @end

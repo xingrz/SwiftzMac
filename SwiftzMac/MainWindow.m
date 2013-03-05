@@ -8,14 +8,18 @@
 
 #import "MainWindow.h"
 
+#import "Amtium.h"
+
 @implementation MainWindow
 
 - (id)init
 {
+    NSLog(@"init:");
     if (![super initWithWindowNibName:@"MainWindow"]) {
+        NSLog(@"initWithWindowNibName: failed");
         return nil;
     }
-    
+    NSLog(@"inited");
     return self;
 }
 
@@ -32,8 +36,33 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    
+    amtium = [[Amtium alloc] init];
+}
 
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+- (IBAction)login:(id)sender
+{
+    NSLog(@"login");
+    
+    [amtium login:@"1234"
+         password:@"5678"];
+    
+    NSLog(@"account: %@", [amtium account]);
+}
+
+- (IBAction)logout:(id)sender
+{
+    NSLog(@"logout");
+    [amtium logout];
+}
+
+- (IBAction)account:(id)sender
+{
+}
+
+- (Amtium *)amtium
+{
+    return amtium;
 }
 
 @end

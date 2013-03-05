@@ -256,11 +256,11 @@
 			<object class="NSCustomObject" id="755631768">
 				<string key="NSClassName">NSFontManager</string>
 			</object>
-			<object class="NSMenu" id="611830594">
+			<object class="NSMenu" id="213646902">
 				<string key="NSTitle"/>
 				<array class="NSMutableArray" key="NSMenuItems">
-					<object class="NSMenuItem" id="337226484">
-						<reference key="NSMenu" ref="611830594"/>
+					<object class="NSMenuItem" id="11972967">
+						<reference key="NSMenu" ref="213646902"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<string key="NSTitle">Account: 1140330000</string>
 						<string key="NSKeyEquiv"/>
@@ -268,24 +268,24 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="20275853">
-						<reference key="NSMenu" ref="611830594"/>
+					<object class="NSMenuItem" id="336490887">
+						<reference key="NSMenu" ref="213646902"/>
 						<string key="NSTitle">Logout</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="316413327">
-						<reference key="NSMenu" ref="611830594"/>
-						<string key="NSTitle">Login</string>
+					<object class="NSMenuItem" id="2622170">
+						<reference key="NSMenu" ref="213646902"/>
+						<string key="NSTitle">Login...</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="661295911">
-						<reference key="NSMenu" ref="611830594"/>
+					<object class="NSMenuItem" id="772327167">
+						<reference key="NSMenu" ref="213646902"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsSeparator">YES</bool>
 						<string key="NSTitle"/>
@@ -294,16 +294,16 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="766172907">
-						<reference key="NSMenu" ref="611830594"/>
+					<object class="NSMenuItem" id="965542045">
+						<reference key="NSMenu" ref="213646902"/>
 						<string key="NSTitle">About SwiftzMac</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="132756124">
-						<reference key="NSMenu" ref="611830594"/>
+					<object class="NSMenuItem" id="272660322">
+						<reference key="NSMenu" ref="213646902"/>
 						<string key="NSTitle">Preferences...</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -311,7 +311,6 @@
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
 				</array>
-				<bool key="NSNoAutoenable">YES</bool>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -344,7 +343,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">orderFrontStandardAboutPanel:</string>
 						<reference key="source" ref="1021"/>
-						<reference key="destination" ref="766172907"/>
+						<reference key="destination" ref="965542045"/>
 					</object>
 					<int key="connectionID">946</int>
 				</object>
@@ -406,67 +405,51 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">showMainWindow:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="2622170"/>
+					</object>
+					<int key="connectionID">968</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showPreferencesWindow:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="272660322"/>
+					</object>
+					<int key="connectionID">969</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showPreferencesWindow:</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="609285721"/>
 					</object>
-					<int key="connectionID">938</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">showPreferencesWindow:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="132756124"/>
-					</object>
-					<int key="connectionID">947</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">logout:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="20275853"/>
-					</object>
-					<int key="connectionID">948</int>
+					<int key="connectionID">970</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">statusMenu</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="611830594"/>
+						<reference key="destination" ref="213646902"/>
 					</object>
-					<int key="connectionID">949</int>
+					<int key="connectionID">971</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">showMainWindow:</string>
+						<string key="label">showAccount:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="316413327"/>
+						<reference key="destination" ref="11972967"/>
 					</object>
-					<int key="connectionID">951</int>
+					<int key="connectionID">972</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">accountMenuItem</string>
+					<object class="IBActionConnection" key="connection">
+						<string key="label">logout:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="337226484"/>
+						<reference key="destination" ref="336490887"/>
 					</object>
-					<int key="connectionID">955</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">logoutMenuItem</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="20275853"/>
-					</object>
-					<int key="connectionID">956</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">loginMenuItem</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="316413327"/>
-					</object>
-					<int key="connectionID">957</int>
+					<int key="connectionID">974</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -666,46 +649,46 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">939</int>
-						<reference key="object" ref="611830594"/>
+						<reference key="object" ref="213646902"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="337226484"/>
-							<reference ref="20275853"/>
-							<reference ref="132756124"/>
-							<reference ref="661295911"/>
-							<reference ref="766172907"/>
-							<reference ref="316413327"/>
+							<reference ref="11972967"/>
+							<reference ref="336490887"/>
+							<reference ref="272660322"/>
+							<reference ref="772327167"/>
+							<reference ref="965542045"/>
+							<reference ref="2622170"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">940</int>
-						<reference key="object" ref="337226484"/>
-						<reference key="parent" ref="611830594"/>
+						<reference key="object" ref="11972967"/>
+						<reference key="parent" ref="213646902"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">941</int>
-						<reference key="object" ref="20275853"/>
-						<reference key="parent" ref="611830594"/>
+						<reference key="object" ref="336490887"/>
+						<reference key="parent" ref="213646902"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">942</int>
-						<reference key="object" ref="132756124"/>
-						<reference key="parent" ref="611830594"/>
+						<reference key="object" ref="272660322"/>
+						<reference key="parent" ref="213646902"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">944</int>
-						<reference key="object" ref="661295911"/>
-						<reference key="parent" ref="611830594"/>
+						<reference key="object" ref="772327167"/>
+						<reference key="parent" ref="213646902"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">945</int>
-						<reference key="object" ref="766172907"/>
-						<reference key="parent" ref="611830594"/>
+						<reference key="object" ref="965542045"/>
+						<reference key="parent" ref="213646902"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">950</int>
-						<reference key="object" ref="316413327"/>
-						<reference key="parent" ref="611830594"/>
+						<int key="objectID">958</int>
+						<reference key="object" ref="2622170"/>
+						<reference key="parent" ref="213646902"/>
 					</object>
 				</array>
 			</object>
@@ -740,79 +723,22 @@
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="939.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<dictionary class="NSMutableDictionary" key="940.IBAttributePlaceholdersKey"/>
 				<string key="940.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<dictionary class="NSMutableDictionary" key="941.IBAttributePlaceholdersKey"/>
 				<string key="941.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="942.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="944.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="945.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="950.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="958.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">957</int>
+			<int key="maxID">974</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">AppDelegate</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="login:">id</string>
-						<string key="logout:">id</string>
-						<string key="showMainWindow:">id</string>
-						<string key="showPreferencesWindow:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="login:">
-							<string key="name">login:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="logout:">
-							<string key="name">logout:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showMainWindow:">
-							<string key="name">showMainWindow:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showPreferencesWindow:">
-							<string key="name">showPreferencesWindow:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="accountMenuItem">NSMenuItem</string>
-						<string key="loginMenuItem">NSMenuItem</string>
-						<string key="logoutMenuItem">NSMenuItem</string>
-						<string key="statusMenu">NSMenu</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="accountMenuItem">
-							<string key="name">accountMenuItem</string>
-							<string key="candidateClassName">NSMenuItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="loginMenuItem">
-							<string key="name">loginMenuItem</string>
-							<string key="candidateClassName">NSMenuItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="logoutMenuItem">
-							<string key="name">logoutMenuItem</string>
-							<string key="candidateClassName">NSMenuItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="statusMenu">
-							<string key="name">statusMenu</string>
-							<string key="candidateClassName">NSMenu</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/AppDelegate.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

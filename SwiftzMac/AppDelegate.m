@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+
+#import "Amtium.h"
+
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 
@@ -15,15 +18,36 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    [statusItem setMenu:self.statusMenu];
+    [statusItem setMenu:[self statusMenu]];
     [statusItem setTitle:@"Swiftz"];
     [statusItem setHighlightMode:YES];
     
     [self showMainWindow:self];
 }
 
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    if ([menuItem action] == @selector(showMainWindow:)) {
+        [menuItem setHidden:[[mainWindow amtium] isOnline]];
+    }
+    
+    if ([menuItem action] == @selector(logout:)) {
+        [menuItem setHidden:![[mainWindow amtium] isOnline]];
+    }
+    
+    if ([menuItem action] == @selector(showAccount:)) {
+        [menuItem setHidden:![[mainWindow amtium] isOnline]];
+        if ([[mainWindow amtium] isOnline]) {
+            [menuItem setTitle:[[mainWindow amtium] account]];
+        }
+    }
+    
+    return YES;
+}
+
 - (IBAction)showMainWindow:(id)sender
 {
+    NSLog(@"showMainWindow:");
     if (!mainWindow) {
         mainWindow = [[MainWindow alloc] init];
     }
@@ -40,20 +64,13 @@
     [preferencesWindow showWindow:self];
 }
 
-- (IBAction)login:(id)sender
+- (IBAction)showAccount:(id)sender
 {
-    NSLog(@"login clicked");
-    [self.loginMenuItem setHidden:YES];
-    [self.logoutMenuItem setHidden:NO];
-    [self.accountMenuItem setHidden:NO];
-    [self.accountMenuItem setTitle:@"Account: 114033xxxx"];
 }
 
 - (IBAction)logout:(id)sender
 {
-    [self.accountMenuItem setHidden:YES];
-    [self.logoutMenuItem setHidden:YES];
-    [self.loginMenuItem setHidden:NO];
+    [mainWindow logout:sender];
 }
 
 @end

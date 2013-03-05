@@ -8,24 +8,23 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class AppController;
+
 @class MainWindow;
 @class PreferencesWindow;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
+    AppController *appController;
     MainWindow *mainWindow;
     PreferencesWindow *preferencesWindow;
     NSStatusItem *statusItem;
 }
 
 @property (weak) IBOutlet NSMenu *statusMenu;
-@property (weak) IBOutlet NSMenuItem *accountMenuItem;
-@property (weak) IBOutlet NSMenuItem *logoutMenuItem;
-@property (weak) IBOutlet NSMenuItem *loginMenuItem;
 
 - (IBAction)showMainWindow:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
-
-- (IBAction)login:(id)sender;
+- (IBAction)showAccount:(id)sender;
 - (IBAction)logout:(id)sender;
 
 @end

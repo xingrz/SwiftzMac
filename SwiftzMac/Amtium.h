@@ -2,35 +2,20 @@
 //  Amtium.h
 //  SwiftzMac
 //
-//  Created by XiNGRZ on 13-2-26.
+//  Created by XiNGRZ on 13-3-5.
 //  Copyright (c) 2013年 XiNGRZ. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface Amtium : NSObject
+@interface Amtium : NSObject {
+    BOOL online;
+    NSString *account;
+}
 
-@property NSString *clientIp;
-@property NSString *gatewayIp;
-@property NSString *clientMac;
-@property NSString *version;
-@property BOOL isDhcpEnabled;
-@property (readonly) BOOL isOnline;
-@property (readonly) NSString *website;
-
-- (void)initialize;
-
-- (NSDictionary *)loginWithUsername:(NSString *)username
-                        password:(NSString *)password
-                           entry:(NSString *)entry;
-
-- (NSDictionary *)loginWithUsername:(NSString *)username
-                        password:(NSString *)password;
-
-- (void)logout;
-
-- (NSString *)getServerIp;
-
-- (NSArray *)getEntries;
+- (BOOL)login:(NSString *)username password:(NSString *)password;
+- (BOOL)logout;
+- (BOOL)isOnline;
+- (NSString *)account;
 
 @end
