@@ -22,5 +22,6 @@
 //@property NSArray *ipAddresses;
 
 + (NSArray *)getAllInterfaces;
++ (NSArray *)getAllIpAddresses;
 
 @end
