@@ -8,17 +8,35 @@
 
 #import <Cocoa/Cocoa.h>
 
+extern NSString * const SMInitialKey;
+extern NSString * const SMServerKey;
+extern NSString * const SMEntryKey;
+extern NSString * const SMEntryListKey;
+extern NSString * const SMInterfaceKey;
+extern NSString * const SMIpKey;
+extern NSString * const SMIpManualKey;
+extern NSString * const SMKeychainKey;
+
 @interface PreferencesWindow : NSWindowController
 
-@property (weak) IBOutlet NSTextField *server;
-@property (weak) IBOutlet NSPopUpButton *entry;
-@property (weak) IBOutlet NSButton *shouldStore;
-@property (weak) IBOutlet NSButton *shouldRetry;
-@property (strong) IBOutlet NSWindow *interface;
-@property (strong) IBOutlet NSWindow *ip;
+@property (weak) IBOutlet NSTextField *serverText;
+@property (weak) IBOutlet NSPopUpButton *entryPopup;
+@property (weak) IBOutlet NSButton *shouldStoreCheckbox;
+@property (weak) IBOutlet NSButton *shouldRetryCheckbox;
+@property (weak) IBOutlet NSPopUpButton *interfacePopup;
+@property (weak) IBOutlet NSComboBox *ipCombo;
 
 - (IBAction)ok:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)restore:(id)sender;
+
+- (BOOL)isInitialUse;
+- (NSString *)server;
+- (NSString *)entry;
+- (NSArray *)entryList;
+- (NSString *)interface;
+- (NSString *)ip;
+- (BOOL)isIpManual;
+- (BOOL)shouldUseKeychain;
 
 @end

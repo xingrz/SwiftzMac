@@ -8,9 +8,14 @@
 
 #import "PreferencesWindow.h"
 
-@interface PreferencesWindow ()
-
-@end
+NSString * const SMInitialKey = @"InitialFlag";
+NSString * const SMServerKey = @"Server";
+NSString * const SMEntryKey = @"Entry";
+NSString * const SMEntryListKey = @"EntryList";
+NSString * const SMInterfaceKey = @"Interface";
+NSString * const SMIpKey = @"IP";
+NSString * const SMIpManualKey = @"IPManualFlag";
+NSString * const SMKeychainKey = @"KeychainFlag";
 
 @implementation PreferencesWindow
 
@@ -47,6 +52,54 @@
 }
 
 - (IBAction)restore:(id)sender {
+}
+
+- (BOOL)isInitialUse
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:SMInitialKey];
+}
+
+- (NSString *)server
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:SMServerKey];
+}
+
+- (NSString *)entry
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:SMEntryKey];
+}
+
+- (NSArray *)entryList
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringArrayForKey:SMEntryListKey];
+}
+
+- (NSString *)interface
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:SMInterfaceKey];
+}
+
+- (NSString *)ip
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:SMIpKey];
+}
+
+- (BOOL)isIpManual
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:SMIpManualKey];
+}
+
+- (BOOL)shouldUseKeychain
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:SMKeychainKey];
 }
 
 @end

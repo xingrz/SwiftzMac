@@ -17,15 +17,28 @@
 
 @implementation AppDelegate
 
++ (void)initialize
+{
+    NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
+    
+    [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:SMInitialKey];
+    [defaultValues setObject:Nil forKey:SMServerKey];
+    [defaultValues setObject:Nil forKey:SMEntryKey];
+    [defaultValues setObject:Nil forKey:SMEntryListKey];
+    [defaultValues setObject:Nil forKey:SMInterfaceKey];
+    [defaultValues setObject:Nil forKey:SMIpKey];
+    [defaultValues setObject:[NSNumber numberWithBool:NO] forKey:SMIpManualKey];
+    [defaultValues setObject:[NSNumber numberWithBool:NO] forKey:SMKeychainKey];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:[self statusMenu]];
     [statusItem setTitle:@"Swiftz"];
     [statusItem setHighlightMode:YES];
-    
-    NSArray *adapters = [NetworkInterface getAllInterfaces];
-    NSLog(@"%@", adapters);
     
     [self showMainWindow:self];
 }
