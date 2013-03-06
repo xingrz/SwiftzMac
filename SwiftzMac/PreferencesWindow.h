@@ -10,4 +10,15 @@
 
 @interface PreferencesWindow : NSWindowController
 
+@property (weak) IBOutlet NSTextField *server;
+@property (weak) IBOutlet NSPopUpButton *entry;
+@property (weak) IBOutlet NSButton *shouldStore;
+@property (weak) IBOutlet NSButton *shouldRetry;
+@property (strong) IBOutlet NSWindow *interface;
+@property (strong) IBOutlet NSWindow *ip;
+
+- (IBAction)ok:(id)sender;
+- (IBAction)cancel:(id)sender;
+- (IBAction)restore:(id)sender;
+
 @end

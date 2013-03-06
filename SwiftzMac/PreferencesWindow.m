@@ -40,4 +40,13 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
+- (IBAction)ok:(id)sender {
+}
+
+- (IBAction)cancel:(id)sender {
+}
+
+- (IBAction)restore:(id)sender {
+}
+
 @end
