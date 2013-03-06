@@ -19,7 +19,6 @@
 @property NSString *name;
 @property NSString *localizedDisplayName;
 @property NSString *hardwareAddress;
-//@property NSArray *ipAddresses;
 
 + (NSArray *)getAllInterfaces;
 + (NSArray *)getAllIpAddresses;
