@@ -57,7 +57,7 @@
                                        alternateButton:@""
                                            otherButton:@""
                              informativeTextWithFormat:@""];
-        
+
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self
                          didEndSelector:nil
