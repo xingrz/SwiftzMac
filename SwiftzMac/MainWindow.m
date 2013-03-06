@@ -42,7 +42,7 @@
     
     AmtiumLoginResult *result = [amtium login:[[self username] stringValue]
                                      password:[[self password] stringValue]];
-
+    
     if ([result success]) {
         [self close];
     } else {
@@ -53,11 +53,11 @@
         }
         
         NSAlert *alert = [NSAlert alertWithMessageText:[result message]
-                                        defaultButton:@"OK"
-                                      alternateButton:@""
-                                          otherButton:@""
-                            informativeTextWithFormat:@""];
-            
+                                         defaultButton:@"OK"
+                                       alternateButton:@""
+                                           otherButton:@""
+                             informativeTextWithFormat:@""];
+        
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self
                          didEndSelector:nil
