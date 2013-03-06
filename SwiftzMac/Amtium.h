@@ -8,14 +8,29 @@
 
 #import <Foundation/Foundation.h>
 
+@class AmtiumLoginResult;
+
 @interface Amtium : NSObject {
-    BOOL online;
-    NSString *account;
+    BOOL _online;
+    NSString *_account;
+    NSString *_server;
+    NSString *_entry;
+    NSString *_mac;
+    NSString *_ip;
+    BOOL _dhcpEnabled;
 }
 
-- (BOOL)login:(NSString *)username password:(NSString *)password;
+@property (readonly) BOOL online;
+@property (readonly) NSString *account;
+@property NSString *server;
+@property NSString *entry;
+@property NSString *mac;
+@property NSString *ip;
+@property BOOL dhcpEnabled;
+
+- (AmtiumLoginResult *)login:(NSString *)username password:(NSString *)password;
 - (BOOL)logout;
-- (BOOL)isOnline;
-- (NSString *)account;
+- (NSString *)serverFromRemote;
+- (NSArray *)entryListFromRemote;
 
 @end

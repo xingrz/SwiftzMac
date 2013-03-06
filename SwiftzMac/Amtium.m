@@ -8,29 +8,95 @@
 
 #import "Amtium.h"
 
+#import "AmtiumLoginResult.h"
+
 @implementation Amtium
 
-- (BOOL)login:(NSString *)username password:(NSString *)password
+- (AmtiumLoginResult *)login:(NSString *)username password:(NSString *)password
 {
-    account = username;
-    online = YES;
-    return YES;
+    if ([password isEqualToString:@"1234"]) {
+        _account = username;
+        _online = YES;
+        return [AmtiumLoginResult resultWithSuccess:YES];
+    } else {
+        return [AmtiumLoginResult resultWithSuccess:NO message:@"测试用的密码是 1234 啦"];
+    }
 }
 
 - (BOOL)logout
 {
-    online = NO;
+    _online = NO;
     return YES;
 }
 
-- (BOOL)isOnline
+- (NSString *)serverFromRemote
 {
-    return online;
+    return @"172.16.1.180";
+}
+
+- (NSArray *)entryListFromRemote
+{
+    return [NSArray arrayWithObjects:@"internet", @"local", nil];
+}
+
+- (BOOL)online
+{
+    return _online;
 }
 
 - (NSString *)account
 {
-    return account;
+    return _account;
+}
+
+- (NSString *)server
+{
+    return _server;
+}
+
+- (void)setServer:(NSString *)server
+{
+    // ...
+}
+
+- (NSString *)entry
+{
+    return _entry;
+}
+
+- (void)setEntry:(NSString *)entry
+{
+    _entry = entry;
+}
+
+- (NSString *)mac
+{
+    return _mac;
+}
+
+- (void)setMac:(NSString *)mac
+{
+    // ...
+}
+
+- (NSString *)ip
+{
+    return _ip;
+}
+
+- (void)setIp:(NSString *)ip
+{
+    // ...
+}
+
+- (BOOL)dhcpEnabled
+{
+    return _dhcpEnabled;
+}
+
+- (void)setDhcpEnabled:(BOOL)dhcpEnabled
+{
+    _dhcpEnabled = dhcpEnabled;
 }
 
 @end

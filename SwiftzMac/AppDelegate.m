@@ -22,12 +22,12 @@
     NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
     
     [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:SMInitialKey];
-    [defaultValues setObject:Nil forKey:SMServerKey];
-    [defaultValues setObject:Nil forKey:SMEntryKey];
-    [defaultValues setObject:Nil forKey:SMEntryListKey];
-    [defaultValues setObject:Nil forKey:SMInterfaceKey];
-    [defaultValues setObject:Nil forKey:SMIpKey];
-    [defaultValues setObject:[NSNumber numberWithBool:NO] forKey:SMIpManualKey];
+    //[defaultValues setObject:nil forKey:SMServerKey];
+    //[defaultValues setObject:nil forKey:SMEntryKey];
+    //[defaultValues setObject:nil forKey:SMEntryListKey];
+    //[defaultValues setObject:nil forKey:SMInterfaceKey];
+    //[defaultValues setObject:nil forKey:SMIpKey];
+    //[defaultValues setObject:[NSNumber numberWithBool:NO] forKey:SMIpManualKey];
     [defaultValues setObject:[NSNumber numberWithBool:NO] forKey:SMKeychainKey];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
@@ -46,18 +46,18 @@
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
     if ([menuItem action] == @selector(showMainWindow:)) {
-        [menuItem setHidden:[[mainWindow amtium] isOnline]];
+        [menuItem setHidden:[[mainWindow amtium] online]];
         return YES;
     }
     
     if ([menuItem action] == @selector(logout:)) {
-        [menuItem setHidden:![[mainWindow amtium] isOnline]];
+        [menuItem setHidden:![[mainWindow amtium] online]];
         return YES;
     }
     
     if ([menuItem action] == @selector(showAccount:)) {
-        [menuItem setHidden:![[mainWindow amtium] isOnline]];
-        if ([[mainWindow amtium] isOnline]) {
+        [menuItem setHidden:![[mainWindow amtium] online]];
+        if ([[mainWindow amtium] online]) {
             NSString *account = [[mainWindow amtium] account];
             NSString *title = [NSString stringWithFormat:@"Online: %@", account];
             [menuItem setTitle:title];

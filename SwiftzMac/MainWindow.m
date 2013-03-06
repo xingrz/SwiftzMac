@@ -9,6 +9,7 @@
 #import "MainWindow.h"
 
 #import "Amtium.h"
+#import "AmtiumLoginResult.h"
 
 @implementation MainWindow
 
@@ -39,10 +40,29 @@
 {
     NSLog(@"login");
     
-    [amtium login:[[self username] stringValue]
-         password:[[self password] stringValue]];
-    
-    [self close];
+    AmtiumLoginResult *result = [amtium login:[[self username] stringValue]
+                                     password:[[self password] stringValue]];
+
+    if ([result success]) {
+        [self close];
+    } else {
+        NSString *message = [result message];
+        
+        if (message == nil) {
+            message = @"Login failed.";
+        }
+        
+        NSAlert *alert = [NSAlert alertWithMessageText:[result message]
+                                        defaultButton:@"OK"
+                                      alternateButton:@""
+                                          otherButton:@""
+                            informativeTextWithFormat:@""];
+            
+        [alert beginSheetModalForWindow:[self window]
+                          modalDelegate:self
+                         didEndSelector:nil
+                            contextInfo:nil];
+    }
 }
 
 - (IBAction)logout:(id)sender
