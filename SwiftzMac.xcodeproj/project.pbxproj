@@ -24,6 +24,7 @@
 		FCBD320916E5BAD4002B1ED1 /* Amtium.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD320816E5BAD4002B1ED1 /* Amtium.m */; };
 		FCBD321B16E6115E002B1ED1 /* NetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */; };
 		FCBD322116E6209E002B1ED1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */; };
+		FCCA9C7416E77F350069C9E1 /* AmtiumEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkInterface.m; sourceTree = "<group>"; };
 		FCBD321F16E61B52002B1ED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FCCA9C7216E77F350069C9E1 /* AmtiumEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumEncoder.h; sourceTree = "<group>"; };
+		FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumEncoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +175,8 @@
 				FCAF7A8A16E767E6006EDA2D /* AmtiumPacket.m */,
 				FCAF7A8C16E77128006EDA2D /* AmtiumConstants.h */,
 				FCAF7A8D16E77128006EDA2D /* AmtiumConstants.m */,
+				FCCA9C7216E77F350069C9E1 /* AmtiumEncoder.h */,
+				FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */,
 			);
 			name = Amtium;
 			sourceTree = "<group>";
@@ -254,6 +259,7 @@
 				FCAF7A7F16E75D34006EDA2D /* GCDAsyncUdpSocket.m in Sources */,
 				FCAF7A8B16E767E6006EDA2D /* AmtiumPacket.m in Sources */,
 				FCAF7A8E16E77128006EDA2D /* AmtiumConstants.m in Sources */,
+				FCCA9C7416E77F350069C9E1 /* AmtiumEncoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
