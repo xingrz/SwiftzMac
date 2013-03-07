@@ -13,8 +13,6 @@
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 
-#import "NetworkInterface.h"
-
 @implementation AppDelegate
 
 + (void)initialize
@@ -39,7 +37,7 @@
     [statusItem setMenu:[self statusMenu]];
     [statusItem setTitle:@"Swiftz"];
     [statusItem setHighlightMode:YES];
-    
+
     [self showMainWindow:self];
 }
 

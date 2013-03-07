@@ -8,53 +8,49 @@
 
 #import <Foundation/Foundation.h>
 
-extern char const APALogin;
-extern char const APALoginResult;
-extern char const APABreath;
-extern char const APABreathResult;
-extern char const APALogout;
-extern char const APALogoutResult;
-extern char const APAEntries;
-extern char const APAEntriesResult;
-extern char const APADisconnect;
-extern char const APAConfirm;
-extern char const APAConfirmResult;
-extern char const APAServer;
-extern char const APAServerResult;
+extern const unsigned char APALogin;
+extern const unsigned char APALoginResult;
+extern const unsigned char APABreath;
+extern const unsigned char APABreathResult;
+extern const unsigned char APALogout;
+extern const unsigned char APALogoutResult;
+extern const unsigned char APAEntries;
+extern const unsigned char APAEntriesResult;
+extern const unsigned char APADisconnect;
+extern const unsigned char APAConfirm;
+extern const unsigned char APAConfirmResult;
+extern const unsigned char APAServer;
+extern const unsigned char APAServerResult;
 
-extern char const APFUsername;
-extern char const APFPassword;
-extern char const APFSuccess;
-extern char const APFUnknown05;
-extern char const APFUnknown06;
-extern char const APFMac;
-extern char const APFSession;
-extern char const APFIp;
-extern char const APFEntry;
-extern char const APFMessage;
-extern char const APFServer;
-extern char const APFDhcp;
-extern char const APFWebsite;
-extern char const APFIndex;
-extern char const APFVersion;
-extern char const APFUnknown20;
-extern char const APFUnknown23;
-extern char const APFReason;
-extern char const APFBlock2A;
-extern char const APFBlock2B;
-extern char const APFBlock2C;
-extern char const APFBlock2D;
-extern char const APFBlock2E;
-extern char const APFBlock2F;
-extern char const APFBlock30;
-extern char const APFBlock31;
-extern char const APFUnknown32;
-extern char const APFBlock34;
-extern char const APFBlock35;
-extern char const APFBlock36;
-extern char const APFBlock37;
-extern char const APFBlock38;
-
-/*@interface AmtiumConstants : NSObject
-
-@end*/
+extern const unsigned char APFUsername;
+extern const unsigned char APFPassword;
+extern const unsigned char APFSuccess;
+extern const unsigned char APFUnknown05;
+extern const unsigned char APFUnknown06;
+extern const unsigned char APFMac;
+extern const unsigned char APFSession;
+extern const unsigned char APFIp;
+extern const unsigned char APFEntry;
+extern const unsigned char APFMessage;
+extern const unsigned char APFServer;
+extern const unsigned char APFDhcp;
+extern const unsigned char APFWebsite;
+extern const unsigned char APFIndex;
+extern const unsigned char APFVersion;
+extern const unsigned char APFUnknown20;
+extern const unsigned char APFUnknown23;
+extern const unsigned char APFReason;
+extern const unsigned char APFBlock2A;
+extern const unsigned char APFBlock2B;
+extern const unsigned char APFBlock2C;
+extern const unsigned char APFBlock2D;
+extern const unsigned char APFBlock2E;
+extern const unsigned char APFBlock2F;
+extern const unsigned char APFBlock30;
+extern const unsigned char APFBlock31;
+extern const unsigned char APFUnknown32;
+extern const unsigned char APFBlock34;
+extern const unsigned char APFBlock35;
+extern const unsigned char APFBlock36;
+extern const unsigned char APFBlock37;
+extern const unsigned char APFBlock38;

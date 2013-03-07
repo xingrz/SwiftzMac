@@ -71,16 +71,16 @@
 {
     index += 0x01000000;
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [AmtiumEncoder dataWithString:session],           APFSession,
-                          [AmtiumEncoder dataWithString:ip length:16],      APFIp,
-                          [AmtiumEncoder dataWithHexadecimal:mac],          APFMac,
-                          [AmtiumEncoder dataWithNumber:index length:4],    APFIndex,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2A,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2B,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2C,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2D,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2E,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2F,
+                          [AmtiumEncoder dataWithString:session],       APFSession,
+                          [AmtiumEncoder dataWithString:ip length:16],  APFIp,
+                          [AmtiumEncoder dataWithHexadecimal:mac],      APFMac,
+                          [AmtiumEncoder dataWithUInt:index],           APFIndex,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2A,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2B,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2C,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2D,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2E,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2F,
                           nil];
 
     return [[AmtiumPacket alloc] initWithAction:APABreath parameters:dict];
@@ -91,17 +91,18 @@
                                              mac:(NSString *)mac
                                            index:(unsigned int)index
 {
+    index += 0x01000000;
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [AmtiumEncoder dataWithString:session],           APFSession,
-                          [AmtiumEncoder dataWithString:ip length:16],      APFIp,
-                          [AmtiumEncoder dataWithHexadecimal:mac],          APFMac,
-                          [AmtiumEncoder dataWithNumber:index length:4],    APFIndex,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2A,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2B,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2C,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2D,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2E,
-                          [AmtiumEncoder dataWithNumber:0 length:4],        APFBlock2F,
+                          [AmtiumEncoder dataWithString:session],       APFSession,
+                          [AmtiumEncoder dataWithString:ip length:16],  APFIp,
+                          [AmtiumEncoder dataWithHexadecimal:mac],      APFMac,
+                          [AmtiumEncoder dataWithUInt:index],           APFIndex,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2A,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2B,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2C,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2D,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2E,
+                          [AmtiumEncoder dataWithUInt:0],               APFBlock2F,
                           nil];
 
     return [[AmtiumPacket alloc] initWithAction:APALogout parameters:dict];

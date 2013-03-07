@@ -15,14 +15,20 @@
 
 + (NSData *)dataWithHexadecimal:(NSString *)hexadecimalValue;
 
-+ (NSData *)dataWithNumber:(unsigned int)numberValue;
-+ (NSData *)dataWithNumber:(unsigned int)numberValue length:(unsigned int)length;
++ (NSData *)dataWithUInt:(unsigned int)intValue;
+
++ (NSData *)dataWithUChar:(unsigned char)charValue;
 
 + (NSData *)dataWithBool:(BOOL)boolValue;
 
 + (NSString *)stringValue:(NSData *)data;
+
 + (NSString *)hexadecimalValue:(NSData *)data;
-+ (unsigned int)numberValue:(NSData *)data;
+
++ (unsigned int)intValue:(NSData *)data;
+
++ (unsigned char)charValue:(NSData *)data;
+
 + (BOOL)boolValue:(NSData *)data;
 
 @end
