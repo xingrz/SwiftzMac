@@ -72,7 +72,7 @@ unsigned char const bs_col[] = {0x00, 0x01, 0x08, 0x09, 0x04, 0x05, 0x0c, 0x0d, 
         if (bs_row[i] == ch) return i;
     }
 
-    return nil;
+    return 0;
 }
 
 + (unsigned char)searchColForValue:(unsigned char)ch
@@ -81,7 +81,7 @@ unsigned char const bs_col[] = {0x00, 0x01, 0x08, 0x09, 0x04, 0x05, 0x0c, 0x0d, 
         if (bs_col[i] == ch) return i;
     }
 
-    return nil;
+    return 0;
 }
 
 @end
