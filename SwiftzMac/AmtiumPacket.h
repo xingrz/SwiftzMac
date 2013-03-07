@@ -10,7 +10,7 @@
 
 @interface AmtiumPacket : NSObject
 
-@property char action;
+@property unsigned char action;
 @property NSDictionary *parameters;
 
 + (NSData *)dataForInitialization;
@@ -33,14 +33,14 @@
 + (AmtiumPacket *)packetForBreathingWithSession:(NSString *)session
                                              ip:(NSString *)ip
                                             mac:(NSString *)mac
-                                          index:(unsigned)index;
+                                          index:(unsigned int)index;
 
 + (AmtiumPacket *)packetForLoggingOutWithSession:(NSString *)session
                                               ip:(NSString *)ip
                                              mac:(NSString *)mac
-                                           index:(unsigned)index;
+                                           index:(unsigned int)index;
 
-- (id)initWithAction:(char)action
+- (id)initWithAction:(unsigned char)action
           parameters:(NSDictionary *)parameters;
 
 - (id)initWithData:(NSData *)data;

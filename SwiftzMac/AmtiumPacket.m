@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 XiNGRZ. All rights reserved.
 //
 
+#import <CommonCrypto/CommonDigest.h>
+
 #import "AmtiumPacket.h"
 #import "AmtiumConstants.h"
 #import "AmtiumEncoder.h"
@@ -69,7 +71,7 @@
                                             mac:(NSString *)mac
                                           index:(unsigned int)index
 {
-    index += 0x01000000;
+    // NOTE: index 是从 0x01000000 起算的，每次递增 3。
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [AmtiumEncoder dataWithString:session],       APFSession,
                           [AmtiumEncoder dataWithString:ip length:16],  APFIp,
@@ -91,7 +93,6 @@
                                              mac:(NSString *)mac
                                            index:(unsigned int)index
 {
-    index += 0x01000000;
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [AmtiumEncoder dataWithString:session],       APFSession,
                           [AmtiumEncoder dataWithString:ip length:16],  APFIp,
@@ -108,7 +109,7 @@
     return [[AmtiumPacket alloc] initWithAction:APALogout parameters:dict];
 }
 
-- (id)initWithAction:(char)aAction
+- (id)initWithAction:(unsigned char)aAction
           parameters:(NSDictionary *)aParameters
 {
     [self setAction:aAction];
@@ -124,8 +125,46 @@
 
 - (NSData *)data
 {
-    NSMutableData *data = [[NSMutableData alloc] init];
-    // ...
+    NSMutableData *data = [[NSMutableData alloc] initWithCapacity:18];
+
+    // adapt to a bug of the server
+    if ([self action] == APAConfirmResult) {
+        [data increaseLengthBy:3];
+    }
+
+    NSEnumerator *enumerator = [[self parameters] keyEnumerator];
+    id key;
+
+    while (key = [enumerator nextObject]) {
+        unsigned char charKey = (unsigned char)key;
+        
+        NSData *dKey = [AmtiumEncoder dataWithUChar:charKey];
+        NSData *dData = [[self parameters] objectForKey:key];
+
+        unsigned char length = [dData length] + 2;
+
+        // adapt to a bug of the server
+        if (charKey == APFMessage || charKey == APFSession) {
+            length -= 2;
+        }
+        
+        NSData *dLength = [AmtiumEncoder dataWithUChar:length];
+
+        [data appendData:dKey];
+        [data appendData:dLength];
+        [data appendData:dData];
+    }
+
+    NSData *dAction = [AmtiumEncoder dataWithUChar:[self action]];
+    NSData *dLength = [AmtiumEncoder dataWithUChar:(unsigned char)[data length]];
+
+    [data replaceBytesInRange:NSMakeRange(0, 1) withBytes:[dAction bytes]];
+    [data replaceBytesInRange:NSMakeRange(1, 1) withBytes:[dLength bytes]];
+
+    unsigned char hash[16];
+    CC_MD5([data bytes], (unsigned int)[data length], hash);
+    [data replaceBytesInRange:NSMakeRange(2, 16) withBytes:hash];
+
     return data;
 }
 
