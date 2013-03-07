@@ -13,7 +13,6 @@
 		FC1DE55416DCD03D008CE989 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55216DCD03D008CE989 /* Credits.rtf */; };
 		FC1DE55716DCD03D008CE989 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE55616DCD03D008CE989 /* AppDelegate.m */; };
 		FC1DE55A16DCD03D008CE989 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55816DCD03D008CE989 /* MainMenu.xib */; };
-		FC40965916E73446009350AF /* AmtiumLoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC40965816E73446009350AF /* AmtiumLoginResult.m */; };
 		FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7716E75229006EDA2D /* MainWindow.xib */; };
 		FCAF7A7916E75239006EDA2D /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */; };
 		FCAF7A7F16E75D34006EDA2D /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */; };
@@ -41,8 +40,6 @@
 		FC1DE55316DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		FC1DE55516DCD03D008CE989 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC1DE55616DCD03D008CE989 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FC40965716E73446009350AF /* AmtiumLoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumLoginResult.h; sourceTree = "<group>"; };
-		FC40965816E73446009350AF /* AmtiumLoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumLoginResult.m; sourceTree = "<group>"; };
 		FCAF7A7616E75229006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		FCAF7A7A16E75239006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
@@ -150,8 +147,8 @@
 		FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
-				FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */,
 				FCAF7A7E16E75D34006EDA2D /* GCDAsyncUdpSocket.h */,
+				FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */,
 			);
 			name = CocoaAsyncSocket;
 			sourceTree = "<group>";
@@ -172,8 +169,6 @@
 				FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */,
 				FCBD320716E5BAD4002B1ED1 /* Amtium.h */,
 				FCBD320816E5BAD4002B1ED1 /* Amtium.m */,
-				FC40965716E73446009350AF /* AmtiumLoginResult.h */,
-				FC40965816E73446009350AF /* AmtiumLoginResult.m */,
 				FCAF7A8916E767E6006EDA2D /* AmtiumPacket.h */,
 				FCAF7A8A16E767E6006EDA2D /* AmtiumPacket.m */,
 				FCAF7A8C16E77128006EDA2D /* AmtiumConstants.h */,
@@ -260,7 +255,6 @@
 				FCBD31F816E4E224002B1ED1 /* PreferencesWindow.m in Sources */,
 				FCBD320916E5BAD4002B1ED1 /* Amtium.m in Sources */,
 				FCBD321B16E6115E002B1ED1 /* NetworkInterface.m in Sources */,
-				FC40965916E73446009350AF /* AmtiumLoginResult.m in Sources */,
 				FCAF7A7F16E75D34006EDA2D /* GCDAsyncUdpSocket.m in Sources */,
 				FCAF7A8B16E767E6006EDA2D /* AmtiumPacket.m in Sources */,
 				FCAF7A8E16E77128006EDA2D /* AmtiumConstants.m in Sources */,
