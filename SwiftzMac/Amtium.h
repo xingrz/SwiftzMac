@@ -8,29 +8,58 @@
 
 #import <Foundation/Foundation.h>
 
-@class AmtiumLoginResult;
+#import "GCDAsyncUdpSocket.h"
 
-@interface Amtium : NSObject {
+@interface Amtium : NSObject<GCDAsyncUdpSocketDelegate> {
     BOOL _online;
     NSString *_account;
+    
     NSString *_server;
-    NSString *_entry;
+    NSString *_entry;   
     NSString *_mac;
     NSString *_ip;
     BOOL _dhcpEnabled;
+    
+    NSString *_session;
+    NSString *_website;
+    unsigned int _index;
+    
+    GCDAsyncUdpSocket *udpSocket;
+    long tag;
+    
+    id _delegate;
+    
+    SEL _didErrorSelector;
+    SEL _didLoginSelector;
+    SEL _didBreathSelector;
+    SEL _didLogoutSelector;
+    SEL _didEntriesSelector;
+    SEL _didCloseSelector;
+    SEL _didConfirmSelector;
+    SEL _didServerSelector;
 }
 
 @property (readonly) BOOL online;
 @property (readonly) NSString *account;
+@property (readonly) NSString *website;
 @property NSString *server;
 @property NSString *entry;
 @property NSString *mac;
 @property NSString *ip;
 @property BOOL dhcpEnabled;
 
-- (AmtiumLoginResult *)login:(NSString *)username password:(NSString *)password;
-- (BOOL)logout;
-- (NSString *)serverFromRemote;
-- (NSArray *)entryListFromRemote;
+- (id)initWithDelegate:(id)delegate
+      didErrorSelector:(SEL)didErrorSelector
+      didCloseSelector:(SEL)didCloseSelector;
+
+- (void)loginWithUsername:(NSString *)username
+                 password:(NSString *)password
+           didEndSelector:(SEL)selector;
+
+- (void)logout:(SEL)selector;
+
+- (void)searchServer:(SEL)selector;
+
+- (void)fetchEntries:(SEL)selector;
 
 @end

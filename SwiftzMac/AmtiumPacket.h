@@ -15,6 +15,8 @@
 
 + (NSData *)dataForInitialization;
 
++ (AmtiumPacket *)packetWithData:(NSData *)data;
+
 + (AmtiumPacket *)packetForGettingServerWithSession:(NSString *)session
                                                  ip:(NSString *)ip
                                                 mac:(NSString *)mac;

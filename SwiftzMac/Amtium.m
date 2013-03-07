@@ -7,36 +7,141 @@
 //
 
 #import "Amtium.h"
+#import "AmtiumConstants.h"
+#import "AmtiumCrypto.h"
+#import "AmtiumEncoder.h"
+#import "AmtiumPacket.h"
 
-#import "AmtiumLoginResult.h"
+#import "GCDAsyncUdpSocket.h"
+
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
 @implementation Amtium
 
-- (AmtiumLoginResult *)login:(NSString *)username password:(NSString *)password
+- (id)initWithDelegate:(id)delegate
+      didErrorSelector:(SEL)didErrorSelector
+      didCloseSelector:(SEL)didCloseSelector
 {
-    if ([password isEqualToString:@"1234"]) {
-        _account = username;
-        _online = YES;
-        return [AmtiumLoginResult resultWithSuccess:YES];
-    } else {
-        return [AmtiumLoginResult resultWithSuccess:NO message:@"测试用的密码是 1234 啦"];
-    }
+    udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+
+	NSError *error = nil;
+
+    if (![udpSocket bindToPort:0 error:&error])
+	{
+		if ([delegate respondsToSelector:didErrorSelector]) {
+            @autoreleasepool {
+                [delegate performSelector:didErrorSelector withObject:error];
+            }
+        }
+        
+        return nil;
+	}
+    
+	if (![udpSocket beginReceiving:&error])
+	{
+		if ([delegate respondsToSelector:didErrorSelector]) {
+            @autoreleasepool {
+                [delegate performSelector:didErrorSelector withObject:error];
+            }
+        }
+        
+        return nil;
+	}
+
+    _delegate = delegate;
+    _didErrorSelector = didErrorSelector;
+    _didCloseSelector = didCloseSelector;
+    
+    return [super init];
 }
 
-- (BOOL)logout
+- (void)loginWithUsername:(NSString *)username
+                 password:(NSString *)password
+           didEndSelector:(SEL)selector
 {
-    _online = NO;
-    return YES;
+    _didLoginSelector = selector;
+
+    _account = username;
+    _index = 0x01000000;
+    
+    AmtiumPacket *packet = [AmtiumPacket packetForLoggingInWithUsername:username
+                                                               password:password
+                                                                  entry:_entry
+                                                                     ip:_ip
+                                                                    mac:_mac
+                                                            dhcpEnabled:_dhcpEnabled
+                                                                version:@"3.6.5"];
+
+    NSData *data = [AmtiumCrypto encrypt:[packet data]];
+
+    [udpSocket sendData:data
+                 toHost:_server
+                   port:3848
+            withTimeout:-1
+                    tag:tag];
+
+    tag++;
 }
 
-- (NSString *)serverFromRemote
+- (void)logout:(SEL)selector
 {
-    return @"172.16.1.180";
+    _didLogoutSelector = selector;
+
+    AmtiumPacket *packet = [AmtiumPacket packetForLoggingOutWithSession:_session
+                                                                     ip:_ip
+                                                                    mac:_mac
+                                                                  index:_index];
+
+    NSData *data = [AmtiumCrypto encrypt:[packet data]];
+
+    [udpSocket sendData:data
+                 toHost:_server
+                   port:3848
+            withTimeout:-1
+                    tag:tag];
+
+    tag++;
 }
 
-- (NSArray *)entryListFromRemote
+- (void)searchServer:(SEL)selector
 {
-    return [NSArray arrayWithObjects:@"internet", @"local", nil];
+    _didServerSelector = selector;
+
+    NSString *session = @"0000000000";
+
+    AmtiumPacket *packet = [AmtiumPacket packetForGettingServerWithSession:session
+                                                                        ip:_ip
+                                                                       mac:_mac];
+
+    NSData *data = [AmtiumCrypto encrypt:[packet data]];
+
+    [udpSocket sendData:data
+                 toHost:_server
+                   port:3848
+            withTimeout:-1
+                    tag:tag];
+
+    tag++;
+}
+
+- (void)fetchEntries:(SEL)selector
+{
+    _didEntriesSelector = selector;
+
+    NSString *session = @"0000000000";
+
+    AmtiumPacket *packet = [AmtiumPacket packetForGettingEntiesWithSession:session
+                                                                       mac:_mac];
+
+    NSData *data = [AmtiumCrypto encrypt:[packet data]];
+
+    [udpSocket sendData:data
+                 toHost:_server
+                   port:3848
+            withTimeout:-1
+                    tag:tag];
+    
+    tag++;
 }
 
 - (BOOL)online
@@ -97,6 +202,91 @@
 - (void)setDhcpEnabled:(BOOL)dhcpEnabled
 {
     _dhcpEnabled = dhcpEnabled;
+}
+
+- (NSString *)website
+{
+    return _website;
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock
+didSendDataWithTag:(long)tag
+{
+
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock
+didNotSendDataWithTag:(long)tag
+       dueToError:(NSError *)error
+{
+
+}
+
+- (void)udpSocket:(GCDAsyncUdpSocket *)sock
+   didReceiveData:(NSData *)data
+      fromAddress:(NSData *)address
+withFilterContext:(id)filterContext
+{
+    NSData *decrypted = [AmtiumCrypto decrypt:data];
+    AmtiumPacket *packet = [AmtiumPacket packetWithData:decrypted];
+
+    unsigned char action = [packet action];
+    if (action == APALoginResult) {
+        BOOL success = [packet boolValueForKey:APFSuccess];
+        NSString *message = [packet stringValueForKey:APFMessage];
+        
+        if (success) {
+            _session = [packet stringValueForKey:APFSession];
+            _website = [packet stringValueForKey:APFWebsite];
+            _online = YES;
+        } else {
+            _session = nil;
+            _website = nil;
+            _online = NO;
+        }
+
+        // timer...
+
+        if ([_delegate respondsToSelector:_didLoginSelector]) {
+            @autoreleasepool {
+                [_delegate performSelector:_didLoginSelector
+                                withObject:[NSNumber numberWithBool:success]
+                                withObject:message];
+            }
+        }
+    } else if (action == APABreathResult) {
+        _index = [packet unsignedIntValueForKey:APFIndex] + 3;
+    } else if (action == APALogoutResult) {
+        _session = nil;
+        _website = nil;
+        _online = NO;
+
+        if ([_delegate respondsToSelector:_didLogoutSelector]) {
+            @autoreleasepool {
+                [_delegate performSelector:_didLogoutSelector];
+            }
+        }
+    } else if (action == APAEntriesResult) {
+
+    } else if (action == APADisconnect) {
+
+    } else if (action == APAConfirmResult) {
+        // no need to do anything
+    } else if (action == APAServerResult) {
+
+    } else {
+        // do nothing
+    }
+}
+
+- (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock
+                withError:(NSError *)error
+{
+    if ([_delegate respondsToSelector:_didErrorSelector]) {
+        @autoreleasepool {
+            [_delegate performSelector:_didErrorSelector withObject:error];
+        }
+    }
 }
 
 @end

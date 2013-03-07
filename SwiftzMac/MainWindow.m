@@ -9,7 +9,6 @@
 #import "MainWindow.h"
 
 #import "Amtium.h"
-#import "AmtiumLoginResult.h"
 
 @implementation MainWindow
 
@@ -25,7 +24,9 @@
 {
     self = [super initWithWindow:window];
     if (self) {
-        amtium = [[Amtium alloc] init];
+        amtium = [[Amtium alloc] initWithDelegate:self
+                                 didErrorSelector:@selector(amtiumDidError:)
+                                 didCloseSelector:@selector(amtiumDidClose:)];
     }
     
     return self;
@@ -39,20 +40,29 @@
 - (IBAction)login:(id)sender
 {
     NSLog(@"login");
-    
-    AmtiumLoginResult *result = [amtium login:[[self username] stringValue]
-                                     password:[[self password] stringValue]];
-    
-    if ([result success]) {
+    [amtium loginWithUsername:[[self username] stringValue]
+                     password:[[self password] stringValue]
+               didEndSelector:@selector(didLoginWithSuccess:message:)];
+
+    [amtium searchServer:@selector(didSearchServer:)];
+}
+
+- (void)didSearchServer:(NSString *)server
+{
+    NSLog(@"%@", server);
+}
+
+- (void)didLoginWithSuccess:(NSNumber *)success
+                    message:(NSString *)message
+{
+    if ([success boolValue]) {
         [self close];
     } else {
-        NSString *message = [result message];
-        
         if (message == nil) {
             message = @"Login failed.";
         }
-        
-        NSAlert *alert = [NSAlert alertWithMessageText:[result message]
+
+        NSAlert *alert = [NSAlert alertWithMessageText:message
                                          defaultButton:@"OK"
                                        alternateButton:@""
                                            otherButton:@""
@@ -68,7 +78,7 @@
 - (IBAction)logout:(id)sender
 {
     NSLog(@"logout");
-    [amtium logout];
+    [amtium logout:nil];
     [self showWindow:sender];
 }
 
@@ -80,6 +90,16 @@
 - (Amtium *)amtium
 {
     return amtium;
+}
+
+- (void)amtiumDidClose:(NSNumber *)reason
+{
+    [self showWindow:nil];
+}
+
+- (void)amtiumDidError:(NSError *)error
+{
+    
 }
 
 @end

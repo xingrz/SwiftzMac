@@ -43,24 +43,29 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
+    Amtium *amtium = [mainWindow amtium];
+    
     if ([menuItem action] == @selector(showMainWindow:)) {
-        [menuItem setHidden:[[mainWindow amtium] online]];
+        [menuItem setHidden:[amtium online]];
         return YES;
     }
     
     if ([menuItem action] == @selector(logout:)) {
-        [menuItem setHidden:![[mainWindow amtium] online]];
+        [menuItem setHidden:![amtium online]];
         return YES;
     }
     
     if ([menuItem action] == @selector(showAccount:)) {
-        [menuItem setHidden:![[mainWindow amtium] online]];
-        if ([[mainWindow amtium] online]) {
+        if ([amtium online]) {
             NSString *account = [[mainWindow amtium] account];
             NSString *title = [NSString stringWithFormat:@"Online: %@", account];
             [menuItem setTitle:title];
+            [menuItem setHidden:NO];
+        } else {
+            [menuItem setHidden:YES];
         }
-        return NO;
+
+        return [amtium website] != nil;
     }
     
     return YES;

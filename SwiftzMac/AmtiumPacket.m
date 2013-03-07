@@ -21,6 +21,11 @@
     return [AmtiumEncoder dataWithString:@"info sock ini"];
 }
 
++ (AmtiumPacket *)packetWithData:(NSData *)data
+{
+    return [[AmtiumPacket alloc] initWithData:data];
+}
+
 + (AmtiumPacket *)packetForGettingServerWithSession:(NSString *)session
                                                  ip:(NSString *)ip
                                                 mac:(NSString *)mac
