@@ -79,14 +79,14 @@
     return value;
 }
 
-+ (unsigned int)intValue:(NSData *)data
++ (unsigned int)unsignedIntValue:(NSData *)data
 {
     unsigned int result;
     [data getBytes:&result length:sizeof(result)];
     return ntohl(result);
 }
 
-+ (unsigned char)charValue:(NSData *)data
++ (unsigned char)unsignedCharValue:(NSData *)data
 {
     unsigned char result;
     [data getBytes:&result length:sizeof(result)];

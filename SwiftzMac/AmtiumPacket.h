@@ -47,4 +47,14 @@
 
 - (NSData *)data;
 
+- (NSString *)stringValueForKey:(unsigned char)key;
+
+- (NSString *)hexadecimalValueForKey:(unsigned char)key;
+
+- (unsigned int)unsignedIntValueForKey:(unsigned char)key;
+
+- (unsigned char)unsignedCharValueForKey:(unsigned char)key;
+
+- (BOOL)boolValueForKey:(unsigned char)key;
+
 @end

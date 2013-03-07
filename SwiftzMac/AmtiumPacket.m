@@ -119,7 +119,36 @@
 
 - (id)initWithData:(NSData *)data
 {
-    // ...
+    NSUInteger length = [data length];
+    unsigned char buffer[length];
+    [data getBytes:buffer length:length];
+
+    [self setAction:buffer[0]];
+
+    unsigned char offset = 18;
+    
+    // adapt to a bug of the server
+    if ([self action] == APAConfirmResult) {
+        offset += 3;
+    }
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+
+    while (offset < sizeof(buffer)) {
+        unsigned char key = buffer[offset];
+        unsigned char length = buffer[offset + 1] - 2;
+
+        // adapt to a bug of the server
+        if (key == APFMessage || key == APFSession) {
+            length += 2;
+        }
+
+        NSData *subdata = [data subdataWithRange:NSMakeRange(offset + 2, length)];
+        [dict setObject:subdata forKey:[NSNumber numberWithUnsignedChar:key]];
+    }
+
+    [self setParameters:dict];
+    
     return self;
 }
 
@@ -141,6 +170,7 @@
         NSData *dKey = [AmtiumEncoder dataWithUChar:charKey];
         NSData *dData = [[self parameters] objectForKey:key];
 
+        // length of `key` + length of `length` + lenght of `data`
         unsigned char length = [dData length] + 2;
 
         // adapt to a bug of the server
@@ -166,6 +196,61 @@
     [data replaceBytesInRange:NSMakeRange(2, 16) withBytes:hash];
 
     return data;
+}
+
+- (NSString *)stringValueForKey:(unsigned char)key
+{
+    id object = [[self parameters] objectForKey:[NSNumber numberWithUnsignedChar:key]];
+    if (object == nil)
+    {
+        return nil;
+    }
+
+    return [AmtiumEncoder stringValue:object];
+}
+
+- (NSString *)hexadecimalValueForKey:(unsigned char)key
+{
+    id object = [[self parameters] objectForKey:[NSNumber numberWithUnsignedChar:key]];
+    if (object == nil)
+    {
+        return nil;
+    }
+
+    return [AmtiumEncoder hexadecimalValue:object];
+}
+
+- (unsigned int)unsignedIntValueForKey:(unsigned char)key
+{
+    id object = [[self parameters] objectForKey:[NSNumber numberWithUnsignedChar:key]];
+    if (object == nil)
+    {
+        return 0;
+    }
+
+    return [AmtiumEncoder unsignedIntValue:object];
+}
+
+- (unsigned char)unsignedCharValueForKey:(unsigned char)key
+{
+    id object = [[self parameters] objectForKey:[NSNumber numberWithUnsignedChar:key]];
+    if (object == nil)
+    {
+        return 0;
+    }
+
+    return [AmtiumEncoder unsignedCharValue:object];
+}
+
+- (BOOL)boolValueForKey:(unsigned char)key
+{
+    id object = [[self parameters] objectForKey:[NSNumber numberWithUnsignedChar:key]];
+    if (object == nil)
+    {
+        return NO;
+    }
+
+    return [AmtiumEncoder boolValue:object];
 }
 
 @end

@@ -25,9 +25,9 @@
 
 + (NSString *)hexadecimalValue:(NSData *)data;
 
-+ (unsigned int)intValue:(NSData *)data;
++ (unsigned int)unsignedIntValue:(NSData *)data;
 
-+ (unsigned char)charValue:(NSData *)data;
++ (unsigned char)unsignedCharValue:(NSData *)data;
 
 + (BOOL)boolValue:(NSData *)data;
 
