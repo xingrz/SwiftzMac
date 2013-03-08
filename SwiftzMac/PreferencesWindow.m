@@ -47,11 +47,13 @@ NSString * const SMKeychainKey = @"KeychainFlag";
 
 - (IBAction)ok:(id)sender {
     NSLog(@"ok");
+    [NSApp endSheet:[self window]];
     [self close];
 }
 
 - (IBAction)cancel:(id)sender {
     NSLog(@"cancel");
+    [NSApp endSheet:[self window]];
     [self close];
 }
 

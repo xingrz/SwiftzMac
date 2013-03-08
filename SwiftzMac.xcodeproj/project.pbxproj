@@ -25,6 +25,8 @@
 		FCBD322116E6209E002B1ED1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */; };
 		FCCA9C7416E77F350069C9E1 /* AmtiumEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */; };
 		FCCA9C7816E790370069C9E1 /* AmtiumCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7716E790370069C9E1 /* AmtiumCrypto.m */; };
+		FCCA9C8116E9A0B70069C9E1 /* PreparingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7F16E9A0B60069C9E1 /* PreparingWindow.m */; };
+		FCCA9C8216E9A0B70069C9E1 /* PreparingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCA9C8016E9A0B70069C9E1 /* PreparingWindow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,9 @@
 		FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumEncoder.m; sourceTree = "<group>"; };
 		FCCA9C7616E790370069C9E1 /* AmtiumCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumCrypto.h; sourceTree = "<group>"; };
 		FCCA9C7716E790370069C9E1 /* AmtiumCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumCrypto.m; sourceTree = "<group>"; };
+		FCCA9C7E16E9A0B60069C9E1 /* PreparingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreparingWindow.h; sourceTree = "<group>"; };
+		FCCA9C7F16E9A0B60069C9E1 /* PreparingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreparingWindow.m; sourceTree = "<group>"; };
+		FCCA9C8016E9A0B70069C9E1 /* PreparingWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreparingWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,12 +125,9 @@
 				FC1DE54A16DCD03D008CE989 /* Supporting Files */,
 				FC1DE55516DCD03D008CE989 /* AppDelegate.h */,
 				FC1DE55616DCD03D008CE989 /* AppDelegate.m */,
-				FCBD31F016E4E1FF002B1ED1 /* MainWindow.h */,
-				FCBD31F116E4E1FF002B1ED1 /* MainWindow.m */,
-				FCBD31F516E4E224002B1ED1 /* PreferencesWindow.h */,
-				FCBD31F616E4E224002B1ED1 /* PreferencesWindow.m */,
 				FCBD321916E6115E002B1ED1 /* NetworkInterface.h */,
 				FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */,
+				FCCA9C8316E9A0D70069C9E1 /* Controllers */,
 				FCAF7A8016E75D8F006EDA2D /* Resources */,
 				FCBD321816E601AD002B1ED1 /* Amtium */,
 			);
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				FC1DE55816DCD03D008CE989 /* MainMenu.xib */,
+				FCCA9C8016E9A0B70069C9E1 /* PreparingWindow.xib */,
 				FCAF7A7716E75229006EDA2D /* MainWindow.xib */,
 				FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */,
 			);
@@ -179,6 +182,19 @@
 				FCCA9C7716E790370069C9E1 /* AmtiumCrypto.m */,
 			);
 			name = Amtium;
+			sourceTree = "<group>";
+		};
+		FCCA9C8316E9A0D70069C9E1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FCBD31F016E4E1FF002B1ED1 /* MainWindow.h */,
+				FCBD31F116E4E1FF002B1ED1 /* MainWindow.m */,
+				FCBD31F516E4E224002B1ED1 /* PreferencesWindow.h */,
+				FCBD31F616E4E224002B1ED1 /* PreferencesWindow.m */,
+				FCCA9C7E16E9A0B60069C9E1 /* PreparingWindow.h */,
+				FCCA9C7F16E9A0B60069C9E1 /* PreparingWindow.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +255,7 @@
 				FC1DE55A16DCD03D008CE989 /* MainMenu.xib in Resources */,
 				FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */,
 				FCAF7A7916E75239006EDA2D /* PreferencesWindow.xib in Resources */,
+				FCCA9C8216E9A0B70069C9E1 /* PreparingWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +277,7 @@
 				FCAF7A8E16E77128006EDA2D /* AmtiumConstants.m in Sources */,
 				FCCA9C7416E77F350069C9E1 /* AmtiumEncoder.m in Sources */,
 				FCCA9C7816E790370069C9E1 /* AmtiumCrypto.m in Sources */,
+				FCCA9C8116E9A0B70069C9E1 /* PreparingWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

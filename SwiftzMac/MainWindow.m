@@ -7,6 +7,7 @@
 //
 
 #import "MainWindow.h"
+#import "PreparingWindow.h"
 
 #import "Amtium.h"
 
@@ -40,11 +41,35 @@
 - (IBAction)login:(id)sender
 {
     NSLog(@"login");
-    [amtium loginWithUsername:[[self username] stringValue]
+    /*[amtium loginWithUsername:[[self username] stringValue]
                      password:[[self password] stringValue]
                didEndSelector:@selector(didLoginWithSuccess:message:)];
 
-    [amtium searchServer:@selector(didSearchServer:)];
+    [amtium searchServer:@selector(didSearchServer:)];*/
+
+    preparingWindow = [[PreparingWindow alloc] init];
+
+    [NSApp beginSheet:[preparingWindow window]
+       modalForWindow:[self window]
+        modalDelegate:self
+       didEndSelector:nil
+          contextInfo:nil];
+
+    [NSTimer scheduledTimerWithTimeInterval:1
+                                     target:self
+                                   selector:@selector(doTimer)
+                                   userInfo:nil
+                                    repeats:NO];
+    
+}
+
+- (void)doTimer
+{
+    NSLog(@"timer");
+    //[[preparingWindow window] orderOut:self];
+    [NSApp endSheet:[preparingWindow window]];
+    [preparingWindow close];
+    preparingWindow = nil;
 }
 
 - (void)didSearchServer:(NSString *)server

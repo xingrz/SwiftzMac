@@ -86,7 +86,17 @@
         preferencesWindow = [[PreferencesWindow alloc] init];
     }
     
-    [preferencesWindow showWindow:self];
+    //[preferencesWindow showWindow:self];
+
+    if (mainWindow && [[mainWindow window] isVisible]) {
+        [NSApp beginSheet:[preferencesWindow window]
+           modalForWindow:[mainWindow window]
+            modalDelegate:self
+           didEndSelector:nil
+              contextInfo:nil];
+    } else {
+        [preferencesWindow showWindow:self];
+    }
 }
 
 - (IBAction)showAccount:(id)sender

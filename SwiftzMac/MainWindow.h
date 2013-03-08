@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class PreparingWindow;
 @class Amtium;
 
 @interface MainWindow : NSWindowController {
     Amtium *amtium;
+    PreparingWindow *preparingWindow;
 }
 
 @property (weak) IBOutlet NSTextField *username;
