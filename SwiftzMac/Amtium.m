@@ -54,14 +54,21 @@
 
     NSData *data = [AmtiumPacket dataForInitialization];
 
-    [udpSocket sendData:data
+    /*[udpSocket sendData:data
                  toHost:_server
                    port:3848
             withTimeout:-1
                     tag:tag];
     
-    tag++;
+    tag++;*/
 
+    NSLog(@"init: %@", data);
+    _server = @"172.16.1.180";
+    _entry = @"internet";
+    _mac = @"000000000000";
+    _ip = @"172.16.163.1";
+    _dhcpEnabled = YES;
+    
     return [super init];
 }
 
@@ -84,13 +91,22 @@
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
 
-    [udpSocket sendData:data
+    /*[udpSocket sendData:data
                  toHost:_server
                    port:3848
             withTimeout:-1
                     tag:tag];
 
-    tag++;
+    tag++;*/
+
+    NSLog(@"login: %@", data);
+    if ([_delegate respondsToSelector:_didLoginSelector]) {
+        @autoreleasepool {
+            [_delegate performSelector:_didLoginSelector
+                            withObject:[NSNumber numberWithBool:YES]
+                            withObject:@"只是测试啦"];
+        }
+    }
 }
 
 - (void)logout:(SEL)selector
@@ -107,13 +123,20 @@
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
 
-    [udpSocket sendData:data
+    /*[udpSocket sendData:data
                  toHost:_server
                    port:3848
             withTimeout:-1
                     tag:tag];
 
-    tag++;
+    tag++;*/
+
+    NSLog(@"logout: %@", data);
+    if ([_delegate respondsToSelector:_didLogoutSelector]) {
+        @autoreleasepool {
+            [_delegate performSelector:_didLogoutSelector];
+        }
+    }
 }
 
 - (void)searchServer:(SEL)selector
@@ -128,13 +151,20 @@
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
 
-    [udpSocket sendData:data
+    /*[udpSocket sendData:data
                  toHost:_server
                    port:3848
             withTimeout:-1
                     tag:tag];
 
-    tag++;
+    tag++;*/
+
+    NSLog(@"server: %@", [packet data]);
+    if ([_delegate respondsToSelector:_didServerSelector]) {
+        @autoreleasepool {
+            [_delegate performSelector:_didServerSelector withObject:@"172.16.1.180"];
+        }
+    }
 }
 
 - (void)fetchEntries:(SEL)selector
@@ -148,13 +178,20 @@
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
 
-    [udpSocket sendData:data
+    /*[udpSocket sendData:data
                  toHost:_server
                    port:3848
             withTimeout:-1
                     tag:tag];
     
-    tag++;
+    tag++;*/
+
+    NSLog(@"enties: %@", data);
+    if ([_delegate respondsToSelector:_didEntriesSelector]) {
+        @autoreleasepool {
+            [_delegate performSelector:_didEntriesSelector withObject:[NSArray arrayWithObjects:@"internet", @"local", nil]];
+        }
+    }
 }
 
 - (void)breath

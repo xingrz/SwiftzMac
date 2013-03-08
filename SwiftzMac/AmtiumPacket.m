@@ -31,10 +31,20 @@
                                                 mac:(NSString *)mac
 {
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [AmtiumEncoder dataWithString:session],       APFSession,
-                          [AmtiumEncoder dataWithString:ip length:16],  APFIp,
-                          [AmtiumEncoder dataWithHexadecimal:mac],      APFMac,
+                          [AmtiumEncoder dataWithString:session],
+                          [NSNumber numberWithUnsignedChar:APFSession],
+                          
+                          [AmtiumEncoder dataWithString:ip length:16],
+                          [NSNumber numberWithUnsignedChar:APFIp],
+                          
+                          [AmtiumEncoder dataWithHexadecimal:mac],
+                          [NSNumber numberWithUnsignedChar:APFMac],
+                          
                           nil];
+
+    NSLog(@"session: %@", [AmtiumEncoder dataWithString:session]);
+    NSLog(@"ip: %@", [AmtiumEncoder dataWithString:ip length:16]);
+    NSLog(@"mac: %@", [AmtiumEncoder dataWithHexadecimal:mac]);
 
     return [[AmtiumPacket alloc] initWithAction:APAServer parameters:dict];
 }
@@ -43,8 +53,12 @@
                                                 mac:(NSString *)mac
 {
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [AmtiumEncoder dataWithString:session],   APFSession,
-                          [AmtiumEncoder dataWithHexadecimal:mac],  APFMac,
+                          [AmtiumEncoder dataWithString:session],
+                          [NSNumber numberWithUnsignedChar:APFSession],
+                          
+                          [AmtiumEncoder dataWithHexadecimal:mac],
+                          [NSNumber numberWithUnsignedChar:APFMac],
+                          
                           nil];
 
     return [[AmtiumPacket alloc] initWithAction:APAEntries parameters:dict];
@@ -59,13 +73,27 @@
                                          version:(NSString *)version
 {
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [AmtiumEncoder dataWithHexadecimal:mac],  APFMac,
-                          [AmtiumEncoder dataWithString:username],  APFUsername,
-                          [AmtiumEncoder dataWithString:password],  APFPassword,
-                          [AmtiumEncoder dataWithString:ip],        APFIp,
-                          [AmtiumEncoder dataWithString:entry],     APFEntry,
-                          [AmtiumEncoder dataWithBool:dhcpEnabled], APFDhcp,
-                          [AmtiumEncoder dataWithString:version],   APFVersion,
+                          [AmtiumEncoder dataWithHexadecimal:mac],
+                          [NSNumber numberWithUnsignedChar:APFMac],
+                          
+                          [AmtiumEncoder dataWithString:username],
+                          [NSNumber numberWithUnsignedChar:APFUsername],
+                          
+                          [AmtiumEncoder dataWithString:password],
+                          [NSNumber numberWithUnsignedChar:APFPassword],
+                          
+                          [AmtiumEncoder dataWithString:ip],
+                          [NSNumber numberWithUnsignedChar:APFIp],
+                          
+                          [AmtiumEncoder dataWithString:entry],
+                          [NSNumber numberWithUnsignedChar:APFEntry],
+                          
+                          [AmtiumEncoder dataWithBool:dhcpEnabled],
+                          [NSNumber numberWithUnsignedChar:APFDhcp],
+                          
+                          [AmtiumEncoder dataWithString:version],
+                          [NSNumber numberWithUnsignedChar:APFVersion],
+                          
                           nil];
 
     return [[AmtiumPacket alloc] initWithAction:APALogin parameters:dict];
@@ -78,16 +106,36 @@
 {
     // NOTE: index 是从 0x01000000 起算的，每次递增 3。
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [AmtiumEncoder dataWithString:session],       APFSession,
-                          [AmtiumEncoder dataWithString:ip length:16],  APFIp,
-                          [AmtiumEncoder dataWithHexadecimal:mac],      APFMac,
-                          [AmtiumEncoder dataWithUInt:index],           APFIndex,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2A,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2B,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2C,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2D,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2E,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2F,
+                          [AmtiumEncoder dataWithString:session],
+                          [NSNumber numberWithUnsignedChar:APFSession],
+                          
+                          [AmtiumEncoder dataWithString:ip length:16],
+                          [NSNumber numberWithUnsignedChar:APFIp],
+                          
+                          [AmtiumEncoder dataWithHexadecimal:mac],
+                          [NSNumber numberWithUnsignedChar:APFMac],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:index],
+                          [NSNumber numberWithUnsignedChar:APFIndex],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2A],
+
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2B],
+
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2C],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2D],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2E],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2F],
+                          
                           nil];
 
     return [[AmtiumPacket alloc] initWithAction:APABreath parameters:dict];
@@ -99,16 +147,36 @@
                                            index:(unsigned int)index
 {
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [AmtiumEncoder dataWithString:session],       APFSession,
-                          [AmtiumEncoder dataWithString:ip length:16],  APFIp,
-                          [AmtiumEncoder dataWithHexadecimal:mac],      APFMac,
-                          [AmtiumEncoder dataWithUInt:index],           APFIndex,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2A,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2B,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2C,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2D,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2E,
-                          [AmtiumEncoder dataWithUInt:0],               APFBlock2F,
+                          [AmtiumEncoder dataWithString:session],
+                          [NSNumber numberWithUnsignedChar:APFSession],
+                          
+                          [AmtiumEncoder dataWithString:ip length:16],
+                          [NSNumber numberWithUnsignedChar:APFIp],
+                          
+                          [AmtiumEncoder dataWithHexadecimal:mac],
+                          [NSNumber numberWithUnsignedChar:APFMac],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:index],
+                          [NSNumber numberWithUnsignedChar:APFIndex],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2A],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2B],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2C],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2D],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2E],
+                          
+                          [AmtiumEncoder dataWithUnsignedInt:0],
+                          [NSNumber numberWithUnsignedChar:APFBlock2F],
+                          
                           nil];
 
     return [[AmtiumPacket alloc] initWithAction:APALogout parameters:dict];
@@ -166,14 +234,20 @@
         [data increaseLengthBy:3];
     }
 
+    NSLog(@"DATA: %i", [self action]);
+
     NSEnumerator *enumerator = [[self parameters] keyEnumerator];
     id key;
 
+    NSLog(@"%@", [self parameters]);
+
     while (key = [enumerator nextObject]) {
-        unsigned char charKey = (unsigned char)key;
+        unsigned char charKey = [(NSNumber *)key unsignedCharValue];
         
-        NSData *dKey = [AmtiumEncoder dataWithUChar:charKey];
+        NSData *dKey = [AmtiumEncoder dataWithUnsignedChar:charKey];
         NSData *dData = [[self parameters] objectForKey:key];
+
+        NSLog(@"key:%@ data:%@", dKey, dData);
 
         // length of `key` + length of `length` + lenght of `data`
         unsigned char length = [dData length] + 2;
@@ -183,15 +257,15 @@
             length -= 2;
         }
         
-        NSData *dLength = [AmtiumEncoder dataWithUChar:length];
+        NSData *dLength = [AmtiumEncoder dataWithUnsignedChar:length];
 
         [data appendData:dKey];
         [data appendData:dLength];
         [data appendData:dData];
     }
 
-    NSData *dAction = [AmtiumEncoder dataWithUChar:[self action]];
-    NSData *dLength = [AmtiumEncoder dataWithUChar:(unsigned char)[data length]];
+    NSData *dAction = [AmtiumEncoder dataWithUnsignedChar:[self action]];
+    NSData *dLength = [AmtiumEncoder dataWithUnsignedChar:(unsigned char)[data length]];
 
     [data replaceBytesInRange:NSMakeRange(0, 1) withBytes:[dAction bytes]];
     [data replaceBytesInRange:NSMakeRange(1, 1) withBytes:[dLength bytes]];

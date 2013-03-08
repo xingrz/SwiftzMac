@@ -9,30 +9,47 @@
 #import "AppDelegate.h"
 
 #import "Amtium.h"
+#import "NetworkInterface.h"
 
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 
 @implementation AppDelegate
 
+@synthesize initialUse;
+@synthesize server;
+@synthesize entry;
+@synthesize entries;
+@synthesize interface;
+@synthesize ip;
+@synthesize ipManual;
+@synthesize shouldUseKeychain;
+
 + (void)initialize
 {
-    NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
+    NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
     
-    [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:SMInitialKey];
-    //[defaultValues setObject:nil forKey:SMServerKey];
-    //[defaultValues setObject:nil forKey:SMEntryKey];
-    //[defaultValues setObject:nil forKey:SMEntryListKey];
-    //[defaultValues setObject:nil forKey:SMInterfaceKey];
-    //[defaultValues setObject:nil forKey:SMIpKey];
-    //[defaultValues setObject:[NSNumber numberWithBool:NO] forKey:SMIpManualKey];
-    [defaultValues setObject:[NSNumber numberWithBool:NO] forKey:SMKeychainKey];
+    [defaults setObject:[NSNumber numberWithBool:YES] forKey:SMInitialKey];
+    [defaults setObject:[NSNumber numberWithBool:NO] forKey:SMIpManualKey];
+    [defaults setObject:[NSNumber numberWithBool:NO] forKey:SMKeychainKey];
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    // 加载用户配置
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self setInitialUse:[defaults boolForKey:SMInitialKey]];
+    [self setServer:[defaults stringForKey:SMServerKey]];
+    [self setEntry:[defaults stringForKey:SMEntryKey]];
+    [self setEntries:[defaults stringArrayForKey:SMEntryListKey]];
+    [self setInterface:[defaults stringForKey:SMInterfaceKey]];
+    [self setIp:[defaults stringForKey:SMIpKey]];
+    [self setIpManual:[defaults boolForKey:SMIpManualKey]];
+    [self setShouldUseKeychain:[defaults boolForKey:SMKeychainKey]];
+
+    // 初始化状态栏菜单
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:[self statusMenu]];
     [statusItem setTitle:@"Swiftz"];

@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 XiNGRZ. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "PreferencesWindow.h"
 
 NSString * const SMInitialKey = @"InitialFlag";
@@ -58,6 +59,8 @@ NSString * const SMKeychainKey = @"KeychainFlag";
 }
 
 - (IBAction)restore:(id)sender {
+    AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
+    NSLog(@"%@", [appDelegate entry]);
 }
 
 - (BOOL)isInitialUse

@@ -16,7 +16,7 @@
     return [stringValue dataUsingEncoding:encoding];
 }
 
-+ (NSData *)dataWithString:(NSString *)stringValue length:(unsigned int)length
++ (NSData *)dataWithString:(NSString *)stringValue length:(unsigned char)length
 {
     NSMutableData *data = [NSMutableData dataWithData:[self dataWithString:stringValue]];
     [data setLength:length];
@@ -40,13 +40,13 @@
     return data;
 }
 
-+ (NSData *)dataWithUInt:(unsigned int)intValue
++ (NSData *)dataWithUnsignedInt:(unsigned int)intValue
 {
     unsigned int i = htonl(intValue);
     return [NSData dataWithBytes:&i length:sizeof(i)];
 }
 
-+ (NSData *)dataWithUChar:(unsigned char)charValue
++ (NSData *)dataWithUnsignedChar:(unsigned char)charValue
 {
     return [NSData dataWithBytes:&charValue length:sizeof(charValue)];
 }

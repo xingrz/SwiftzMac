@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 XiNGRZ. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MainWindow.h"
 #import "PreparingWindow.h"
 
@@ -25,6 +26,8 @@
 {
     self = [super initWithWindow:window];
     if (self) {
+        appdelegate = [[NSApplication sharedApplication] delegate];
+
         amtium = [[Amtium alloc] initWithDelegate:self
                                  didErrorSelector:@selector(amtiumDidError:)
                                  didCloseSelector:@selector(amtiumDidClose:)];
@@ -36,6 +39,39 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    
+    if ([appdelegate initialUse]) {
+        [appdelegate setInitialUse:NO];
+        
+        preparingWindow = [[PreparingWindow alloc] init];
+        [NSApp beginSheet:[preparingWindow window]
+           modalForWindow:[self window]
+            modalDelegate:self
+           didEndSelector:nil
+              contextInfo:nil];
+
+        [amtium searchServer:@selector(initialStepOneWithServer:)];
+    }
+}
+
+- (void)initialStepOneWithServer:(NSString *)server
+{
+    [appdelegate setServer:server];
+    [amtium fetchEntries:@selector(initialStepTwoWithEntries:)];
+}
+
+- (void)initialStepTwoWithEntries:(NSArray *)entries
+{
+    [appdelegate setEntries:entries];
+
+    NSString *firstEntry = [entries objectAtIndex:0];
+    [appdelegate setEntry:firstEntry];
+
+    [NSApp endSheet:[preparingWindow window]];
+    [preparingWindow close];
+    preparingWindow = nil;
+
+    [appdelegate showPreferencesWindow:self];
 }
 
 - (IBAction)login:(id)sender
@@ -45,36 +81,7 @@
                      password:[[self password] stringValue]
                didEndSelector:@selector(didLoginWithSuccess:message:)];
 
-    [amtium searchServer:@selector(didSearchServer:)];*/
-
-    preparingWindow = [[PreparingWindow alloc] init];
-
-    [NSApp beginSheet:[preparingWindow window]
-       modalForWindow:[self window]
-        modalDelegate:self
-       didEndSelector:nil
-          contextInfo:nil];
-
-    [NSTimer scheduledTimerWithTimeInterval:1
-                                     target:self
-                                   selector:@selector(doTimer)
-                                   userInfo:nil
-                                    repeats:NO];
-    
-}
-
-- (void)doTimer
-{
-    NSLog(@"timer");
-    //[[preparingWindow window] orderOut:self];
-    [NSApp endSheet:[preparingWindow window]];
-    [preparingWindow close];
-    preparingWindow = nil;
-}
-
-- (void)didSearchServer:(NSString *)server
-{
-    NSLog(@"%@", server);
+    [amtium searchServer:@selector(didSearchServer:)];*/    
 }
 
 - (void)didLoginWithSuccess:(NSNumber *)success

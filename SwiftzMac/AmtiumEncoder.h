@@ -11,13 +11,13 @@
 @interface AmtiumEncoder : NSObject
 
 + (NSData *)dataWithString:(NSString *)stringValue;
-+ (NSData *)dataWithString:(NSString *)stringValue length:(unsigned int)length;
++ (NSData *)dataWithString:(NSString *)stringValue length:(unsigned char)length;
 
 + (NSData *)dataWithHexadecimal:(NSString *)hexadecimalValue;
 
-+ (NSData *)dataWithUInt:(unsigned int)intValue;
++ (NSData *)dataWithUnsignedInt:(unsigned int)intValue;
 
-+ (NSData *)dataWithUChar:(unsigned char)charValue;
++ (NSData *)dataWithUnsignedChar:(unsigned char)charValue;
 
 + (NSData *)dataWithBool:(BOOL)boolValue;
 

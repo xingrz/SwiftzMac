@@ -8,19 +8,25 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class AppController;
-
 @class MainWindow;
 @class PreferencesWindow;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
-    AppController *appController;
     MainWindow *mainWindow;
     PreferencesWindow *preferencesWindow;
     NSStatusItem *statusItem;
 }
 
 @property (weak) IBOutlet NSMenu *statusMenu;
+
+@property BOOL initialUse;
+@property NSString *server;
+@property NSString *entry;
+@property NSArray *entries;
+@property NSString *interface;
+@property NSString *ip;
+@property BOOL ipManual;
+@property BOOL shouldUseKeychain;
 
 - (IBAction)showMainWindow:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
