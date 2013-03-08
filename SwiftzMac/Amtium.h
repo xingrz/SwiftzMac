@@ -23,6 +23,7 @@
     NSString *_session;
     NSString *_website;
     unsigned int _index;
+    NSTimer *_timer;
     
     GCDAsyncUdpSocket *udpSocket;
     long tag;

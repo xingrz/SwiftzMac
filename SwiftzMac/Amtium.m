@@ -22,6 +22,10 @@
       didErrorSelector:(SEL)didErrorSelector
       didCloseSelector:(SEL)didCloseSelector
 {
+    _delegate = delegate;
+    _didErrorSelector = didErrorSelector;
+    _didCloseSelector = didCloseSelector;
+
     udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
 
 	NSError *error = nil;
@@ -48,10 +52,16 @@
         return nil;
 	}
 
-    _delegate = delegate;
-    _didErrorSelector = didErrorSelector;
-    _didCloseSelector = didCloseSelector;
+    NSData *data = [AmtiumPacket dataForInitialization];
+
+    [udpSocket sendData:data
+                 toHost:_server
+                   port:3848
+            withTimeout:-1
+                    tag:tag];
     
+    tag++;
+
     return [super init];
 }
 
@@ -86,6 +96,9 @@
 - (void)logout:(SEL)selector
 {
     _didLogoutSelector = selector;
+
+    [_timer invalidate];
+    _timer = nil;
 
     AmtiumPacket *packet = [AmtiumPacket packetForLoggingOutWithSession:_session
                                                                      ip:_ip
@@ -144,6 +157,11 @@
     tag++;
 }
 
+- (void)breath
+{
+    
+}
+
 - (BOOL)online
 {
     return _online;
@@ -161,7 +179,9 @@
 
 - (void)setServer:(NSString *)server
 {
-    // ...
+    if (!_online) {
+        _server = server;
+    }
 }
 
 - (NSString *)entry
@@ -181,7 +201,9 @@
 
 - (void)setMac:(NSString *)mac
 {
-    // ...
+    if (!_online) {
+        _mac = mac;
+    }
 }
 
 - (NSString *)ip
@@ -191,7 +213,9 @@
 
 - (void)setIp:(NSString *)ip
 {
-    // ...
+    if (!_online) {
+        _ip = ip;
+    }
 }
 
 - (BOOL)dhcpEnabled
@@ -219,7 +243,11 @@ didSendDataWithTag:(long)tag
 didNotSendDataWithTag:(long)tag
        dueToError:(NSError *)error
 {
-
+    if ([_delegate respondsToSelector:_didErrorSelector]) {
+        @autoreleasepool {
+            [_delegate performSelector:_didErrorSelector withObject:error];
+        }
+    }
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock
@@ -245,7 +273,11 @@ withFilterContext:(id)filterContext
             _online = NO;
         }
 
-        // timer...
+        _timer = [NSTimer scheduledTimerWithTimeInterval:30
+                                                  target:self
+                                                selector:@selector(breath)
+                                                userInfo:nil
+                                                 repeats:YES];
 
         if ([_delegate respondsToSelector:_didLoginSelector]) {
             @autoreleasepool {
@@ -269,7 +301,14 @@ withFilterContext:(id)filterContext
     } else if (action == APAEntriesResult) {
 
     } else if (action == APADisconnect) {
+        [_timer invalidate];
+        _timer = nil;
 
+        if ([_delegate respondsToSelector:_didCloseSelector]) {
+            @autoreleasepool {
+                [_delegate performSelector:_didCloseSelector withObject:@""];
+            }
+        }
     } else if (action == APAConfirmResult) {
         // no need to do anything
     } else if (action == APAServerResult) {
@@ -282,6 +321,9 @@ withFilterContext:(id)filterContext
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock
                 withError:(NSError *)error
 {
+    [_timer invalidate];
+    _timer = nil;
+    
     if ([_delegate respondsToSelector:_didErrorSelector]) {
         @autoreleasepool {
             [_delegate performSelector:_didErrorSelector withObject:error];
