@@ -8,55 +8,66 @@
 
 #import <Foundation/Foundation.h>
 
+@class APMutableParams;
+
 @interface AmtiumPacket : NSObject
 
 @property unsigned char action;
-@property NSDictionary *parameters;
+@property APMutableParams *parameters;
 
 + (NSData *)dataForInitialization;
 
-+ (AmtiumPacket *)packetWithData:(NSData *)data;
++ (id)packetWithAction:(unsigned char)action
+            parameters:(APMutableParams *)parameters;
 
-+ (AmtiumPacket *)packetForGettingServerWithSession:(NSString *)session
-                                                 ip:(NSString *)ip
-                                                mac:(NSString *)mac;
++ (id)packetWithData:(NSData *)data;
 
-+ (AmtiumPacket *)packetForGettingEntiesWithSession:(NSString *)session
-                                                mac:(NSString *)mac;
++ (id)packetForGettingServerWithSession:(NSString *)session
+                                     ip:(NSString *)ip
+                                    mac:(NSString *)mac;
 
-+ (AmtiumPacket *)packetForLoggingInWithUsername:(NSString *)username
-                                        password:(NSString *)password
-                                           entry:(NSString *)entry
-                                              ip:(NSString *)ip
-                                             mac:(NSString *)mac
-                                     dhcpEnabled:(BOOL)dhcpEnabled
-                                         version:(NSString *)version;
++ (id)packetForGettingEntiesWithSession:(NSString *)session
+                                    mac:(NSString *)mac;
 
-+ (AmtiumPacket *)packetForBreathingWithSession:(NSString *)session
-                                             ip:(NSString *)ip
-                                            mac:(NSString *)mac
-                                          index:(unsigned int)index;
++ (id)packetForLoggingInWithUsername:(NSString *)username
+                            password:(NSString *)password
+                               entry:(NSString *)entry
+                                  ip:(NSString *)ip
+                                 mac:(NSString *)mac
+                         dhcpEnabled:(BOOL)dhcpEnabled
+                             version:(NSString *)version;
 
-+ (AmtiumPacket *)packetForLoggingOutWithSession:(NSString *)session
-                                              ip:(NSString *)ip
-                                             mac:(NSString *)mac
-                                           index:(unsigned int)index;
++ (id)packetForBreathingWithSession:(NSString *)session
+                                 ip:(NSString *)ip
+                                mac:(NSString *)mac
+                              index:(unsigned int)index;
+
++ (id)packetForLoggingOutWithSession:(NSString *)session
+                                  ip:(NSString *)ip
+                                 mac:(NSString *)mac
+                               index:(unsigned int)index;
 
 - (id)initWithAction:(unsigned char)action
-          parameters:(NSDictionary *)parameters;
+          parameters:(APMutableParams *)parameters;
 
 - (id)initWithData:(NSData *)data;
 
 - (NSData *)data;
 
-- (NSString *)stringValueForKey:(unsigned char)key;
+- (NSString *)stringForKey:(unsigned char)key;
 
-- (NSString *)hexadecimalValueForKey:(unsigned char)key;
+- (NSArray *)stringArrayForKey:(unsigned char)key;
 
-- (unsigned int)unsignedIntValueForKey:(unsigned char)key;
+- (NSString *)hexadecimalForKey:(unsigned char)key;
 
-- (unsigned char)unsignedCharValueForKey:(unsigned char)key;
+- (unsigned int)unsignedIntForKey:(unsigned char)key;
 
-- (BOOL)boolValueForKey:(unsigned char)key;
+- (unsigned char)unsignedCharForKey:(unsigned char)key;
+
+- (BOOL)boolForKey:(unsigned char)key;
+
+- (NSArray *)allKeys;
+
+- (BOOL)containsKey:(unsigned char)key;
 
 @end

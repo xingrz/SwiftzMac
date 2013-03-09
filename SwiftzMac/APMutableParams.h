@@ -8,7 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface APMutableParams : NSObject
+@interface APMutableParams : NSObject {
+    NSMutableArray *keys;
+    NSMutableArray *values;
+}
+
++ (id)paramsWithData:(NSData *)data;
+
+- (id)initWithData:(NSData *)data;
 
 - (void)addString:(NSString *)stringValue forKey:(unsigned char)key;
 - (void)addString:(NSString *)stringValue length:(unsigned char)length forKey:(unsigned char)key;
@@ -21,6 +28,22 @@
 
 - (void)addBool:(BOOL)boolValue forKey:(unsigned char)key;
 
+- (NSString *)stringForKey:(unsigned char)key;
+
+- (NSArray *)stringArrayForKey:(unsigned char)key;
+
+- (NSString *)hexadecimalForKey:(unsigned char)key;
+
+- (unsigned int)unsignedIntForKey:(unsigned char)key;
+
+- (unsigned char)unsignedCharForKey:(unsigned char)key;
+
+- (BOOL)boolForKey:(unsigned char)key;
+
 - (NSData *)data;
+
+- (NSArray *)allKeys;
+
+- (BOOL)containsKey:(unsigned char)key;
 
 @end

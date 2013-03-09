@@ -159,7 +159,7 @@
 
     tag++;*/
 
-    NSLog(@"server: %@", [packet data]);
+    NSLog(@"server: %@", data);
     if ([_delegate respondsToSelector:_didServerSelector]) {
         @autoreleasepool {
             [_delegate performSelector:_didServerSelector withObject:@"172.16.1.180"];
@@ -297,12 +297,12 @@ withFilterContext:(id)filterContext
 
     unsigned char action = [packet action];
     if (action == APALoginResult) {
-        BOOL success = [packet boolValueForKey:APFSuccess];
-        NSString *message = [packet stringValueForKey:APFMessage];
+        BOOL success = [packet boolForKey:APFSuccess];
+        NSString *message = [packet stringForKey:APFMessage];
         
         if (success) {
-            _session = [packet stringValueForKey:APFSession];
-            _website = [packet stringValueForKey:APFWebsite];
+            _session = [packet stringForKey:APFSession];
+            _website = [packet stringForKey:APFWebsite];
             _online = YES;
         } else {
             _session = nil;
@@ -324,7 +324,7 @@ withFilterContext:(id)filterContext
             }
         }
     } else if (action == APABreathResult) {
-        _index = [packet unsignedIntValueForKey:APFIndex] + 3;
+        _index = [packet unsignedIntForKey:APFIndex] + 3;
     } else if (action == APALogoutResult) {
         _session = nil;
         _website = nil;
