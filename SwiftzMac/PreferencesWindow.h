@@ -17,7 +17,9 @@ extern NSString * const SMIpKey;
 extern NSString * const SMIpManualKey;
 extern NSString * const SMKeychainKey;
 
-@interface PreferencesWindow : NSWindowController
+@interface PreferencesWindow : NSWindowController <NSWindowDelegate> {
+    AppDelegate *appdelegate;
+}
 
 @property (weak) IBOutlet NSTextField *serverText;
 @property (weak) IBOutlet NSPopUpButton *entryPopup;

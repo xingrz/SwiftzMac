@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "MainWindow.h"
 #import "PreferencesWindow.h"
+
+#import "NetworkInterface.h"
 
 NSString * const SMInitialKey = @"InitialFlag";
 NSString * const SMServerKey = @"Server";
@@ -33,10 +36,48 @@ NSString * const SMKeychainKey = @"KeychainFlag";
 {
     self = [super initWithWindow:window];
     if (self) {
-        // Initialization code here.
+        appdelegate = [[NSApplication sharedApplication] delegate];
     }
     
     return self;
+}
+
+- (void)showWindow:(id)sender
+{
+    if ([appdelegate mainWindow] && [[[appdelegate mainWindow] window] isVisible]) {
+        [NSApp beginSheet:[[appdelegate preferencesWindow] window]
+           modalForWindow:[[appdelegate mainWindow] window]
+            modalDelegate:self
+           didEndSelector:nil
+              contextInfo:nil];
+    } else {
+        [super showWindow:sender];
+    }
+
+    NSLog(@"%@", [appdelegate entries]);
+
+    [[self serverText] setStringValue:[appdelegate server]];
+
+    [[self entryPopup] addItemsWithTitles:[appdelegate entries]];
+    [[self entryPopup] setTitle:[appdelegate entry]];
+
+    for (NetworkInterface *ni in [appdelegate interfaces]) {
+        NSString *label = [NSString stringWithFormat:
+                           @"%@ (%@, %@)",
+                           [ni localizedDisplayName],
+                           [ni name],
+                           [ni hardwareAddress]];
+        
+        [[self interfacePopup] addItemWithTitle:label];
+    }
+
+    [[self ipCombo] addItemsWithObjectValues:[appdelegate ipAddresses]];
+
+    if ([appdelegate ip]) {
+        [[self ipCombo] setObjectValue:[appdelegate ip]];
+    } else {
+        [[self ipCombo] selectItemAtIndex:0];
+    }
 }
 
 - (void)windowDidLoad

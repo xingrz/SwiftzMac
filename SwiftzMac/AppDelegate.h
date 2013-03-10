@@ -15,9 +15,14 @@
     MainWindow *mainWindow;
     PreferencesWindow *preferencesWindow;
     NSStatusItem *statusItem;
+    NSArray *ipAddresses;
+    NSArray *interfaces;
 }
 
 @property (weak) IBOutlet NSMenu *statusMenu;
+
+@property (readonly) MainWindow *mainWindow;
+@property (readonly) PreferencesWindow *preferencesWindow;
 
 @property BOOL initialUse;
 @property NSString *server;
@@ -27,6 +32,8 @@
 @property NSString *ip;
 @property BOOL ipManual;
 @property BOOL shouldUseKeychain;
+@property (readonly) NSArray *ipAddresses;
+@property (readonly) NSArray *interfaces;
 
 - (IBAction)showMainWindow:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;

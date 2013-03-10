@@ -38,22 +38,14 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // 加载用户配置
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self setInitialUse:[defaults boolForKey:SMInitialKey]];
-    [self setServer:[defaults stringForKey:SMServerKey]];
-    [self setEntry:[defaults stringForKey:SMEntryKey]];
-    [self setEntries:[defaults stringArrayForKey:SMEntryListKey]];
-    [self setInterface:[defaults stringForKey:SMInterfaceKey]];
-    [self setIp:[defaults stringForKey:SMIpKey]];
-    [self setIpManual:[defaults boolForKey:SMIpManualKey]];
-    [self setShouldUseKeychain:[defaults boolForKey:SMKeychainKey]];
-
     // 初始化状态栏菜单
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:[self statusMenu]];
     [statusItem setTitle:@"Swiftz"];
     [statusItem setHighlightMode:YES];
+
+    ipAddresses = [NetworkInterface getAllIpAddresses];
+    interfaces = [NetworkInterface getAllInterfaces];
 
     [self showMainWindow:self];
 }
@@ -88,6 +80,24 @@
     return YES;
 }
 
+- (MainWindow *)mainWindow
+{
+    if (!mainWindow) {
+        mainWindow = [[MainWindow alloc] init];
+    }
+    
+    return mainWindow;
+}
+
+- (PreferencesWindow *)preferencesWindow
+{
+    if (!preferencesWindow) {
+        preferencesWindow = [[PreferencesWindow alloc] init];
+    }
+    
+    return preferencesWindow;
+}
+
 - (IBAction)showMainWindow:(id)sender
 {
     if (!mainWindow) {
@@ -103,18 +113,9 @@
     if (!preferencesWindow) {
         preferencesWindow = [[PreferencesWindow alloc] init];
     }
-    
-    //[preferencesWindow showWindow:self];
 
-    if (mainWindow && [[mainWindow window] isVisible]) {
-        [NSApp beginSheet:[preferencesWindow window]
-           modalForWindow:[mainWindow window]
-            modalDelegate:self
-           didEndSelector:nil
-              contextInfo:nil];
-    } else {
-        [preferencesWindow showWindow:self];
-    }
+    [NSApp activateIgnoringOtherApps:YES];
+    [preferencesWindow showWindow:self];
 }
 
 - (IBAction)showAccount:(id)sender
@@ -125,6 +126,62 @@
 - (IBAction)logout:(id)sender
 {
     [mainWindow logout:sender];
+}
+
+- (BOOL)initialUse
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SMInitialKey];
+}
+
+- (void)setInitialUse:(BOOL)_initialUse
+{
+    [[NSUserDefaults standardUserDefaults] setBool:_initialUse
+                                            forKey:SMInitialKey];
+}
+
+- (NSString *)server
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:SMServerKey];
+}
+
+- (void)setServer:(NSString *)_server
+{
+    [[NSUserDefaults standardUserDefaults] setObject:_server
+                                              forKey:SMServerKey];
+}
+
+- (NSString *)entry
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:SMEntryKey];
+}
+
+- (void)setEntry:(NSString *)_entry
+{
+    [[NSUserDefaults standardUserDefaults] setObject:_entry
+                                              forKey:SMEntryKey];
+}
+
+- (NSArray *)entries
+{
+    NSLog(@"get entries: %@", [[NSUserDefaults standardUserDefaults] stringArrayForKey:SMEntryListKey]);
+    return [[NSUserDefaults standardUserDefaults] stringArrayForKey:SMEntryListKey];
+}
+
+- (void)setEntries:(NSArray *)_entries
+{
+    NSLog(@"set entries: %@", _entries);
+    [[NSUserDefaults standardUserDefaults] setObject:_entries
+                                              forKey:SMEntryListKey];
+}
+
+- (NSArray *)ipAddresses
+{
+    return ipAddresses;
+}
+
+- (NSArray *)interfaces
+{
+    return interfaces;
 }
 
 @end
