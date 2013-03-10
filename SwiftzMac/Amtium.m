@@ -26,11 +26,12 @@
     _didErrorSelector = didErrorSelector;
     _didCloseSelector = didCloseSelector;
 
-    udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-
 	NSError *error = nil;
 
-    if (![udpSocket bindToPort:0 error:&error])
+    // initialize udp socket for port 3848
+    socket3848 = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_current_queue()];
+    
+    if (![socket3848 bindToPort:3848 error:&error])
 	{
 		if ([delegate respondsToSelector:didErrorSelector]) {
             @autoreleasepool {
@@ -41,7 +42,7 @@
         return nil;
 	}
     
-	if (![udpSocket beginReceiving:&error])
+	if (![socket3848 beginReceiving:&error])
 	{
 		if ([delegate respondsToSelector:didErrorSelector]) {
             @autoreleasepool {
@@ -49,25 +50,44 @@
             }
         }
         
+        return nil;
+	}
+
+    // initialize udp socket for port 4999
+    socket4999 = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_current_queue()];
+
+    if (![socket4999 bindToPort:4999 error:&error])
+	{
+		if ([delegate respondsToSelector:didErrorSelector]) {
+            @autoreleasepool {
+                [delegate performSelector:didErrorSelector withObject:error];
+            }
+        }
+
+        return nil;
+	}
+
+	if (![socket4999 beginReceiving:&error])
+	{
+		if ([delegate respondsToSelector:didErrorSelector]) {
+            @autoreleasepool {
+                [delegate performSelector:didErrorSelector withObject:error];
+            }
+        }
+
         return nil;
 	}
 
     NSData *data = [AmtiumPacket dataForInitialization];
-
-    /*[udpSocket sendData:data
-                 toHost:_server
-                   port:3848
-            withTimeout:-1
-                    tag:tag];
-    
-    tag++;*/
+    [socket4999 sendData:data toHost:@"1.1.1.8" port:3850 withTimeout:-1 tag:tag++];
 
     NSLog(@"init: %@", data);
-    _server = @"172.16.1.180";
-    _entry = @"internet";
-    _mac = @"000000000000";
-    _ip = @"172.16.163.1";
-    _dhcpEnabled = YES;
+    
+    //_server = @"172.16.1.180";
+    //_entry = @"internet";
+    //_mac = @"000000000000";
+    //_ip = @"172.16.163.1";
+    //_dhcpEnabled = YES;
     
     return [super init];
 }
@@ -76,6 +96,10 @@
                  password:(NSString *)password
            didEndSelector:(SEL)selector
 {
+    if (_server == nil) {
+        return;
+    }
+
     _didLoginSelector = selector;
 
     _account = username;
@@ -90,17 +114,10 @@
                                                                 version:@"3.6.5"];
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
-
-    /*[udpSocket sendData:data
-                 toHost:_server
-                   port:3848
-            withTimeout:-1
-                    tag:tag];
-
-    tag++;*/
+    [socket3848 sendData:data toHost:_server port:3848 withTimeout:-1 tag:tag++];
 
     NSLog(@"login: %@", data);
-    _online = YES;
+    /*_online = YES;
     _session = @"1234567890";
     _account = username;
     if ([_delegate respondsToSelector:_didLoginSelector]) {
@@ -109,15 +126,23 @@
                             withObject:[NSNumber numberWithBool:YES]
                             withObject:@"只是测试啦"];
         }
-    }
+    }*/
 }
 
 - (void)logout:(SEL)selector
 {
+    if (_server == nil) {
+        return;
+    }
+    
+    if (_session == nil) {
+        return;
+    }
+    
     _didLogoutSelector = selector;
 
-    //[_timer invalidate];
-    //_timer = nil;
+    [_timer invalidate];
+    _timer = nil;
 
     AmtiumPacket *packet = [AmtiumPacket packetForLoggingOutWithSession:_session
                                                                      ip:_ip
@@ -125,21 +150,14 @@
                                                                   index:_index];
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
-
-    /*[udpSocket sendData:data
-                 toHost:_server
-                   port:3848
-            withTimeout:-1
-                    tag:tag];
-
-    tag++;*/
-
+    [socket3848 sendData:data toHost:_server port:3848 withTimeout:-1 tag:tag++];
+    
     NSLog(@"logout: %@", data);
-    if ([_delegate respondsToSelector:_didLogoutSelector]) {
+    /*if ([_delegate respondsToSelector:_didLogoutSelector]) {
         @autoreleasepool {
             [_delegate performSelector:_didLogoutSelector];
         }
-    }
+    }*/
 }
 
 - (void)searchServer:(SEL)selector
@@ -153,25 +171,22 @@
                                                                        mac:_mac];
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
-
-    /*[udpSocket sendData:data
-                 toHost:_server
-                   port:3848
-            withTimeout:-1
-                    tag:tag];
-
-    tag++;*/
+    [socket3848 sendData:data toHost:@"1.1.1.8" port:3850 withTimeout:-1 tag:tag++];
 
     NSLog(@"server: %@", data);
-    if ([_delegate respondsToSelector:_didServerSelector]) {
+    /*if ([_delegate respondsToSelector:_didServerSelector]) {
         @autoreleasepool {
             [_delegate performSelector:_didServerSelector withObject:@"172.16.1.180"];
         }
-    }
+    }*/
 }
 
 - (void)fetchEntries:(SEL)selector
 {
+    if (_server == nil) {
+        return;
+    }
+    
     _didEntriesSelector = selector;
 
     NSString *session = @"0000000000";
@@ -180,26 +195,35 @@
                                                                        mac:_mac];
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
-
-    /*[udpSocket sendData:data
-                 toHost:_server
-                   port:3848
-            withTimeout:-1
-                    tag:tag];
+    [socket3848 sendData:data toHost:_server port:3848 withTimeout:-1 tag:tag++];
     
-    tag++;*/
-
     NSLog(@"enties: %@", data);
-    if ([_delegate respondsToSelector:_didEntriesSelector]) {
+    /*if ([_delegate respondsToSelector:_didEntriesSelector]) {
         @autoreleasepool {
             [_delegate performSelector:_didEntriesSelector withObject:[NSArray arrayWithObjects:@"internet", @"local", nil]];
         }
-    }
+    }*/
 }
 
 - (void)breath
 {
+    if (_server == nil) {
+        return;
+    }
     
+    if (_session == nil) {
+        return;
+    }
+
+    AmtiumPacket *packet = [AmtiumPacket packetForBreathingWithSession:_session
+                                                                    ip:_ip
+                                                                   mac:_mac
+                                                                 index:_index];
+    
+    NSData *data = [AmtiumCrypto encrypt:[packet data]];
+    [socket3848 sendData:data toHost:_server port:3848 withTimeout:-1 tag:tag++];
+
+    NSLog(@"breath: %i", _index);
 }
 
 - (BOOL)online
@@ -296,6 +320,8 @@ didNotSendDataWithTag:(long)tag
 withFilterContext:(id)filterContext
 {
     NSData *decrypted = [AmtiumCrypto decrypt:data];
+    NSLog(@"packet: %@", decrypted);
+
     AmtiumPacket *packet = [AmtiumPacket packetWithData:decrypted];
 
     unsigned char action = [packet action];
@@ -339,20 +365,40 @@ withFilterContext:(id)filterContext
             }
         }
     } else if (action == APAEntriesResult) {
+        NSArray *entries = [packet stringArrayForKey:APFEntry];
 
+        if ([_delegate respondsToSelector:_didEntriesSelector]) {
+            @autoreleasepool {
+                [_delegate performSelector:_didEntriesSelector
+                                withObject:entries];
+            }
+        }
     } else if (action == APADisconnect) {
         [_timer invalidate];
         _timer = nil;
 
         if ([_delegate respondsToSelector:_didCloseSelector]) {
             @autoreleasepool {
-                [_delegate performSelector:_didCloseSelector withObject:@""];
+                [_delegate performSelector:_didCloseSelector
+                                withObject:@""];
             }
         }
     } else if (action == APAConfirmResult) {
         // no need to do anything
     } else if (action == APAServerResult) {
+        NSData *serverIp = [packet dataForKey:APFServer];
 
+        unsigned char buffer[4];
+        [serverIp getBytes:buffer length:4];
+
+        _server = [NSString stringWithFormat:@"%i.%i.%i.%i", buffer[0], buffer[1], buffer[2], buffer[3]];
+        
+        if ([_delegate respondsToSelector:_didServerSelector]) {
+            @autoreleasepool {
+                [_delegate performSelector:_didServerSelector
+                                withObject:_server];
+            }
+        }
     } else {
         // do nothing
     }

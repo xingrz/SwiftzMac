@@ -25,7 +25,8 @@
     unsigned int _index;
     NSTimer *_timer;
     
-    GCDAsyncUdpSocket *udpSocket;
+    GCDAsyncUdpSocket *socket3848;
+    GCDAsyncUdpSocket *socket4999;
     long tag;
     
     id _delegate;

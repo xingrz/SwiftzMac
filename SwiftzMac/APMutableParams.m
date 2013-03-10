@@ -12,9 +12,9 @@
 
 @implementation APMutableParams
 
-+ (id)paramsWithData:(NSData *)data
++ (id)paramsWithAction:(unsigned char)action data:(NSData *)data
 {
-    return [[APMutableParams alloc] initWithData:data];
+    return [[APMutableParams alloc] initWithAction:action data:data];
 }
 
 - (id)init
@@ -24,7 +24,7 @@
     return [super init];
 }
 
-- (id)initWithData:(NSData *)data
+- (id)initWithAction:(unsigned char)action data:(NSData *)data
 {
     self = [self init];
 
@@ -36,15 +36,15 @@
     
     while (offset < sizeof(buffer)) {
         unsigned char key = buffer[offset];
-        unsigned char length = buffer[offset + 1] - 2;
+        unsigned char length = buffer[offset + 1];
 
         // adapt to a bug of the server
-        if (key == APFMessage || key == APFSession) {
+        if ([self isLengthWrongInAction:action andKey:key]) {
             length += 2;
         }
 
         NSNumber *number = [NSNumber numberWithUnsignedChar:key];
-        NSData *value = [data subdataWithRange:NSMakeRange(offset + 2, length)];
+        NSData *value = [data subdataWithRange:NSMakeRange(offset + 2, length - 2)];
 
         if ([keys containsObject:number]) {
             NSUInteger index = [keys indexOfObject:number];
@@ -60,6 +60,8 @@
             [keys addObject:number];
             [values addObject:value];
         }
+
+        offset += length;
     }
 
     return self;
@@ -165,7 +167,20 @@
     }
 }
 
--(NSData *)data
+- (void)addData:(NSData *)data forKey:(unsigned char)key
+{
+    NSNumber *number = [NSNumber numberWithUnsignedChar:key];
+
+    if ([keys containsObject:number]) {
+        NSUInteger index = [keys indexOfObject:number];
+        [values setObject:data atIndexedSubscript:index];
+    } else {
+        [keys addObject:number];
+        [values addObject:data];
+    }
+}
+
+-(NSData *)dataWithAction:(unsigned char)action
 {
     NSMutableData *data = [[NSMutableData alloc] initWithCapacity:18];
 
@@ -182,8 +197,8 @@
                 unsigned char cLength = [value length] + 2;
 
                 // adapt to a bug of the server
-                if (cKey == APFMessage || cKey == APFSession) {
-                    cLength -= 2;
+                if ([self isLengthWrongInAction:action andKey:cKey]) {
+                    cLength += 2;
                 }
 
                 NSData *dLength = [AmtiumEncoder dataWithUnsignedChar:cLength];
@@ -197,8 +212,8 @@
             unsigned char cLength = [value length] + 2;
 
             // adapt to a bug of the server
-            if (cKey == APFMessage || cKey == APFSession) {
-                cLength -= 2;
+            if ([self isLengthWrongInAction:action andKey:cKey]) {
+                cLength += 2;
             }
 
             NSData *dLength = [AmtiumEncoder dataWithUnsignedChar:cLength];
@@ -296,6 +311,18 @@
     return [AmtiumEncoder boolValue:[values objectAtIndex:index]];
 }
 
+- (NSData *)dataForKey:(unsigned char)key
+{
+    NSNumber *number = [NSNumber numberWithUnsignedChar:key];
+
+    if (![keys containsObject:number]) {
+        return nil;
+    }
+
+    NSUInteger index = [keys indexOfObject:number];
+    return [values objectAtIndex:index];
+}
+
 - (NSArray *)allKeys
 {
     return keys;
@@ -304,6 +331,17 @@
 - (BOOL)containsKey:(unsigned char)key
 {
     return [keys containsObject:[NSNumber numberWithUnsignedChar:key]];
+}
+
+- (BOOL)isLengthWrongInAction:(unsigned char)action andKey:(unsigned char)key
+{
+    return (action == APALoginResult ||
+            action == APABreathResult ||
+            action == APALogoutResult ||
+            action == APADisconnect ||
+            action == APAServer ||
+            action == APAEntries)
+        && (key == APFSession || key == APFMessage);
 }
 
 @end

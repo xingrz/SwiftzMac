@@ -16,15 +16,6 @@
 
 @implementation AppDelegate
 
-@synthesize initialUse;
-@synthesize server;
-@synthesize entry;
-@synthesize entries;
-@synthesize interface;
-@synthesize ip;
-@synthesize ipManual;
-@synthesize shouldUseKeychain;
-
 + (void)initialize
 {
     NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
@@ -130,7 +121,8 @@
 
 - (BOOL)initialUse
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:SMInitialKey];
+    //return [[NSUserDefaults standardUserDefaults] boolForKey:SMInitialKey];
+    return YES;
 }
 
 - (void)setInitialUse:(BOOL)_initialUse
@@ -148,6 +140,10 @@
 {
     [[NSUserDefaults standardUserDefaults] setObject:_server
                                               forKey:SMServerKey];
+
+    if (mainWindow) {
+        [[mainWindow amtium] setServer:_server];
+    }
 }
 
 - (NSString *)entry
@@ -159,19 +155,84 @@
 {
     [[NSUserDefaults standardUserDefaults] setObject:_entry
                                               forKey:SMEntryKey];
+
+    if (mainWindow) {
+        [[mainWindow amtium] setEntry:_entry];
+    }
 }
 
 - (NSArray *)entries
 {
-    NSLog(@"get entries: %@", [[NSUserDefaults standardUserDefaults] stringArrayForKey:SMEntryListKey]);
     return [[NSUserDefaults standardUserDefaults] stringArrayForKey:SMEntryListKey];
 }
 
 - (void)setEntries:(NSArray *)_entries
 {
-    NSLog(@"set entries: %@", _entries);
     [[NSUserDefaults standardUserDefaults] setObject:_entries
                                               forKey:SMEntryListKey];
+}
+
+- (NSString *)interface
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:SMInterfaceKey];
+}
+
+- (void)setInterface:(NSString *)_interface
+{
+    [[NSUserDefaults standardUserDefaults] setObject:_interface
+                                              forKey:SMInterfaceKey];
+
+    if (mainWindow) {
+        [[mainWindow amtium] setMac:[self mac]];
+    }
+}
+
+- (NSString *)ip
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:SMIpKey];
+}
+
+- (void)setIp:(NSString *)_ip
+{
+    [[NSUserDefaults standardUserDefaults] setObject:_ip
+                                              forKey:SMIpKey];
+
+    if (mainWindow) {
+        [[mainWindow amtium] setIp:_ip];
+    }
+}
+
+- (NSString *)mac
+{
+    for (NetworkInterface *ni in interfaces) {
+        if ([ni name] == [self interface]) {
+            return [ni hardwareAddress];
+        }
+    }
+
+    return @"000000000000";
+}
+
+- (BOOL)ipManual
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SMIpManualKey];
+}
+
+- (void)setIpManual:(BOOL)_ipManual
+{
+    [[NSUserDefaults standardUserDefaults] setBool:_ipManual
+                                            forKey:SMIpManualKey];
+}
+
+- (BOOL)shouldUseKeychain
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SMKeychainKey];
+}
+
+- (void)setShouldUseKeychain:(BOOL)_shouldUseKeychain
+{
+    [[NSUserDefaults standardUserDefaults] setBool:_shouldUseKeychain
+                                            forKey:SMKeychainKey];
 }
 
 - (NSArray *)ipAddresses

@@ -57,21 +57,7 @@ NSString * const SMKeychainKey = @"KeychainFlag";
     NSLog(@"%@", [appdelegate entries]);
 
     [[self serverText] setStringValue:[appdelegate server]];
-
-    [[self entryPopup] addItemsWithTitles:[appdelegate entries]];
     [[self entryPopup] setTitle:[appdelegate entry]];
-
-    for (NetworkInterface *ni in [appdelegate interfaces]) {
-        NSString *label = [NSString stringWithFormat:
-                           @"%@ (%@, %@)",
-                           [ni localizedDisplayName],
-                           [ni name],
-                           [ni hardwareAddress]];
-        
-        [[self interfacePopup] addItemWithTitle:label];
-    }
-
-    [[self ipCombo] addItemsWithObjectValues:[appdelegate ipAddresses]];
 
     if ([appdelegate ip]) {
         [[self ipCombo] setObjectValue:[appdelegate ip]];
@@ -83,12 +69,36 @@ NSString * const SMKeychainKey = @"KeychainFlag";
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+
+    [[self entryPopup] addItemsWithTitles:[appdelegate entries]];
     
+    for (NetworkInterface *ni in [appdelegate interfaces]) {
+        NSString *label = [NSString stringWithFormat:
+                           @"%@ (%@, %@)",
+                           [ni localizedDisplayName],
+                           [ni name],
+                           [ni hardwareAddress]];
+
+        [[self interfacePopup] addItemWithTitle:label];
+    }
+
+    [[self ipCombo] addItemsWithObjectValues:[appdelegate ipAddresses]];
+    
+
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
 - (IBAction)ok:(id)sender {
     NSLog(@"ok");
+
+    [appdelegate setServer:[[self serverText] stringValue]];
+    [appdelegate setEntry:[[self entryPopup] stringValue]];
+
+    [appdelegate setInterface:@""];
+
+    [appdelegate setIp:[[self ipCombo] stringValue]];
+    [appdelegate setIpManual:([[appdelegate ipAddresses] containsObject:[appdelegate ip]])];
+
     [NSApp endSheet:[self window]];
     [self close];
 }

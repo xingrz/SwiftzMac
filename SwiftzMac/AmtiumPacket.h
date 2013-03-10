@@ -66,6 +66,8 @@
 
 - (BOOL)boolForKey:(unsigned char)key;
 
+- (NSData *)dataForKey:(unsigned char)key;
+
 - (NSArray *)allKeys;
 
 - (BOOL)containsKey:(unsigned char)key;

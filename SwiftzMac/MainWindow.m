@@ -39,8 +39,10 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
+
     if ([appdelegate initialUse]) {
+        // 如果是初次使用，执行初始化过程
+        
         [appdelegate setInitialUse:NO];
         
         preparingWindow = [[PreparingWindow alloc] init];
@@ -51,11 +53,16 @@
               contextInfo:nil];
 
         [amtium searchServer:@selector(initialStepOneWithServer:)];
+    } else if (![appdelegate ipManual] && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]]) {
+        // 如果不是手动指定IP且IP不在列表中，说明IP已变更，提示重新设置
+
+        [appdelegate showPreferencesWindow:self];
     }
 }
 
 - (void)initialStepOneWithServer:(NSString *)server
 {
+    NSLog(@"got server: %@", server);
     [appdelegate setServer:server];
     [amtium fetchEntries:@selector(initialStepTwoWithEntries:)];
 }
@@ -124,12 +131,38 @@
 
 - (void)amtiumDidClose:(NSNumber *)reason
 {
-    [self showWindow:nil];
+    [amtium logout:nil];
+    [appdelegate showMainWindow:self];
+
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Disconnected."
+                                     defaultButton:@"OK"
+                                   alternateButton:@""
+                                       otherButton:@""
+                         informativeTextWithFormat:@"Reason code: %@", reason];
+
+    [alert beginSheetModalForWindow:[self window]
+                      modalDelegate:self
+                     didEndSelector:nil
+                        contextInfo:nil];
+
+    // TODO: 自动重新登录
 }
 
 - (void)amtiumDidError:(NSError *)error
 {
-    
+    [amtium logout:nil];
+    [appdelegate showMainWindow:self];
+
+    NSAlert *alert = [NSAlert alertWithMessageText:@"An error occured."
+                                     defaultButton:@"OK"
+                                   alternateButton:@""
+                                       otherButton:@""
+                         informativeTextWithFormat:@""];
+
+    [alert beginSheetModalForWindow:[self window]
+                      modalDelegate:self
+                     didEndSelector:nil
+                        contextInfo:nil];
 }
 
 - (void)windowWillClose:(NSNotification *)notification

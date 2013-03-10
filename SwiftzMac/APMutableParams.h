@@ -13,9 +13,9 @@
     NSMutableArray *values;
 }
 
-+ (id)paramsWithData:(NSData *)data;
++ (id)paramsWithAction:(unsigned char)action data:(NSData *)data;
 
-- (id)initWithData:(NSData *)data;
+- (id)initWithAction:(unsigned char)action data:(NSData *)data;
 
 - (void)addString:(NSString *)stringValue forKey:(unsigned char)key;
 - (void)addString:(NSString *)stringValue length:(unsigned char)length forKey:(unsigned char)key;
@@ -27,6 +27,8 @@
 - (void)addUnsignedChar:(unsigned char)unsignedCharValue forKey:(unsigned char)key;
 
 - (void)addBool:(BOOL)boolValue forKey:(unsigned char)key;
+
+- (void)addData:(NSData *)data forKey:(unsigned char)key;
 
 - (NSString *)stringForKey:(unsigned char)key;
 
@@ -40,7 +42,9 @@
 
 - (BOOL)boolForKey:(unsigned char)key;
 
-- (NSData *)data;
+- (NSData *)dataForKey:(unsigned char)key;
+
+- (NSData *)dataWithAction:(unsigned char)action;
 
 - (NSArray *)allKeys;
 

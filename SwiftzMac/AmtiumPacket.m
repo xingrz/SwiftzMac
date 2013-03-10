@@ -149,7 +149,7 @@
     // TODO: verify md5 checksum
 
     NSData *dParams = [data subdataWithRange:NSMakeRange(offset, length - offset)];
-    [self setParameters:[APMutableParams paramsWithData:dParams]];
+    [self setParameters:[APMutableParams paramsWithAction:[self action] data:dParams]];
 
     return self;
 }
@@ -165,7 +165,7 @@
         [data increaseLengthBy:3];
     }
 
-    [data appendData:[[self parameters] data]];
+    [data appendData:[[self parameters] dataWithAction:[self action]]];
 
     NSData *dAction = [AmtiumEncoder dataWithUnsignedChar:[self action]];
     NSData *dLength = [AmtiumEncoder dataWithUnsignedChar:(unsigned char)[data length]];
@@ -208,6 +208,11 @@
 - (BOOL)boolForKey:(unsigned char)key
 {
     return [parameters boolForKey:key];
+}
+
+- (NSData *)dataForKey:(unsigned char)key
+{
+    return [parameters dataForKey:key];
 }
 
 - (NSArray *)allKeys
