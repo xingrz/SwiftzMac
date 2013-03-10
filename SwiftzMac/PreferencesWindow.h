@@ -30,13 +30,4 @@ extern NSString * const SMKeychainKey;
 - (IBAction)cancel:(id)sender;
 - (IBAction)restore:(id)sender;
 
-- (BOOL)isInitialUse;
-- (NSString *)server;
-- (NSString *)entry;
-- (NSArray *)entryList;
-- (NSString *)interface;
-- (NSString *)ip;
-- (BOOL)isIpManual;
-- (BOOL)shouldUseKeychain;
-
 @end

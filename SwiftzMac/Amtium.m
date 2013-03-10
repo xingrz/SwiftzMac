@@ -100,6 +100,9 @@
     tag++;*/
 
     NSLog(@"login: %@", data);
+    _online = YES;
+    _session = @"1234567890";
+    _account = username;
     if ([_delegate respondsToSelector:_didLoginSelector]) {
         @autoreleasepool {
             [_delegate performSelector:_didLoginSelector
@@ -113,8 +116,8 @@
 {
     _didLogoutSelector = selector;
 
-    [_timer invalidate];
-    _timer = nil;
+    //[_timer invalidate];
+    //_timer = nil;
 
     AmtiumPacket *packet = [AmtiumPacket packetForLoggingOutWithSession:_session
                                                                      ip:_ip

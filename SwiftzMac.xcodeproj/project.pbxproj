@@ -28,6 +28,7 @@
 		FCCA9C8116E9A0B70069C9E1 /* PreparingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7F16E9A0B60069C9E1 /* PreparingWindow.m */; };
 		FCCA9C8216E9A0B70069C9E1 /* PreparingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCA9C8016E9A0B70069C9E1 /* PreparingWindow.xib */; };
 		FCCA9C8616EA4D030069C9E1 /* APMutableParams.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C8516EA4D020069C9E1 /* APMutableParams.m */; };
+		FCCA9C8816EC1E490069C9E1 /* Swiftz.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCA9C8716EC1E490069C9E1 /* Swiftz.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		FCCA9C8016E9A0B70069C9E1 /* PreparingWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreparingWindow.xib; sourceTree = "<group>"; };
 		FCCA9C8416EA4D020069C9E1 /* APMutableParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APMutableParams.h; sourceTree = "<group>"; };
 		FCCA9C8516EA4D020069C9E1 /* APMutableParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APMutableParams.m; sourceTree = "<group>"; };
+		FCCA9C8716EC1E490069C9E1 /* Swiftz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Swiftz.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 		FCAF7A8016E75D8F006EDA2D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FCCA9C8716EC1E490069C9E1 /* Swiftz.png */,
 				FC1DE55816DCD03D008CE989 /* MainMenu.xib */,
 				FCCA9C8016E9A0B70069C9E1 /* PreparingWindow.xib */,
 				FCAF7A7716E75229006EDA2D /* MainWindow.xib */,
@@ -261,6 +264,7 @@
 				FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */,
 				FCAF7A7916E75239006EDA2D /* PreferencesWindow.xib in Resources */,
 				FCCA9C8216E9A0B70069C9E1 /* PreparingWindow.xib in Resources */,
+				FCCA9C8816EC1E490069C9E1 /* Swiftz.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

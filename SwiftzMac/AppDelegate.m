@@ -93,7 +93,8 @@
     if (!mainWindow) {
         mainWindow = [[MainWindow alloc] init];
     }
-    
+
+    [NSApp activateIgnoringOtherApps:YES];
     [mainWindow showWindow:self];
 }
 

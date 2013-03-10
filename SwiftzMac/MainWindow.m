@@ -77,11 +77,9 @@
 - (IBAction)login:(id)sender
 {
     NSLog(@"login");
-    /*[amtium loginWithUsername:[[self username] stringValue]
+    [amtium loginWithUsername:[[self username] stringValue]
                      password:[[self password] stringValue]
                didEndSelector:@selector(didLoginWithSuccess:message:)];
-
-    [amtium searchServer:@selector(didSearchServer:)];*/    
 }
 
 - (void)didLoginWithSuccess:(NSNumber *)success
@@ -111,7 +109,7 @@
 {
     NSLog(@"logout");
     [amtium logout:nil];
-    [self showWindow:sender];
+    [appdelegate showMainWindow:sender];
 }
 
 - (IBAction)account:(id)sender
@@ -132,6 +130,14 @@
 - (void)amtiumDidError:(NSError *)error
 {
     
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+    NSLog(@"will close");
+    if (![amtium online]) {
+        [[NSApplication sharedApplication] terminate:self];
+    }
 }
 
 @end

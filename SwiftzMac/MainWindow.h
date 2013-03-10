@@ -12,7 +12,7 @@
 @class PreparingWindow;
 @class Amtium;
 
-@interface MainWindow : NSWindowController {
+@interface MainWindow : NSWindowController <NSWindowDelegate> {
     Amtium *amtium;
     PreparingWindow *preparingWindow;
     AppDelegate *appdelegate;
