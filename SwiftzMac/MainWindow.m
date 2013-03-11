@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainWindow.h"
-#import "PreparingWindow.h"
+#import "SpinningWindow.h"
 
 #import "Amtium.h"
 
@@ -42,11 +42,16 @@
 
     if ([appdelegate initialUse]) {
         // 如果是初次使用，执行初始化过程
-        
+
         [appdelegate setInitialUse:NO];
+
+        spinningWindow = [[SpinningWindow alloc] initWithMessage:@"Preparing..."
+                                                        delegate:self
+                                               didCancelSelector:@selector(initialDidCancel:)];
+
+        //spinningWindow = [[SpinningWindow alloc] init];
         
-        preparingWindow = [[PreparingWindow alloc] init];
-        [NSApp beginSheet:[preparingWindow window]
+        [NSApp beginSheet:[spinningWindow window]
            modalForWindow:[self window]
             modalDelegate:self
            didEndSelector:nil
@@ -74,24 +79,57 @@
     NSString *firstEntry = [entries objectAtIndex:0];
     [appdelegate setEntry:firstEntry];
 
-    [NSApp endSheet:[preparingWindow window]];
-    [preparingWindow close];
-    preparingWindow = nil;
+    [NSApp endSheet:[spinningWindow window]];
+    [spinningWindow close];
+    spinningWindow = nil;
+
+    // TODO: 必须先写入一次配置，防止用户点击取消。
 
     [appdelegate showPreferencesWindow:self];
+}
+
+- (void)initialDidCancel:(id)sender
+{
+    [NSApp endSheet:[spinningWindow window]];
+    [spinningWindow close];
+    spinningWindow = nil;
+    
+    [[NSApplication sharedApplication] terminate:self];
 }
 
 - (IBAction)login:(id)sender
 {
     NSLog(@"login");
+
+    spinningWindow = [[SpinningWindow alloc] initWithMessage:@"Loggin in..."
+                                                    delegate:self
+                                           didCancelSelector:@selector(loginDidCancel:)];
+
+    [NSApp beginSheet:[spinningWindow window]
+       modalForWindow:[self window]
+        modalDelegate:self
+       didEndSelector:nil
+          contextInfo:nil];
+
     [amtium loginWithUsername:[[self username] stringValue]
                      password:[[self password] stringValue]
                didEndSelector:@selector(didLoginWithSuccess:message:)];
 }
 
+- (void)loginDidCancel:(id)sender
+{
+    [NSApp endSheet:[spinningWindow window]];
+    [spinningWindow close];
+    spinningWindow = nil;
+}
+
 - (void)didLoginWithSuccess:(NSNumber *)success
                     message:(NSString *)message
 {
+    [NSApp endSheet:[spinningWindow window]];
+    [spinningWindow close];
+    spinningWindow = nil;
+
     if ([success boolValue]) {
         [self close];
     } else {

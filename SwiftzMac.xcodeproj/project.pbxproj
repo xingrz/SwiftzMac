@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC041FAD16ED6743001AE293 /* SpinningWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC041FAF16ED6743001AE293 /* SpinningWindow.xib */; };
 		FC1DE54416DCD03D008CE989 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1DE54316DCD03D008CE989 /* Cocoa.framework */; };
 		FC1DE54E16DCD03D008CE989 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */; };
 		FC1DE55016DCD03D008CE989 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE54F16DCD03D008CE989 /* main.m */; };
@@ -25,13 +26,13 @@
 		FCBD322116E6209E002B1ED1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */; };
 		FCCA9C7416E77F350069C9E1 /* AmtiumEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */; };
 		FCCA9C7816E790370069C9E1 /* AmtiumCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7716E790370069C9E1 /* AmtiumCrypto.m */; };
-		FCCA9C8116E9A0B70069C9E1 /* PreparingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7F16E9A0B60069C9E1 /* PreparingWindow.m */; };
-		FCCA9C8216E9A0B70069C9E1 /* PreparingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCA9C8016E9A0B70069C9E1 /* PreparingWindow.xib */; };
+		FCCA9C8116E9A0B70069C9E1 /* SpinningWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7F16E9A0B60069C9E1 /* SpinningWindow.m */; };
 		FCCA9C8616EA4D030069C9E1 /* APMutableParams.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C8516EA4D020069C9E1 /* APMutableParams.m */; };
 		FCCA9C8816EC1E490069C9E1 /* Swiftz.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCA9C8716EC1E490069C9E1 /* Swiftz.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC041FAE16ED6743001AE293 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SpinningWindow.xib; sourceTree = "<group>"; };
 		FC1DE53F16DCD03D008CE989 /* SwiftzMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftzMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1DE54316DCD03D008CE989 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FC1DE54616DCD03D008CE989 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -66,9 +67,8 @@
 		FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumEncoder.m; sourceTree = "<group>"; };
 		FCCA9C7616E790370069C9E1 /* AmtiumCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumCrypto.h; sourceTree = "<group>"; };
 		FCCA9C7716E790370069C9E1 /* AmtiumCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumCrypto.m; sourceTree = "<group>"; };
-		FCCA9C7E16E9A0B60069C9E1 /* PreparingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreparingWindow.h; sourceTree = "<group>"; };
-		FCCA9C7F16E9A0B60069C9E1 /* PreparingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreparingWindow.m; sourceTree = "<group>"; };
-		FCCA9C8016E9A0B70069C9E1 /* PreparingWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreparingWindow.xib; sourceTree = "<group>"; };
+		FCCA9C7E16E9A0B60069C9E1 /* SpinningWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinningWindow.h; sourceTree = "<group>"; };
+		FCCA9C7F16E9A0B60069C9E1 /* SpinningWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinningWindow.m; sourceTree = "<group>"; };
 		FCCA9C8416EA4D020069C9E1 /* APMutableParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APMutableParams.h; sourceTree = "<group>"; };
 		FCCA9C8516EA4D020069C9E1 /* APMutableParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APMutableParams.m; sourceTree = "<group>"; };
 		FCCA9C8716EC1E490069C9E1 /* Swiftz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Swiftz.png; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 			children = (
 				FCCA9C8716EC1E490069C9E1 /* Swiftz.png */,
 				FC1DE55816DCD03D008CE989 /* MainMenu.xib */,
-				FCCA9C8016E9A0B70069C9E1 /* PreparingWindow.xib */,
+				FC041FAF16ED6743001AE293 /* SpinningWindow.xib */,
 				FCAF7A7716E75229006EDA2D /* MainWindow.xib */,
 				FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */,
 			);
@@ -199,8 +199,8 @@
 				FCBD31F116E4E1FF002B1ED1 /* MainWindow.m */,
 				FCBD31F516E4E224002B1ED1 /* PreferencesWindow.h */,
 				FCBD31F616E4E224002B1ED1 /* PreferencesWindow.m */,
-				FCCA9C7E16E9A0B60069C9E1 /* PreparingWindow.h */,
-				FCCA9C7F16E9A0B60069C9E1 /* PreparingWindow.m */,
+				FCCA9C7E16E9A0B60069C9E1 /* SpinningWindow.h */,
+				FCCA9C7F16E9A0B60069C9E1 /* SpinningWindow.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 				FC1DE55A16DCD03D008CE989 /* MainMenu.xib in Resources */,
 				FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */,
 				FCAF7A7916E75239006EDA2D /* PreferencesWindow.xib in Resources */,
-				FCCA9C8216E9A0B70069C9E1 /* PreparingWindow.xib in Resources */,
+				FC041FAD16ED6743001AE293 /* SpinningWindow.xib in Resources */,
 				FCCA9C8816EC1E490069C9E1 /* Swiftz.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +286,7 @@
 				FCAF7A8E16E77128006EDA2D /* AmtiumConstants.m in Sources */,
 				FCCA9C7416E77F350069C9E1 /* AmtiumEncoder.m in Sources */,
 				FCCA9C7816E790370069C9E1 /* AmtiumCrypto.m in Sources */,
-				FCCA9C8116E9A0B70069C9E1 /* PreparingWindow.m in Sources */,
+				FCCA9C8116E9A0B70069C9E1 /* SpinningWindow.m in Sources */,
 				FCCA9C8616EA4D030069C9E1 /* APMutableParams.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,6 +294,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		FC041FAF16ED6743001AE293 /* SpinningWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC041FAE16ED6743001AE293 /* en */,
+			);
+			name = SpinningWindow.xib;
+			sourceTree = "<group>";
+		};
 		FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -9,13 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 @class AppDelegate;
-@class PreparingWindow;
+@class SpinningWindow;
 @class Amtium;
 
 @interface MainWindow : NSWindowController <NSWindowDelegate> {
     Amtium *amtium;
-    PreparingWindow *preparingWindow;
     AppDelegate *appdelegate;
+    SpinningWindow *spinningWindow;
 }
 
 @property (weak) IBOutlet NSTextField *username;
