@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC041FAD16ED6743001AE293 /* SpinningWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC041FAF16ED6743001AE293 /* SpinningWindow.xib */; };
+		FC041FB316ED974C001AE293 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC041FB516ED974C001AE293 /* Localizable.strings */; };
 		FC1DE54416DCD03D008CE989 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1DE54316DCD03D008CE989 /* Cocoa.framework */; };
 		FC1DE54E16DCD03D008CE989 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */; };
 		FC1DE55016DCD03D008CE989 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE54F16DCD03D008CE989 /* main.m */; };
@@ -33,6 +34,11 @@
 
 /* Begin PBXFileReference section */
 		FC041FAE16ED6743001AE293 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SpinningWindow.xib; sourceTree = "<group>"; };
+		FC041FB416ED974C001AE293 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FC041FB616ED9E7A001AE293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindow.xib"; sourceTree = "<group>"; };
+		FC041FB716ED9E7A001AE293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FC041FB816ED9F21001AE293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		FC041FB916ED9FDD001AE293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/SpinningWindow.xib"; sourceTree = "<group>"; };
 		FC1DE53F16DCD03D008CE989 /* SwiftzMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftzMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1DE54316DCD03D008CE989 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FC1DE54616DCD03D008CE989 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -168,6 +174,7 @@
 				FC041FAF16ED6743001AE293 /* SpinningWindow.xib */,
 				FCAF7A7716E75229006EDA2D /* MainWindow.xib */,
 				FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */,
+				FC041FB516ED974C001AE293 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -265,6 +272,7 @@
 				FCAF7A7916E75239006EDA2D /* PreferencesWindow.xib in Resources */,
 				FC041FAD16ED6743001AE293 /* SpinningWindow.xib in Resources */,
 				FCCA9C8816EC1E490069C9E1 /* Swiftz.png in Resources */,
+				FC041FB316ED974C001AE293 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +306,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				FC041FAE16ED6743001AE293 /* en */,
+				FC041FB916ED9FDD001AE293 /* zh-Hans */,
 			);
 			name = SpinningWindow.xib;
+			sourceTree = "<group>";
+		};
+		FC041FB516ED974C001AE293 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC041FB416ED974C001AE293 /* en */,
+				FC041FB716ED9E7A001AE293 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */ = {
@@ -322,6 +340,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				FCBD321F16E61B52002B1ED1 /* en */,
+				FC041FB816ED9F21001AE293 /* zh-Hans */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -330,6 +349,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				FCAF7A7616E75229006EDA2D /* en */,
+				FC041FB616ED9E7A001AE293 /* zh-Hans */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";

@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  SwiftzMac
+
+  Created by XiNGRZ on 13-3-11.
+  Copyright (c) 2013年 XiNGRZ. All rights reserved.
+*/
+
+"MENU_ACCOUNT" = "在线: %@";
+"MSG_PREPARING" = "准备中...";
+"MSG_LOGGINGIN" = "登录中...";
+"MSG_LOGINFAILED" = "登录失败";
+"MSG_DISCONNECTED" = "已下线";
+"MSG_DISCONNECTED_0" = "连接保持失败，请重新登录。";
+"MSG_DISCONNECTED_1" = "您已被强制下线。";
+"MSG_DISCONNECTED_2" = "您的流量已用尽，请重新登录。";
+"MSG_DISCONNECTED_UNKNOWN" = "错误码: %@";
+"OK" = "好";
+"MSG_ERROR" = "发生错误";

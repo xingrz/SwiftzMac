@@ -45,12 +45,11 @@
 
         [appdelegate setInitialUse:NO];
 
-        spinningWindow = [[SpinningWindow alloc] initWithMessage:@"Preparing..."
-                                                        delegate:self
-                                               didCancelSelector:@selector(initialDidCancel:)];
+        spinningWindow = [[SpinningWindow alloc]
+                          initWithMessage:NSLocalizedString(@"MSG_PREPARING", @"Preparing...")
+                          delegate:self
+                          didCancelSelector:@selector(initialDidCancel:)];
 
-        //spinningWindow = [[SpinningWindow alloc] init];
-        
         [NSApp beginSheet:[spinningWindow window]
            modalForWindow:[self window]
             modalDelegate:self
@@ -101,9 +100,10 @@
 {
     NSLog(@"login");
 
-    spinningWindow = [[SpinningWindow alloc] initWithMessage:@"Loggin in..."
-                                                    delegate:self
-                                           didCancelSelector:@selector(loginDidCancel:)];
+    spinningWindow = [[SpinningWindow alloc]
+                      initWithMessage:NSLocalizedString(@"MSG_LOGGINGIN", @"Logging in...")
+                      delegate:self
+                      didCancelSelector:@selector(loginDidCancel:)];
 
     [NSApp beginSheet:[spinningWindow window]
        modalForWindow:[self window]
@@ -133,15 +133,13 @@
     if ([success boolValue]) {
         [self close];
     } else {
-        if (message == nil) {
-            message = @"Login failed.";
-        }
+        NSString *title = NSLocalizedString(@"MSG_LOGINFAILED", @"Login failed.");
 
-        NSAlert *alert = [NSAlert alertWithMessageText:message
+        NSAlert *alert = [NSAlert alertWithMessageText:title
                                          defaultButton:@"OK"
                                        alternateButton:@""
                                            otherButton:@""
-                             informativeTextWithFormat:@""];
+                             informativeTextWithFormat:@"%@", message];
 
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self
@@ -172,11 +170,36 @@
     [amtium logout:nil];
     [appdelegate showMainWindow:self];
 
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Disconnected."
-                                     defaultButton:@"OK"
+    NSString *title = NSLocalizedString(@"MSG_DISCONNECTED", @"Disconnected.");
+    NSString *message = @"";
+
+    switch ([reason integerValue]) {
+        case 0:
+            message = NSLocalizedString(@"MSG_DISCONNECTED_0",
+                                        @"Failed to keep connection alive, please login again.");
+            break;
+
+        case 1:
+            message = NSLocalizedString(@"MSG_DISCONNECTED_1",
+                                        @"You have been disconnected forcibly.");
+            break;
+
+        case 2:
+            message = NSLocalizedString(@"MSG_DISCONNECTED_2",
+                                        @"Your traffic has run out, please login again.");
+            break;
+            
+        default:
+            message = [NSString stringWithFormat:NSLocalizedString(@"MSG_DISCONNECTED_UNKNOWN",
+                                                                   @"Reason code: %i"), reason];
+            break;
+    }
+
+    NSAlert *alert = [NSAlert alertWithMessageText:title
+                                     defaultButton:NSLocalizedString(@"OK", @"OK")
                                    alternateButton:@""
                                        otherButton:@""
-                         informativeTextWithFormat:@"Reason code: %@", reason];
+                         informativeTextWithFormat:@"%@", message];
 
     [alert beginSheetModalForWindow:[self window]
                       modalDelegate:self
@@ -191,8 +214,8 @@
     [amtium logout:nil];
     [appdelegate showMainWindow:self];
 
-    NSAlert *alert = [NSAlert alertWithMessageText:@"An error occured."
-                                     defaultButton:@"OK"
+    NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_ERROR", @"An error occured.")
+                                     defaultButton:NSLocalizedString(@"OK", @"OK")
                                    alternateButton:@""
                                        otherButton:@""
                          informativeTextWithFormat:@""];

@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  SwiftzMac
+
+  Created by XiNGRZ on 13-3-11.
+  Copyright (c) 2013年 XiNGRZ. All rights reserved.
+*/
+
+"MENU_ACCOUNT" = "Online: %@";
+"MSG_PREPARING" = "Preparing...";
+"MSG_LOGGINGIN" = "Logging in...";
+"MSG_LOGINFAILED" = "Login failed.";
+"MSG_DISCONNECTED" = "Disconnected.";
+"MSG_DISCONNECTED_0" = "Failed to keep connection alive, please login again.";
+"MSG_DISCONNECTED_1" = "You have been disconnected forcibly.";
+"MSG_DISCONNECTED_2" = "Your traffic has run out, please login again.";
+"MSG_DISCONNECTED_UNKNOWN" = "Reason code: %@";
+"OK" = "OK";
+"MSG_ERROR" = "An error occured.";

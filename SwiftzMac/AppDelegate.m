@@ -58,8 +58,8 @@
     if ([menuItem action] == @selector(showAccount:)) {
         if ([amtium online]) {
             NSString *account = [[mainWindow amtium] account];
-            NSString *title = [NSString stringWithFormat:@"Online: %@", account];
-            [menuItem setTitle:title];
+            NSString *format = NSLocalizedString(@"MENU_ACCOUNT", @"Online: %@");
+            [menuItem setTitle:[NSString stringWithFormat:format, account]];
             [menuItem setHidden:NO];
         } else {
             [menuItem setHidden:YES];
