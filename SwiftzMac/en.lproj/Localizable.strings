@@ -6,6 +6,8 @@
   Copyright (c) 2013年 XiNGRZ. All rights reserved.
 */
 
+"MENU_ONLINE" = "Online";
+"MENU_OFFLINE" = "Offline";
 "MENU_ACCOUNT" = "Online: %@";
 "MSG_PREPARING" = "Preparing...";
 "MSG_LOGGINGIN" = "Logging in...";

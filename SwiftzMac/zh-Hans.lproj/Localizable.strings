@@ -6,6 +6,8 @@
   Copyright (c) 2013年 XiNGRZ. All rights reserved.
 */
 
+"MENU_ONLINE" = "在线";
+"MENU_OFFLINE" = "离线";
 "MENU_ACCOUNT" = "在线: %@";
 "MSG_PREPARING" = "准备中...";
 "MSG_LOGGINGIN" = "登录中...";

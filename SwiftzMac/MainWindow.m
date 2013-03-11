@@ -132,6 +132,7 @@
 
     if ([success boolValue]) {
         [self close];
+        [appdelegate setOnline:YES];
     } else {
         NSString *title = NSLocalizedString(@"MSG_LOGINFAILED", @"Login failed.");
 
@@ -153,6 +154,7 @@
     NSLog(@"logout");
     [amtium logout:nil];
     [appdelegate showMainWindow:sender];
+    [appdelegate setOnline:NO];
 }
 
 - (IBAction)account:(id)sender
@@ -169,6 +171,7 @@
 {
     [amtium logout:nil];
     [appdelegate showMainWindow:self];
+    [appdelegate setOnline:NO];
 
     NSString *title = NSLocalizedString(@"MSG_DISCONNECTED", @"Disconnected.");
     NSString *message = @"";

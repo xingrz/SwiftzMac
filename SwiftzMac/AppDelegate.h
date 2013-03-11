@@ -41,4 +41,6 @@
 - (IBAction)showAccount:(id)sender;
 - (IBAction)logout:(id)sender;
 
+- (void)setOnline:(BOOL)online;
+
 @end

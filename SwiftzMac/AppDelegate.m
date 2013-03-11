@@ -32,9 +32,13 @@
     // 初始化状态栏菜单
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:[self statusMenu]];
-    [statusItem setTitle:@"Swiftz"];
+    [statusItem setImage:[NSImage imageNamed:@"status.png"]];
+    [statusItem setAlternateImage:[NSImage imageNamed:@"statusAlternate.png"]];
+    //[statusItem setTitle:@"Swiftz"];
     [statusItem setHighlightMode:YES];
 
+    [self setOnline:NO];
+    
     ipAddresses = [NetworkInterface getAllIpAddresses];
     interfaces = [NetworkInterface getAllInterfaces];
 
@@ -243,6 +247,15 @@
 - (NSArray *)interfaces
 {
     return interfaces;
+}
+
+- (void)setOnline:(BOOL)online
+{
+    if (online) {
+        [statusItem setTitle:NSLocalizedString(@"MENU_ONLINE", @"Online")];
+    } else {
+        [statusItem setTitle:NSLocalizedString(@"MENU_OFFLINE", @"Offline")];
+    }
 }
 
 @end
