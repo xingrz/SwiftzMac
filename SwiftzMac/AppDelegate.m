@@ -32,9 +32,7 @@
     // 初始化状态栏菜单
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:[self statusMenu]];
-    [statusItem setImage:[NSImage imageNamed:@"status.png"]];
     [statusItem setAlternateImage:[NSImage imageNamed:@"statusAlternate.png"]];
-    //[statusItem setTitle:@"Swiftz"];
     [statusItem setHighlightMode:YES];
 
     [self setOnline:NO];
@@ -125,8 +123,7 @@
 
 - (BOOL)initialUse
 {
-    //return [[NSUserDefaults standardUserDefaults] boolForKey:SMInitialKey];
-    return YES;
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SMInitialKey];
 }
 
 - (void)setInitialUse:(BOOL)_initialUse
@@ -252,9 +249,9 @@
 - (void)setOnline:(BOOL)online
 {
     if (online) {
-        [statusItem setTitle:NSLocalizedString(@"MENU_ONLINE", @"Online")];
+        [statusItem setImage:[NSImage imageNamed:@"status.png"]];
     } else {
-        [statusItem setTitle:NSLocalizedString(@"MENU_OFFLINE", @"Offline")];
+        [statusItem setImage:[NSImage imageNamed:@"statusOffline.png"]];
     }
 }
 
