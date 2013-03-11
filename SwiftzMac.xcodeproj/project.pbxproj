@@ -12,6 +12,8 @@
 		FC041FBB16EDA3C7001AE293 /* status.png in Resources */ = {isa = PBXBuildFile; fileRef = FC041FBA16EDA3C7001AE293 /* status.png */; };
 		FC041FBD16EDA4F2001AE293 /* statusAlternate.png in Resources */ = {isa = PBXBuildFile; fileRef = FC041FBC16EDA4F2001AE293 /* statusAlternate.png */; };
 		FC041FBF16EDD6D5001AE293 /* statusOffline.png in Resources */ = {isa = PBXBuildFile; fileRef = FC041FBE16EDD6D4001AE293 /* statusOffline.png */; };
+		FC041FCC16EDE8FF001AE293 /* NotificationWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FC041FCA16EDE8FE001AE293 /* NotificationWindow.m */; };
+		FC041FCD16EDE8FF001AE293 /* NotificationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC041FCB16EDE8FF001AE293 /* NotificationWindow.xib */; };
 		FC1DE54416DCD03D008CE989 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1DE54316DCD03D008CE989 /* Cocoa.framework */; };
 		FC1DE54E16DCD03D008CE989 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */; };
 		FC1DE55016DCD03D008CE989 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE54F16DCD03D008CE989 /* main.m */; };
@@ -45,6 +47,9 @@
 		FC041FBA16EDA3C7001AE293 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
 		FC041FBC16EDA4F2001AE293 /* statusAlternate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = statusAlternate.png; sourceTree = "<group>"; };
 		FC041FBE16EDD6D4001AE293 /* statusOffline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = statusOffline.png; sourceTree = "<group>"; };
+		FC041FC916EDE8FE001AE293 /* NotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationWindow.h; sourceTree = "<group>"; };
+		FC041FCA16EDE8FE001AE293 /* NotificationWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationWindow.m; sourceTree = "<group>"; };
+		FC041FCB16EDE8FF001AE293 /* NotificationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationWindow.xib; sourceTree = "<group>"; };
 		FC1DE53F16DCD03D008CE989 /* SwiftzMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftzMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1DE54316DCD03D008CE989 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FC1DE54616DCD03D008CE989 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -183,6 +188,7 @@
 				FC041FAF16ED6743001AE293 /* SpinningWindow.xib */,
 				FCAF7A7716E75229006EDA2D /* MainWindow.xib */,
 				FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */,
+				FC041FCB16EDE8FF001AE293 /* NotificationWindow.xib */,
 				FC041FB516ED974C001AE293 /* Localizable.strings */,
 			);
 			name = Resources;
@@ -217,6 +223,8 @@
 				FCBD31F616E4E224002B1ED1 /* PreferencesWindow.m */,
 				FCCA9C7E16E9A0B60069C9E1 /* SpinningWindow.h */,
 				FCCA9C7F16E9A0B60069C9E1 /* SpinningWindow.m */,
+				FC041FC916EDE8FE001AE293 /* NotificationWindow.h */,
+				FC041FCA16EDE8FE001AE293 /* NotificationWindow.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -285,6 +293,7 @@
 				FC041FBB16EDA3C7001AE293 /* status.png in Resources */,
 				FC041FBD16EDA4F2001AE293 /* statusAlternate.png in Resources */,
 				FC041FBF16EDD6D5001AE293 /* statusOffline.png in Resources */,
+				FC041FCD16EDE8FF001AE293 /* NotificationWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +317,7 @@
 				FCCA9C7816E790370069C9E1 /* AmtiumCrypto.m in Sources */,
 				FCCA9C8116E9A0B70069C9E1 /* SpinningWindow.m in Sources */,
 				FCCA9C8616EA4D030069C9E1 /* APMutableParams.m in Sources */,
+				FC041FCC16EDE8FF001AE293 /* NotificationWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

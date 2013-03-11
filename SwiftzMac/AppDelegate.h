@@ -10,10 +10,12 @@
 
 @class MainWindow;
 @class PreferencesWindow;
+@class NotificationWindow;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     MainWindow *mainWindow;
     PreferencesWindow *preferencesWindow;
+    NotificationWindow *notificationWindow;
     NSStatusItem *statusItem;
     NSArray *ipAddresses;
     NSArray *interfaces;

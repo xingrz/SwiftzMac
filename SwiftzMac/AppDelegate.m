@@ -13,6 +13,7 @@
 
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
+#import "NotificationWindow.h"
 
 @implementation AppDelegate
 
@@ -36,11 +37,12 @@
     [statusItem setHighlightMode:YES];
 
     [self setOnline:NO];
-    
+
     ipAddresses = [NetworkInterface getAllIpAddresses];
     interfaces = [NetworkInterface getAllInterfaces];
 
     [self showMainWindow:self];
+    [self showNotification:@""];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
@@ -109,6 +111,15 @@
 
     [NSApp activateIgnoringOtherApps:YES];
     [preferencesWindow showWindow:self];
+}
+
+- (void)showNotification:(NSString *)message
+{
+    if (!notificationWindow) {
+        notificationWindow = [[NotificationWindow alloc] init];
+    }
+
+    [notificationWindow showWindow:self];
 }
 
 - (IBAction)showAccount:(id)sender

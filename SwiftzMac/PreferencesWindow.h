@@ -17,6 +17,8 @@ extern NSString * const SMIpKey;
 extern NSString * const SMIpManualKey;
 extern NSString * const SMKeychainKey;
 
+@class AppDelegate;
+
 @interface PreferencesWindow : NSWindowController <NSWindowDelegate> {
     AppDelegate *appdelegate;
 }
