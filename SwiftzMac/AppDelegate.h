@@ -43,6 +43,7 @@
 - (IBAction)showAccount:(id)sender;
 - (IBAction)logout:(id)sender;
 
+- (void)showNotification:(NSString *)message;
 - (void)setOnline:(BOOL)online;
 
 @end

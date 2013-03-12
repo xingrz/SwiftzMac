@@ -42,7 +42,6 @@
     interfaces = [NetworkInterface getAllInterfaces];
 
     [self showMainWindow:self];
-    [self showNotification:@""];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
@@ -119,6 +118,7 @@
         notificationWindow = [[NotificationWindow alloc] init];
     }
 
+    [notificationWindow setMessage:message];
     [notificationWindow showWindow:self];
 }
 

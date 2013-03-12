@@ -10,13 +10,13 @@
 
 @implementation NotificationWindow
 
+@synthesize message;
+
 - (id)init
 {
     if (![super initWithWindowNibName:@"NotificationWindow"]) {
         return nil;
     }
-
-    NSLog(@"init noti");
 
     return self;
 }
@@ -40,8 +40,34 @@
 
 - (void)showWindow:(id)sender
 {
-    NSLog(@"show window");
     [super showWindow:sender];
+    [[self window] setLevel:kCGStatusWindowLevel];
+    timer = [NSTimer scheduledTimerWithTimeInterval:5
+                                             target:self
+                                           selector:@selector(handleTimer:)
+                                           userInfo:nil
+                                            repeats:NO];
+}
+
+- (void)closeWindow:(id)sender
+{
+    [self setMessage:nil];
+    
+    [timer invalidate];
+    timer = nil;
+    
+    [self close];
+}
+
+- (void)handleTimer:(NSTimer *)theTimer
+{
+    [self closeWindow:self];
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent
+{
+    NSLog(@"mouse entered");
+    [timer invalidate];
 }
 
 @end

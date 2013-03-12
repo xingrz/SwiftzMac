@@ -12,6 +12,11 @@
 
 @interface NotificationWindow : NSWindowController <NSWindowDelegate> {
     AppDelegate *appdelegate;
+    NSTimer *timer;
 }
+
+@property NSString *message;
+
+- (IBAction)closeWindow:(id)sender;
 
 @end

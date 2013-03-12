@@ -133,6 +133,7 @@
     if ([success boolValue]) {
         [self close];
         [appdelegate setOnline:YES];
+        [appdelegate showNotification:message];
     } else {
         NSString *title = NSLocalizedString(@"MSG_LOGINFAILED", @"Login failed.");
 
