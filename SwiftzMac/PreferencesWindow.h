@@ -18,9 +18,13 @@ extern NSString * const SMIpManualKey;
 extern NSString * const SMKeychainKey;
 
 @class AppDelegate;
+@class NetworkInterface;
 
 @interface PreferencesWindow : NSWindowController <NSWindowDelegate> {
     AppDelegate *appdelegate;
+    NSArray *entries;
+    NSArray *interfaces;
+    NSArray *ips;
 }
 
 @property (weak) IBOutlet NSTextField *serverText;

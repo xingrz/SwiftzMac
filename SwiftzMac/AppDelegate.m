@@ -150,6 +150,7 @@
 
 - (void)setServer:(NSString *)_server
 {
+    NSLog(@"set server: %@", _server);
     [[NSUserDefaults standardUserDefaults] setObject:_server
                                               forKey:SMServerKey];
 
@@ -191,6 +192,7 @@
 
 - (void)setInterface:(NSString *)_interface
 {
+    NSLog(@"set interface: %@", _interface);
     [[NSUserDefaults standardUserDefaults] setObject:_interface
                                               forKey:SMInterfaceKey];
 
@@ -206,9 +208,13 @@
 
 - (void)setIp:(NSString *)_ip
 {
+    NSLog(@"set ip: %@", _ip);
     [[NSUserDefaults standardUserDefaults] setObject:_ip
                                               forKey:SMIpKey];
 
+    [[NSUserDefaults standardUserDefaults] setBool:![ipAddresses containsObject:_ip]
+                                            forKey:SMIpManualKey];
+    
     if (mainWindow) {
         [[mainWindow amtium] setIp:_ip];
     }
@@ -228,12 +234,6 @@
 - (BOOL)ipManual
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:SMIpManualKey];
-}
-
-- (void)setIpManual:(BOOL)_ipManual
-{
-    [[NSUserDefaults standardUserDefaults] setBool:_ipManual
-                                            forKey:SMIpManualKey];
 }
 
 - (BOOL)shouldUseKeychain

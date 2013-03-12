@@ -28,7 +28,7 @@ NSString * const SMKeychainKey = @"KeychainFlag";
     if (![super initWithWindowNibName:@"PreferencesWindow"]) {
         return nil;
     }
-    
+
     return self;
 }
 
@@ -37,8 +37,11 @@ NSString * const SMKeychainKey = @"KeychainFlag";
     self = [super initWithWindow:window];
     if (self) {
         appdelegate = [[NSApplication sharedApplication] delegate];
+
+        entries = [appdelegate entries];
+        interfaces = [appdelegate interfaces];
+        ips = [appdelegate ipAddresses];
     }
-    
     return self;
 }
 
@@ -57,32 +60,22 @@ NSString * const SMKeychainKey = @"KeychainFlag";
     NSLog(@"%@", [appdelegate entries]);
 
     [[self serverText] setStringValue:[appdelegate server]];
-    [[self entryPopup] setTitle:[appdelegate entry]];
+    //[[self entryPopup] setTitle:[appdelegate entry]];
 
-    if ([appdelegate ip]) {
+    /*if ([appdelegate ip]) {
         [[self ipCombo] setObjectValue:[appdelegate ip]];
     } else {
         [[self ipCombo] selectItemAtIndex:0];
-    }
+    }*/
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
 
-    [[self entryPopup] addItemsWithTitles:[appdelegate entries]];
+    //[[self entryPopup] addItemsWithTitles:[appdelegate entries]];
     
-    for (NetworkInterface *ni in [appdelegate interfaces]) {
-        NSString *label = [NSString stringWithFormat:
-                           @"%@ (%@, %@)",
-                           [ni localizedDisplayName],
-                           [ni name],
-                           [ni hardwareAddress]];
-
-        [[self interfacePopup] addItemWithTitle:label];
-    }
-
-    [[self ipCombo] addItemsWithObjectValues:[appdelegate ipAddresses]];
+    //[[self ipCombo] addItemsWithObjectValues:[appdelegate ipAddresses]];
     
 
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
@@ -91,13 +84,13 @@ NSString * const SMKeychainKey = @"KeychainFlag";
 - (IBAction)ok:(id)sender {
     NSLog(@"ok");
 
-    [appdelegate setServer:[[self serverText] stringValue]];
-    [appdelegate setEntry:[[self entryPopup] stringValue]];
+    //[appdelegate setServer:[[self serverText] stringValue]];
+    //[appdelegate setEntry:[[self entryPopup] stringValue]];
 
-    [appdelegate setInterface:@""];
+    //[appdelegate setInterface:@""];
 
-    [appdelegate setIp:[[self ipCombo] stringValue]];
-    [appdelegate setIpManual:([[appdelegate ipAddresses] containsObject:[appdelegate ip]])];
+    //[appdelegate setIp:[[self ipCombo] stringValue]];
+    //[appdelegate setIpManual:![[appdelegate ipAddresses] containsObject:[appdelegate ip]]];
 
     [NSApp endSheet:[self window]];
     [self close];

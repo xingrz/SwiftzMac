@@ -33,7 +33,7 @@
 @property NSString *interface;
 @property NSString *ip;
 @property (readonly) NSString *mac;
-@property BOOL ipManual;
+@property (readonly) BOOL ipManual;
 @property BOOL shouldUseKeychain;
 @property (readonly) NSArray *ipAddresses;
 @property (readonly) NSArray *interfaces;
