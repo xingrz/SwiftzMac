@@ -45,8 +45,6 @@
     if ([appdelegate initialUse]) {
         // 如果是初次使用，执行初始化过程
 
-        [appdelegate setInitialUse:NO];
-
         spinningWindow = [[SpinningWindow alloc]
                           initWithMessage:NSLocalizedString(@"MSG_PREPARING", @"Preparing...")
                           delegate:self
@@ -61,8 +59,6 @@
         [amtium searchServer:@selector(initialStepOneWithServer:)];
     } else if (![appdelegate ipManual] && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]]) {
         // 如果不是手动指定IP且IP不在列表中，说明IP已变更，提示重新设置
-        NSLog(@"ip changed");
-
         NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_IPCHANGED", @"")
                                          defaultButton:NSLocalizedString(@"OK", @"")
                                        alternateButton:@""
@@ -124,6 +120,7 @@
 
     [self applyPreferences];
 
+    [appdelegate setInitialUse:NO];
     [appdelegate showPreferencesWindow:self];
 }
 
