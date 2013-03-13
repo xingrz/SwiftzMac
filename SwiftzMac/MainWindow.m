@@ -119,6 +119,11 @@
        didEndSelector:nil
           contextInfo:nil];
 
+    [amtium setServer:[appdelegate server]];
+    [amtium setEntry:[appdelegate entry]];
+    [amtium setMac:[appdelegate mac]];
+    [amtium setIp:[appdelegate ip]];
+
     [amtium loginWithUsername:[[self username] stringValue]
                      password:[[self password] stringValue]
                didEndSelector:@selector(didLoginWithSuccess:message:)];
