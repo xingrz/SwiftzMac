@@ -61,25 +61,47 @@
     } else if (![appdelegate ipManual] && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]]) {
         // 如果不是手动指定IP且IP不在列表中，说明IP已变更，提示重新设置
         NSLog(@"ip changed");
+
+        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_IPCHANGED", @"")
+                                         defaultButton:NSLocalizedString(@"OK", @"")
+                                       alternateButton:@""
+                                           otherButton:@""
+                             informativeTextWithFormat:@""];
+
+        [alert runModal];
         [appdelegate showPreferencesWindow:self];
     } else {
-        [amtium setServer:[appdelegate server]];
-        [amtium setEntry:[appdelegate entry]];
-        [amtium setMac:[appdelegate mac]];
-        [amtium setIp:[appdelegate ip]];
-    }
-
-    NSArray *accounts = [SSKeychain accountsForService:@"SwiftzMac"];
-    if (accounts != nil && [accounts count] > 0) {
-        NSDictionary *account = [accounts objectAtIndex:0];
+        [self applyPreferences];
         
-        NSString *username = [account objectForKey:@"acct"];
-        NSString *password = [SSKeychain passwordForService:@"SwiftzMac"
-                                                    account:username];
+        if ([appdelegate shouldUseKeychain]) {
+            NSArray *accounts = [SSKeychain accountsForService:@"SwiftzMac"];
+            if (accounts != nil && [accounts count] > 0) {
+                NSDictionary *account = [accounts objectAtIndex:0];
 
-        [[self username] setStringValue:username];
-        [[self password] setStringValue:password];
+                NSError *keychainError = nil;
+
+                NSString *username = [account objectForKey:@"acct"];
+                NSString *password = [SSKeychain passwordForService:@"SwiftzMac"
+                                                            account:username
+                                                              error:&keychainError];
+
+                if (keychainError != nil) {
+                    [appdelegate setShouldUseKeychain:NO];
+                }
+
+                [[self username] setStringValue:username];
+                [[self password] setStringValue:password];
+            }
+        }
     }
+}
+
+- (void)applyPreferences
+{
+    [amtium setServer:[appdelegate server]];
+    [amtium setEntry:[appdelegate entry]];
+    [amtium setMac:[appdelegate mac]];
+    [amtium setIp:[appdelegate ip]];
 }
 
 - (void)initialStepOneWithServer:(NSString *)server
@@ -100,10 +122,7 @@
     [spinningWindow close];
     spinningWindow = nil;
 
-    [amtium setServer:[appdelegate server]];
-    [amtium setEntry:[appdelegate entry]];
-    [amtium setMac:[appdelegate mac]];
-    [amtium setIp:[appdelegate ip]];
+    [self applyPreferences];
 
     [appdelegate showPreferencesWindow:self];
 }
@@ -132,10 +151,7 @@
        didEndSelector:nil
           contextInfo:nil];
 
-    [amtium setServer:[appdelegate server]];
-    [amtium setEntry:[appdelegate entry]];
-    [amtium setMac:[appdelegate mac]];
-    [amtium setIp:[appdelegate ip]];
+    [self applyPreferences];
 
     [amtium loginWithUsername:[[self username] stringValue]
                      password:[[self password] stringValue]
@@ -160,15 +176,17 @@
         [self close];
         [appdelegate setOnline:YES];
         [appdelegate showNotification:message];
-        
-        [SSKeychain setPassword:[[self password] stringValue]
-                     forService:@"SwiftzMac"
-                        account:[[self username] stringValue]];
+
+        if ([appdelegate shouldUseKeychain]) {
+            [SSKeychain setPassword:[[self password] stringValue]
+                         forService:@"SwiftzMac"
+                            account:[[self username] stringValue]];
+        }
     } else {
         NSString *title = NSLocalizedString(@"MSG_LOGINFAILED", @"Login failed.");
 
         NSAlert *alert = [NSAlert alertWithMessageText:title
-                                         defaultButton:@"OK"
+                                         defaultButton:NSLocalizedString(@"OK", @"OK")
                                        alternateButton:@""
                                            otherButton:@""
                              informativeTextWithFormat:@"%@", message];

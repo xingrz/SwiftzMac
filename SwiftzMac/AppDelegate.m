@@ -23,7 +23,7 @@
     
     [defaults setObject:[NSNumber numberWithBool:YES] forKey:SMInitialKey];
     [defaults setObject:[NSNumber numberWithBool:NO] forKey:SMIpManualKey];
-    [defaults setObject:[NSNumber numberWithBool:NO] forKey:SMKeychainKey];
+    [defaults setObject:[NSNumber numberWithBool:YES] forKey:SMKeychainKey];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }

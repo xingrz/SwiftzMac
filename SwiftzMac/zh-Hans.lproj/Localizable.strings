@@ -19,3 +19,8 @@
 "MSG_DISCONNECTED_UNKNOWN" = "错误码: %@";
 "OK" = "好";
 "MSG_ERROR" = "发生错误";
+"MSG_MANUALIP" = "您确定要自定义 IP 吗？";
+"MSG_MANUALIP_DESC" = "自定义 IP 可能会在网络环境改变（例如，IP 发送变化）的时候导致无法登录。假如您是有意这样做，请务必及时更新您的 IP 设置。";
+"MSG_MANUALIP_YES" = "继续使用自定义 IP";
+"MSG_MANUALIP_NO" = "更改设置";
+"MSG_IPCHANGED" = "您的 IP 地址已发送变化，请在偏好设置中重新设定 IP 地址";

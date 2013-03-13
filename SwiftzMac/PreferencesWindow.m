@@ -56,44 +56,36 @@ NSString * const SMKeychainKey = @"KeychainFlag";
     } else {
         [super showWindow:sender];
     }
-
-    //NSLog(@"%@", [appdelegate entries]);
-
-    //[[self serverText] setStringValue:[appdelegate server]];
-    //[[self entryPopup] setTitle:[appdelegate entry]];
-
-    /*if ([appdelegate ip]) {
-        [[self ipCombo] setObjectValue:[appdelegate ip]];
-    } else {
-        [[self ipCombo] selectItemAtIndex:0];
-    }*/
-}
-
-- (void)windowDidLoad
-{
-    [super windowDidLoad];
-
-    //[[self entryPopup] addItemsWithTitles:[appdelegate entries]];
-    
-    //[[self ipCombo] addItemsWithObjectValues:[appdelegate ipAddresses]];
-    
-
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
 - (IBAction)ok:(id)sender {
     NSLog(@"ok");
 
-    //[appdelegate setServer:[[self serverText] stringValue]];
-    //[appdelegate setEntry:[[self entryPopup] stringValue]];
+    if ([appdelegate ipManual]) {
+        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_MANUALIP", @"")
+                                         defaultButton:NSLocalizedString(@"MSG_MANUALIP_YES", @"")
+                                       alternateButton:NSLocalizedString(@"MSG_MANUALIP_NO", @"")
+                                           otherButton:@""
+                             informativeTextWithFormat:NSLocalizedString(@"MSG_MANUALIP_DESC", @"")];
 
-    //[appdelegate setInterface:@""];
+        [alert beginSheetModalForWindow:[self window]
+                          modalDelegate:self
+                         didEndSelector:@selector(manualIpAlertDidEnd:returnCode:contextInfo:)
+                            contextInfo:nil];
 
-    //[appdelegate setIp:[[self ipCombo] stringValue]];
-    //[appdelegate setIpManual:![[appdelegate ipAddresses] containsObject:[appdelegate ip]]];
+        return;
+    }
 
     [NSApp endSheet:[self window]];
     [self close];
+}
+
+- (void)manualIpAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode == NSAlertDefaultReturn) {
+        [NSApp endSheet:[self window]];
+        [self close];
+    }
 }
 
 - (IBAction)cancel:(id)sender {

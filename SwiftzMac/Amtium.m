@@ -83,12 +83,6 @@
 
     NSLog(@"init: %@", data);
     
-    //_server = @"172.16.1.180";
-    //_entry = @"internet";
-    //_mac = @"000000000000";
-    //_ip = @"172.16.163.1";
-    //_dhcpEnabled = YES;
-    
     return [super init];
 }
 

@@ -27,12 +27,12 @@ extern NSString * const SMKeychainKey;
     NSArray *ips;
 }
 
-@property (weak) IBOutlet NSTextField *serverText;
+/*@property (weak) IBOutlet NSTextField *serverText;
 @property (weak) IBOutlet NSPopUpButton *entryPopup;
 @property (weak) IBOutlet NSButton *shouldStoreCheckbox;
 @property (weak) IBOutlet NSButton *shouldRetryCheckbox;
 @property (weak) IBOutlet NSPopUpButton *interfacePopup;
-@property (weak) IBOutlet NSComboBox *ipCombo;
+@property (weak) IBOutlet NSComboBox *ipCombo;*/
 
 - (IBAction)ok:(id)sender;
 - (IBAction)cancel:(id)sender;
