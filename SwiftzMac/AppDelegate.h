@@ -42,12 +42,11 @@
 
 - (IBAction)showMainWindow:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
-- (void)showNotification:(NSString *)message;
-- (void)showUpdate:(NSString *)update;
 - (IBAction)showAccount:(id)sender;
 - (IBAction)logout:(id)sender;
 
 - (void)showNotification:(NSString *)message;
+- (void)showUpdate:(NSString *)update;
 - (void)setOnline:(BOOL)online;
 
 @end
