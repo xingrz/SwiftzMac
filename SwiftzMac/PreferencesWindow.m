@@ -57,9 +57,9 @@ NSString * const SMKeychainKey = @"KeychainFlag";
         [super showWindow:sender];
     }
 
-    NSLog(@"%@", [appdelegate entries]);
+    //NSLog(@"%@", [appdelegate entries]);
 
-    [[self serverText] setStringValue:[appdelegate server]];
+    //[[self serverText] setStringValue:[appdelegate server]];
     //[[self entryPopup] setTitle:[appdelegate entry]];
 
     /*if ([appdelegate ip]) {

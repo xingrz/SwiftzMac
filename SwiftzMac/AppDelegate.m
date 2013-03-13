@@ -161,7 +161,14 @@
 
 - (NSString *)entry
 {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:SMEntryKey];
+    NSString *theEntry = [[NSUserDefaults standardUserDefaults] stringForKey:SMEntryKey];
+    if (theEntry == nil) {
+        if ([self entries] != nil) {
+            theEntry = [[self entries] objectAtIndex:0];
+        }
+    }
+    
+    return theEntry;
 }
 
 - (void)setEntry:(NSString *)_entry
@@ -187,7 +194,12 @@
 
 - (NSString *)interface
 {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:SMInterfaceKey];
+    NSString *theInterface = [[NSUserDefaults standardUserDefaults] stringForKey:SMInterfaceKey];
+    if (theInterface == nil) {
+        theInterface = [[[self interfaces] objectAtIndex:0] name];
+    }
+
+    return theInterface;
 }
 
 - (void)setInterface:(NSString *)_interface
@@ -203,7 +215,12 @@
 
 - (NSString *)ip
 {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:SMIpKey];
+    NSString *theIp = [[NSUserDefaults standardUserDefaults] stringForKey:SMIpKey];
+    if (theIp == nil) {
+        theIp = [[self ipAddresses] objectAtIndex:0];
+    }
+
+    return theIp;
 }
 
 - (void)setIp:(NSString *)_ip
@@ -223,7 +240,7 @@
 - (NSString *)mac
 {
     for (NetworkInterface *ni in interfaces) {
-        if ([ni name] == [self interface]) {
+        if ([[ni name] isEqualToString:[self interface]]) {
             return [ni hardwareAddress];
         }
     }

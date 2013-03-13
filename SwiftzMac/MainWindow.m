@@ -61,6 +61,11 @@
         // 如果不是手动指定IP且IP不在列表中，说明IP已变更，提示重新设置
         NSLog(@"ip changed");
         [appdelegate showPreferencesWindow:self];
+    } else {
+        [amtium setServer:[appdelegate server]];
+        [amtium setEntry:[appdelegate entry]];
+        [amtium setMac:[appdelegate mac]];
+        [amtium setIp:[appdelegate ip]];
     }
 }
 
@@ -82,7 +87,10 @@
     [spinningWindow close];
     spinningWindow = nil;
 
-    // TODO: 必须先写入一次配置，防止用户点击取消。
+    [amtium setServer:[appdelegate server]];
+    [amtium setEntry:[appdelegate entry]];
+    [amtium setMac:[appdelegate mac]];
+    [amtium setIp:[appdelegate ip]];
 
     [appdelegate showPreferencesWindow:self];
 }

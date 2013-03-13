@@ -9,16 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
-@interface NetworkInterface : NSObject {
-    NSString *name;
-    NSString *localizedDisplayName;
-    NSString *hardwareAddress;
-    NSArray *ipAddresses;
-}
+@interface NetworkInterface : NSObject
 
 @property NSString *name;
 @property NSString *localizedDisplayName;
 @property NSString *hardwareAddress;
+@property NSString *description;
 
 + (NSArray *)getAllInterfaces;
 + (NSArray *)getAllIpAddresses;

@@ -10,7 +10,10 @@
 
 @implementation NetworkInterface
 
-@synthesize name, localizedDisplayName, hardwareAddress;
+@synthesize name;
+@synthesize localizedDisplayName;
+@synthesize hardwareAddress;
+@synthesize description;
 
 + (NSArray *)getAllInterfaces
 {
@@ -25,13 +28,17 @@
         NSString *_name = CFBridgingRelease(SCNetworkInterfaceGetBSDName(ni));
 		NSString *_localizedDisplayName = CFBridgingRelease(SCNetworkInterfaceGetLocalizedDisplayName(ni));
 		NSString *_hardwareAddress = CFBridgingRelease(SCNetworkInterfaceGetHardwareAddressString(ni));
+
+        NSArray *haSplited = [_hardwareAddress componentsSeparatedByString:@":"];
+        _hardwareAddress = [haSplited componentsJoinedByString:@""];
         
         if (_hardwareAddress != nil) {
             NetworkInterface *interface = [[NetworkInterface alloc] init];
-            
-            interface.name = _name;
-            interface.localizedDisplayName = _localizedDisplayName;
-            interface.hardwareAddress = _hardwareAddress;
+
+            [interface setName:_name];
+            [interface setLocalizedDisplayName:_localizedDisplayName];
+            [interface setHardwareAddress:_hardwareAddress];
+            [interface setDescription:[NSString stringWithFormat:@"%@ (%@)", _localizedDisplayName, _name]];
             
             [result addObject:interface];
         }
