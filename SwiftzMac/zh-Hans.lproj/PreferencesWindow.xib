@@ -54,7 +54,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{499, 290}, {330, 220}}</string>
 				<int key="NSWTFlags">544735232</int>
-				<string key="NSWindowTitle">Preferences</string>
+				<string key="NSWindowTitle">偏好设置</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
@@ -69,12 +69,13 @@
 							<string key="NSFrame">{{234, 13}, {82, 32}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="558703055">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents">OK</string>
+								<string key="NSContents">确定</string>
 								<object class="NSFont" key="NSSupport" id="843404816">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
@@ -103,7 +104,7 @@
 							<object class="NSButtonCell" key="NSCell" id="675301898">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents">Cancel</string>
+								<string key="NSContents">取消</string>
 								<reference key="NSSupport" ref="843404816"/>
 								<string key="NSCellIdentifier">_NS:9</string>
 								<reference key="NSControlView" ref="403657696"/>
@@ -128,7 +129,7 @@
 							<object class="NSButtonCell" key="NSCell" id="762794617">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents">Restore</string>
+								<string key="NSContents">恢复设置</string>
 								<reference key="NSSupport" ref="843404816"/>
 								<string key="NSCellIdentifier">_NS:9</string>
 								<reference key="NSControlView" ref="130825017"/>
@@ -147,12 +148,13 @@
 							<string key="NSFrame">{{13, 41}, {304, 173}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="698255403"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<array class="NSMutableArray" key="NSTabViewItems">
 								<object class="NSTabViewItem" id="251256357">
 									<string key="NSIdentifier">1</string>
 									<object class="NSView" key="NSView" id="608404787">
-										<reference key="NSNextResponder" ref="407567829"/>
+										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSPopUpButton" id="479534257">
@@ -160,7 +162,6 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{92, 70}, {176, 26}}</string>
 												<reference key="NSSuperview" ref="608404787"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="425266136"/>
 												<string key="NSReuseIdentifierKey">_NS:9</string>
 												<bool key="NSEnabled">YES</bool>
@@ -196,14 +197,13 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{14, 76}, {76, 17}}</string>
 												<reference key="NSSuperview" ref="608404787"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="479534257"/>
 												<string key="NSReuseIdentifierKey">_NS:1535</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="1034132021">
 													<int key="NSCellFlags">68157504</int>
 													<int key="NSCellFlags2">71304192</int>
-													<string key="NSContents">Entry:</string>
+													<string key="NSContents">接入点:</string>
 													<reference key="NSSupport" ref="843404816"/>
 													<string key="NSCellIdentifier">_NS:1535</string>
 													<reference key="NSControlView" ref="60843390"/>
@@ -233,14 +233,13 @@
 												<int key="NSvFlags">-2147483380</int>
 												<string key="NSFrame">{{93, 17}, {174, 18}}</string>
 												<reference key="NSSuperview" ref="608404787"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="130825017"/>
 												<string key="NSReuseIdentifierKey">_NS:9</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="5421964">
 													<int key="NSCellFlags">-2080374784</int>
 													<int key="NSCellFlags2">268435456</int>
-													<string key="NSContents">Retry if disconnected</string>
+													<string key="NSContents">断线自动重连</string>
 													<reference key="NSSupport" ref="843404816"/>
 													<string key="NSCellIdentifier">_NS:9</string>
 													<reference key="NSControlView" ref="199946896"/>
@@ -265,14 +264,13 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{14, 104}, {76, 17}}</string>
 												<reference key="NSSuperview" ref="608404787"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="33603787"/>
 												<string key="NSReuseIdentifierKey">_NS:1535</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="157015607">
 													<int key="NSCellFlags">68157504</int>
 													<int key="NSCellFlags2">71304192</int>
-													<string key="NSContents">Server:</string>
+													<string key="NSContents">服务器:</string>
 													<reference key="NSSupport" ref="843404816"/>
 													<string key="NSCellIdentifier">_NS:1535</string>
 													<reference key="NSControlView" ref="647950237"/>
@@ -286,7 +284,6 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{95, 102}, {170, 22}}</string>
 												<reference key="NSSuperview" ref="608404787"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="60843390"/>
 												<string key="NSReuseIdentifierKey">_NS:9</string>
 												<bool key="NSEnabled">YES</bool>
@@ -321,14 +318,13 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{93, 37}, {174, 18}}</string>
 												<reference key="NSSuperview" ref="608404787"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="199946896"/>
 												<string key="NSReuseIdentifierKey">_NS:9</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="447217578">
 													<int key="NSCellFlags">-2080374784</int>
 													<int key="NSCellFlags2">268435456</int>
-													<string key="NSContents">Store password</string>
+													<string key="NSContents">在钥匙串中储存密码</string>
 													<reference key="NSSupport" ref="843404816"/>
 													<string key="NSCellIdentifier">_NS:9</string>
 													<reference key="NSControlView" ref="425266136"/>
@@ -345,19 +341,17 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {284, 127}}</string>
-										<reference key="NSSuperview" ref="407567829"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="647950237"/>
 										<string key="NSReuseIdentifierKey">_NS:11</string>
 									</object>
-									<string key="NSLabel">Connection</string>
+									<string key="NSLabel">连接</string>
 									<reference key="NSColor" ref="760581323"/>
 									<reference key="NSTabView" ref="407567829"/>
 								</object>
 								<object class="NSTabViewItem" id="922142777">
 									<string key="NSIdentifier">2</string>
 									<object class="NSView" key="NSView" id="698255403">
-										<nil key="NSNextResponder"/>
+										<reference key="NSNextResponder" ref="407567829"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSPopUpButton" id="1002051804">
@@ -365,6 +359,7 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{92, 100}, {176, 26}}</string>
 												<reference key="NSSuperview" ref="698255403"/>
+												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="293466901"/>
 												<string key="NSReuseIdentifierKey">_NS:9</string>
 												<bool key="NSEnabled">YES</bool>
@@ -400,13 +395,14 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{14, 106}, {76, 17}}</string>
 												<reference key="NSSuperview" ref="698255403"/>
+												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="1002051804"/>
 												<string key="NSReuseIdentifierKey">_NS:1535</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="861427585">
 													<int key="NSCellFlags">68157504</int>
 													<int key="NSCellFlags2">71304192</int>
-													<string key="NSContents">Interface:</string>
+													<string key="NSContents">接口:</string>
 													<reference key="NSSupport" ref="843404816"/>
 													<string key="NSCellIdentifier">_NS:1535</string>
 													<reference key="NSControlView" ref="951407693"/>
@@ -420,13 +416,14 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{14, 63}, {76, 17}}</string>
 												<reference key="NSSuperview" ref="698255403"/>
+												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="145609881"/>
 												<string key="NSReuseIdentifierKey">_NS:1535</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="947769254">
 													<int key="NSCellFlags">68157504</int>
 													<int key="NSCellFlags2">71304192</int>
-													<string key="NSContents">IP address:</string>
+													<string key="NSContents">IP 地址:</string>
 													<reference key="NSSupport" ref="843404816"/>
 													<string key="NSCellIdentifier">_NS:1535</string>
 													<reference key="NSControlView" ref="293466901"/>
@@ -440,6 +437,8 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{95, 59}, {173, 26}}</string>
 												<reference key="NSSuperview" ref="698255403"/>
+												<reference key="NSWindow"/>
+												<reference key="NSNextKeyView" ref="130825017"/>
 												<string key="NSReuseIdentifierKey">_NS:9</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSComboBoxCell" key="NSCell" id="835171280">
@@ -534,21 +533,23 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {284, 127}}</string>
+										<reference key="NSSuperview" ref="407567829"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="951407693"/>
 										<string key="NSReuseIdentifierKey">_NS:28</string>
 									</object>
-									<string key="NSLabel">Network</string>
+									<string key="NSLabel">网络</string>
 									<reference key="NSColor" ref="760581323"/>
 									<reference key="NSTabView" ref="407567829"/>
 								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="251256357"/>
+							<reference key="NSSelectedTabViewItem" ref="922142777"/>
 							<reference key="NSFont" ref="843404816"/>
 							<int key="NSTvFlags">0</int>
 							<bool key="NSAllowTruncatedLabels">YES</bool>
 							<bool key="NSDrawsBackground">YES</bool>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="608404787"/>
+								<reference ref="698255403"/>
 							</array>
 						</object>
 					</array>
