@@ -85,6 +85,7 @@
 		FCC3BB8016F0630B001ECB2E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FCC3BB8416F064B5001ECB2E /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		FCC3BB8516F064B5001ECB2E /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		FCC3BB8716F083D9001ECB2E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/PreferencesWindow.xib"; sourceTree = "<group>"; };
 		FCCA9C7216E77F350069C9E1 /* AmtiumEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumEncoder.h; sourceTree = "<group>"; };
 		FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumEncoder.m; sourceTree = "<group>"; };
 		FCCA9C7616E790370069C9E1 /* AmtiumCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumCrypto.h; sourceTree = "<group>"; };
@@ -400,6 +401,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				FCAF7A7A16E75239006EDA2D /* en */,
+				FCC3BB8716F083D9001ECB2E /* zh-Hans */,
 			);
 			name = PreferencesWindow.xib;
 			sourceTree = "<group>";
