@@ -191,6 +191,9 @@
 - (IBAction)account:(id)sender
 {
     NSLog(@"show account");
+    if ([amtium website] != nil) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[amtium website]]];
+    }
 }
 
 - (Amtium *)amtium
