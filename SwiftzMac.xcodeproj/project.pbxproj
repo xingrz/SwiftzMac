@@ -30,6 +30,8 @@
 		FCBD320916E5BAD4002B1ED1 /* Amtium.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD320816E5BAD4002B1ED1 /* Amtium.m */; };
 		FCBD321B16E6115E002B1ED1 /* NetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */; };
 		FCBD322116E6209E002B1ED1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */; };
+		FCC3BB8116F0630B001ECB2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC3BB8016F0630B001ECB2E /* Security.framework */; };
+		FCC3BB8616F064B5001ECB2E /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC3BB8516F064B5001ECB2E /* SSKeychain.m */; };
 		FCCA9C7416E77F350069C9E1 /* AmtiumEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */; };
 		FCCA9C7816E790370069C9E1 /* AmtiumCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7716E790370069C9E1 /* AmtiumCrypto.m */; };
 		FCCA9C8116E9A0B70069C9E1 /* SpinningWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7F16E9A0B60069C9E1 /* SpinningWindow.m */; };
@@ -80,6 +82,9 @@
 		FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkInterface.m; sourceTree = "<group>"; };
 		FCBD321F16E61B52002B1ED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FCC3BB8016F0630B001ECB2E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FCC3BB8416F064B5001ECB2E /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		FCC3BB8516F064B5001ECB2E /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		FCCA9C7216E77F350069C9E1 /* AmtiumEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumEncoder.h; sourceTree = "<group>"; };
 		FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumEncoder.m; sourceTree = "<group>"; };
 		FCCA9C7616E790370069C9E1 /* AmtiumCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumCrypto.h; sourceTree = "<group>"; };
@@ -96,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC3BB8116F0630B001ECB2E /* Security.framework in Frameworks */,
 				FCBD322116E6209E002B1ED1 /* SystemConfiguration.framework in Frameworks */,
 				FC1DE54416DCD03D008CE989 /* Cocoa.framework in Frameworks */,
 			);
@@ -107,6 +113,8 @@
 		FC1DE53416DCD03D008CE989 = {
 			isa = PBXGroup;
 			children = (
+				FCC3BB8316F064B5001ECB2E /* SSKeychain */,
+				FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */,
 				FC1DE54916DCD03D008CE989 /* SwiftzMac */,
 				FC1DE54216DCD03D008CE989 /* Frameworks */,
 				FC1DE54016DCD03D008CE989 /* Products */,
@@ -124,6 +132,7 @@
 		FC1DE54216DCD03D008CE989 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCC3BB8016F0630B001ECB2E /* Security.framework */,
 				FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */,
 				FC1DE54316DCD03D008CE989 /* Cocoa.framework */,
 				FC1DE54516DCD03D008CE989 /* Other Frameworks */,
@@ -175,6 +184,7 @@
 				FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */,
 			);
 			name = CocoaAsyncSocket;
+			path = SwiftzMac;
 			sourceTree = "<group>";
 		};
 		FCAF7A8016E75D8F006EDA2D /* Resources */ = {
@@ -197,7 +207,6 @@
 		FCBD321816E601AD002B1ED1 /* Amtium */ = {
 			isa = PBXGroup;
 			children = (
-				FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */,
 				FCBD320716E5BAD4002B1ED1 /* Amtium.h */,
 				FCBD320816E5BAD4002B1ED1 /* Amtium.m */,
 				FCAF7A8916E767E6006EDA2D /* AmtiumPacket.h */,
@@ -212,6 +221,16 @@
 				FCCA9C8516EA4D020069C9E1 /* APMutableParams.m */,
 			);
 			name = Amtium;
+			sourceTree = "<group>";
+		};
+		FCC3BB8316F064B5001ECB2E /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				FCC3BB8416F064B5001ECB2E /* SSKeychain.h */,
+				FCC3BB8516F064B5001ECB2E /* SSKeychain.m */,
+			);
+			name = SSKeychain;
+			path = "../../Downloads/sskeychain-master/SSKeychain";
 			sourceTree = "<group>";
 		};
 		FCCA9C8316E9A0D70069C9E1 /* Controllers */ = {
@@ -318,6 +337,7 @@
 				FCCA9C8116E9A0B70069C9E1 /* SpinningWindow.m in Sources */,
 				FCCA9C8616EA4D030069C9E1 /* APMutableParams.m in Sources */,
 				FC041FCC16EDE8FF001AE293 /* NotificationWindow.m in Sources */,
+				FCC3BB8616F064B5001ECB2E /* SSKeychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

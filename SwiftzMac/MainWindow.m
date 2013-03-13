@@ -11,6 +11,7 @@
 #import "SpinningWindow.h"
 
 #import "Amtium.h"
+#import "SSKeychain.h"
 
 @implementation MainWindow
 
@@ -66,6 +67,18 @@
         [amtium setEntry:[appdelegate entry]];
         [amtium setMac:[appdelegate mac]];
         [amtium setIp:[appdelegate ip]];
+    }
+
+    NSArray *accounts = [SSKeychain accountsForService:@"SwiftzMac"];
+    if (accounts != nil && [accounts count] > 0) {
+        NSDictionary *account = [accounts objectAtIndex:0];
+        
+        NSString *username = [account objectForKey:@"acct"];
+        NSString *password = [SSKeychain passwordForService:@"SwiftzMac"
+                                                    account:username];
+
+        [[self username] setStringValue:username];
+        [[self password] setStringValue:password];
     }
 }
 
@@ -147,6 +160,10 @@
         [self close];
         [appdelegate setOnline:YES];
         [appdelegate showNotification:message];
+        
+        [SSKeychain setPassword:[[self password] stringValue]
+                     forService:@"SwiftzMac"
+                        account:[[self username] stringValue]];
     } else {
         NSString *title = NSLocalizedString(@"MSG_LOGINFAILED", @"Login failed.");
 
