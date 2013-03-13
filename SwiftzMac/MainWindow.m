@@ -107,7 +107,6 @@
 
 - (void)initialStepOneWithServer:(NSString *)server
 {
-    NSLog(@"got server: %@", server);
     [appdelegate setServer:server];
     [amtium fetchEntries:@selector(initialStepTwoWithEntries:)];
 }

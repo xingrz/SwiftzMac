@@ -10,8 +10,6 @@
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 
-#import "NetworkInterface.h"
-
 NSString * const SMInitialKey = @"InitialFlag";
 NSString * const SMServerKey = @"Server";
 NSString * const SMEntryKey = @"Entry";
@@ -59,8 +57,6 @@ NSString * const SMKeychainKey = @"KeychainFlag";
 }
 
 - (IBAction)ok:(id)sender {
-    NSLog(@"ok");
-
     if ([appdelegate ipManual]) {
         NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_MANUALIP", @"")
                                          defaultButton:NSLocalizedString(@"MSG_MANUALIP_YES", @"")
@@ -88,15 +84,7 @@ NSString * const SMKeychainKey = @"KeychainFlag";
     }
 }
 
-- (IBAction)cancel:(id)sender {
-    NSLog(@"cancel");
-    [NSApp endSheet:[self window]];
-    [self close];
-}
-
 - (IBAction)restore:(id)sender {
-    AppDelegate *appDelegate = [[NSApplication sharedApplication] delegate];
-    NSLog(@"%@", [appDelegate entry]);
 }
 
 @end

@@ -10,6 +10,7 @@
 
 #import "Amtium.h"
 #import "NetworkInterface.h"
+#import "SSKeychain.h"
 
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
@@ -154,7 +155,6 @@
 
 - (void)setServer:(NSString *)_server
 {
-    NSLog(@"set server: %@", _server);
     [[NSUserDefaults standardUserDefaults] setObject:_server
                                               forKey:SMServerKey];
 
@@ -201,6 +201,7 @@
     NSString *theInterface = [[NSUserDefaults standardUserDefaults] stringForKey:SMInterfaceKey];
     if (theInterface == nil) {
         theInterface = [[[self interfaces] objectAtIndex:0] name];
+        [self setInterface:theInterface];
     }
 
     return theInterface;
@@ -208,7 +209,6 @@
 
 - (void)setInterface:(NSString *)_interface
 {
-    NSLog(@"set interface: %@", _interface);
     [[NSUserDefaults standardUserDefaults] setObject:_interface
                                               forKey:SMInterfaceKey];
 
@@ -222,6 +222,7 @@
     NSString *theIp = [[NSUserDefaults standardUserDefaults] stringForKey:SMIpKey];
     if (theIp == nil) {
         theIp = [[self ipAddresses] objectAtIndex:0];
+        [self setIp:theIp];
     }
 
     return theIp;
@@ -266,6 +267,15 @@
 {
     [[NSUserDefaults standardUserDefaults] setBool:_shouldUseKeychain
                                             forKey:SMKeychainKey];
+
+    if (!_shouldUseKeychain) {
+        NSArray *accounts = [SSKeychain accountsForService:@"SwiftzMac"];
+        if (accounts != nil && [accounts count] > 0) {
+            for (NSDictionary *account in accounts) {
+                [SSKeychain deletePasswordForService:@"SwiftzMac" account:[account objectForKey:@"acct"]];
+            }
+        }
+    }
 }
 
 - (NSArray *)ipAddresses
