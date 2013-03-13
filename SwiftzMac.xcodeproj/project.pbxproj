@@ -32,6 +32,9 @@
 		FCBD322116E6209E002B1ED1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */; };
 		FCC3BB8116F0630B001ECB2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC3BB8016F0630B001ECB2E /* Security.framework */; };
 		FCC3BB8616F064B5001ECB2E /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC3BB8516F064B5001ECB2E /* SSKeychain.m */; };
+		FCCA8F6216F08EBD00BE16FA /* StatisticsAndUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA8F6116F08EBD00BE16FA /* StatisticsAndUpdate.m */; };
+		FCCA8F6716F098A100BE16FA /* UpdateWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA8F6516F098A000BE16FA /* UpdateWindow.m */; };
+		FCCA8F6916F09D8400BE16FA /* UpdateWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCA8F6B16F09D8400BE16FA /* UpdateWindow.xib */; };
 		FCCA9C7416E77F350069C9E1 /* AmtiumEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */; };
 		FCCA9C7816E790370069C9E1 /* AmtiumCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7716E790370069C9E1 /* AmtiumCrypto.m */; };
 		FCCA9C8116E9A0B70069C9E1 /* SpinningWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA9C7F16E9A0B60069C9E1 /* SpinningWindow.m */; };
@@ -86,6 +89,12 @@
 		FCC3BB8416F064B5001ECB2E /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		FCC3BB8516F064B5001ECB2E /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		FCC3BB8716F083D9001ECB2E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/PreferencesWindow.xib"; sourceTree = "<group>"; };
+		FCCA8F6016F08EBD00BE16FA /* StatisticsAndUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsAndUpdate.h; sourceTree = "<group>"; };
+		FCCA8F6116F08EBD00BE16FA /* StatisticsAndUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsAndUpdate.m; sourceTree = "<group>"; };
+		FCCA8F6416F098A000BE16FA /* UpdateWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateWindow.h; sourceTree = "<group>"; };
+		FCCA8F6516F098A000BE16FA /* UpdateWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateWindow.m; sourceTree = "<group>"; };
+		FCCA8F6A16F09D8400BE16FA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/UpdateWindow.xib; sourceTree = "<group>"; };
+		FCCA8F6C16F09D8600BE16FA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/UpdateWindow.xib"; sourceTree = "<group>"; };
 		FCCA9C7216E77F350069C9E1 /* AmtiumEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumEncoder.h; sourceTree = "<group>"; };
 		FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumEncoder.m; sourceTree = "<group>"; };
 		FCCA9C7616E790370069C9E1 /* AmtiumCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumCrypto.h; sourceTree = "<group>"; };
@@ -159,6 +168,8 @@
 				FC1DE55616DCD03D008CE989 /* AppDelegate.m */,
 				FCBD321916E6115E002B1ED1 /* NetworkInterface.h */,
 				FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */,
+				FCCA8F6016F08EBD00BE16FA /* StatisticsAndUpdate.h */,
+				FCCA8F6116F08EBD00BE16FA /* StatisticsAndUpdate.m */,
 				FCCA9C8316E9A0D70069C9E1 /* Controllers */,
 				FCAF7A8016E75D8F006EDA2D /* Resources */,
 				FCBD321816E601AD002B1ED1 /* Amtium */,
@@ -196,6 +207,7 @@
 				FC041FBA16EDA3C7001AE293 /* status.png */,
 				FCCA9C8716EC1E490069C9E1 /* Swiftz.png */,
 				FC1DE55816DCD03D008CE989 /* MainMenu.xib */,
+				FCCA8F6B16F09D8400BE16FA /* UpdateWindow.xib */,
 				FC041FAF16ED6743001AE293 /* SpinningWindow.xib */,
 				FCAF7A7716E75229006EDA2D /* MainWindow.xib */,
 				FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */,
@@ -237,6 +249,8 @@
 		FCCA9C8316E9A0D70069C9E1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FCCA8F6416F098A000BE16FA /* UpdateWindow.h */,
+				FCCA8F6516F098A000BE16FA /* UpdateWindow.m */,
 				FCBD31F016E4E1FF002B1ED1 /* MainWindow.h */,
 				FCBD31F116E4E1FF002B1ED1 /* MainWindow.m */,
 				FCBD31F516E4E224002B1ED1 /* PreferencesWindow.h */,
@@ -314,6 +328,7 @@
 				FC041FBD16EDA4F2001AE293 /* statusAlternate.png in Resources */,
 				FC041FBF16EDD6D5001AE293 /* statusOffline.png in Resources */,
 				FC041FCD16EDE8FF001AE293 /* NotificationWindow.xib in Resources */,
+				FCCA8F6916F09D8400BE16FA /* UpdateWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +354,8 @@
 				FCCA9C8616EA4D030069C9E1 /* APMutableParams.m in Sources */,
 				FC041FCC16EDE8FF001AE293 /* NotificationWindow.m in Sources */,
 				FCC3BB8616F064B5001ECB2E /* SSKeychain.m in Sources */,
+				FCCA8F6216F08EBD00BE16FA /* StatisticsAndUpdate.m in Sources */,
+				FCCA8F6716F098A100BE16FA /* UpdateWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +421,15 @@
 				FCC3BB8716F083D9001ECB2E /* zh-Hans */,
 			);
 			name = PreferencesWindow.xib;
+			sourceTree = "<group>";
+		};
+		FCCA8F6B16F09D8400BE16FA /* UpdateWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCCA8F6A16F09D8400BE16FA /* en */,
+				FCCA8F6C16F09D8600BE16FA /* zh-Hans */,
+			);
+			name = UpdateWindow.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

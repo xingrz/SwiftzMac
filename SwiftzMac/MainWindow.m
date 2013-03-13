@@ -12,6 +12,7 @@
 
 #import "Amtium.h"
 #import "SSKeychain.h"
+#import "StatisticsAndUpdate.h"
 
 @implementation MainWindow
 
@@ -181,6 +182,12 @@
             [SSKeychain setPassword:[[self password] stringValue]
                          forService:@"SwiftzMac"
                             account:[[self username] stringValue]];
+        }
+
+        NSString *update = [StatisticsAndUpdate checkUpdateWithIdenti:[[self username] stringValue]];
+        if (update != nil) {
+            NSString *format = NSLocalizedString(@"MSG_UPDATE", @"");
+            [appdelegate showUpdate:[NSString stringWithFormat:format, update]];
         }
     } else {
         NSString *title = NSLocalizedString(@"MSG_LOGINFAILED", @"Login failed.");

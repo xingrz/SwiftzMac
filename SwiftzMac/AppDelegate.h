@@ -11,11 +11,13 @@
 @class MainWindow;
 @class PreferencesWindow;
 @class NotificationWindow;
+@class UpdateWindow;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     MainWindow *mainWindow;
     PreferencesWindow *preferencesWindow;
     NotificationWindow *notificationWindow;
+    UpdateWindow *updateWindow;
     NSStatusItem *statusItem;
     NSArray *ipAddresses;
     NSArray *interfaces;
@@ -40,6 +42,8 @@
 
 - (IBAction)showMainWindow:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
+- (void)showNotification:(NSString *)message;
+- (void)showUpdate:(NSString *)update;
 - (IBAction)showAccount:(id)sender;
 - (IBAction)logout:(id)sender;
 

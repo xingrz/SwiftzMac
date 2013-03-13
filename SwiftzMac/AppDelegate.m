@@ -14,6 +14,7 @@
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 #import "NotificationWindow.h"
+#import "UpdateWindow.h"
 
 @implementation AppDelegate
 
@@ -94,22 +95,14 @@
 
 - (IBAction)showMainWindow:(id)sender
 {
-    if (!mainWindow) {
-        mainWindow = [[MainWindow alloc] init];
-    }
-
     [NSApp activateIgnoringOtherApps:YES];
-    [mainWindow showWindow:self];
+    [[self mainWindow] showWindow:self];
 }
 
 - (IBAction)showPreferencesWindow:(id)sender
 {
-    if (!preferencesWindow) {
-        preferencesWindow = [[PreferencesWindow alloc] init];
-    }
-
     [NSApp activateIgnoringOtherApps:YES];
-    [preferencesWindow showWindow:self];
+    [[self preferencesWindow] showWindow:self];
 }
 
 - (void)showNotification:(NSString *)message
@@ -120,6 +113,17 @@
 
     [notificationWindow setMessage:message];
     [notificationWindow showWindow:self];
+}
+
+- (void)showUpdate:(NSString *)update
+{
+    if (!updateWindow) {
+        updateWindow = [[UpdateWindow alloc] init];
+    }
+
+    [NSApp activateIgnoringOtherApps:YES];
+    [updateWindow setUpdate:update];
+    [updateWindow showWindow:self];
 }
 
 - (IBAction)showAccount:(id)sender
