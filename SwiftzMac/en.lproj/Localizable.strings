@@ -19,3 +19,8 @@
 "MSG_DISCONNECTED_UNKNOWN" = "Reason code: %@";
 "OK" = "OK";
 "MSG_ERROR" = "An error occured.";
+"MSG_MANUALIP" = "Are you sure to manually set your IP?";
+"MSG_MANUALIP_DESC" = "";
+"MSG_MANUALIP_YES" = "Continue";
+"MSG_MANUALIP_NO" = "Change it";
+"MSG_IPCHANGED" = "Your IP is changed. Please select your new IP.";
