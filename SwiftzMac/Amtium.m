@@ -82,7 +82,7 @@
     [socket4999 sendData:data toHost:@"1.1.1.8" port:3850 withTimeout:-1 tag:tag++];
 
     NSLog(@"init: %@", data);
-    
+
     return [super init];
 }
 
@@ -301,6 +301,12 @@ didSendDataWithTag:(long)tag
 didNotSendDataWithTag:(long)tag
        dueToError:(NSError *)error
 {
+    [_timer invalidate];
+    _timer = nil;
+    _session = nil;
+    _website = nil;
+    _online = NO;
+
     if ([_delegate respondsToSelector:_didErrorSelector]) {
         @autoreleasepool {
             [_delegate performSelector:_didErrorSelector withObject:error];
@@ -313,10 +319,21 @@ didNotSendDataWithTag:(long)tag
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext
 {
-    NSData *decrypted = [AmtiumCrypto decrypt:data];
-    NSLog(@"packet: %@", decrypted);
+    NSString *host = nil;
+    uint16_t port;
+    [GCDAsyncUdpSocket getHost:&host port:&port fromAddress:address];
 
+    if (!([host isEqualToString:@"1.1.1.8"] || [host isEqualToString:_server])) {
+        // 抛弃非服务器IP发来的包
+        return;
+    }
+
+    NSData *decrypted = [AmtiumCrypto decrypt:data];
     AmtiumPacket *packet = [AmtiumPacket packetWithData:decrypted];
+    if (packet == nil) {
+        // 抛弃解码失败的包
+        return;
+    }
 
     unsigned char action = [packet action];
     if (action == APALoginResult) {
@@ -403,6 +420,9 @@ withFilterContext:(id)filterContext
 {
     [_timer invalidate];
     _timer = nil;
+    _session = nil;
+    _website = nil;
+    _online = NO;
     
     if ([_delegate respondsToSelector:_didErrorSelector]) {
         @autoreleasepool {

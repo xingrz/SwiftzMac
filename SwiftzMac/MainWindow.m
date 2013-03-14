@@ -224,37 +224,32 @@
 
 - (void)amtiumDidClose:(NSNumber *)reason
 {
-    [amtium logout:nil];
     [appdelegate showMainWindow:self];
     [appdelegate setOnline:NO];
 
-    NSString *title = NSLocalizedString(@"MSG_DISCONNECTED", @"Disconnected.");
-    NSString *message = @"";
+    NSString *title = NSLocalizedString(@"MSG_DISCONNECTED", nil);
+    NSString *message;
 
     switch ([reason integerValue]) {
         case 0:
-            message = NSLocalizedString(@"MSG_DISCONNECTED_0",
-                                        @"Failed to keep connection alive, please login again.");
+            message = NSLocalizedString(@"MSG_DISCONNECTED_0", nil);
             break;
 
         case 1:
-            message = NSLocalizedString(@"MSG_DISCONNECTED_1",
-                                        @"You have been disconnected forcibly.");
+            message = NSLocalizedString(@"MSG_DISCONNECTED_1", nil);
             break;
 
         case 2:
-            message = NSLocalizedString(@"MSG_DISCONNECTED_2",
-                                        @"Your traffic has run out, please login again.");
+            message = NSLocalizedString(@"MSG_DISCONNECTED_2", nil);
             break;
             
         default:
-            message = [NSString stringWithFormat:NSLocalizedString(@"MSG_DISCONNECTED_UNKNOWN",
-                                                                   @"Reason code: %i"), reason];
+            message = [NSString stringWithFormat:NSLocalizedString(@"MSG_DISCONNECTED_UNKNOWN", nil), reason];
             break;
     }
 
     NSAlert *alert = [NSAlert alertWithMessageText:title
-                                     defaultButton:NSLocalizedString(@"OK", @"OK")
+                                     defaultButton:NSLocalizedString(@"OK", nil)
                                    alternateButton:@""
                                        otherButton:@""
                          informativeTextWithFormat:@"%@", message];
@@ -269,14 +264,16 @@
 
 - (void)amtiumDidError:(NSError *)error
 {
-    [amtium logout:nil];
     [appdelegate showMainWindow:self];
+    [appdelegate setOnline:NO];
 
-    NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_ERROR", @"An error occured.")
-                                     defaultButton:NSLocalizedString(@"OK", @"OK")
+    NSLog(@"error code: %ld", [error code]);
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_ERROR", nil)
+                                     defaultButton:NSLocalizedString(@"OK", nil)
                                    alternateButton:@""
                                        otherButton:@""
-                         informativeTextWithFormat:@""];
+                         informativeTextWithFormat:@"%@", [error localizedDescription]];
 
     [alert beginSheetModalForWindow:[self window]
                       modalDelegate:self
@@ -286,7 +283,6 @@
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-    NSLog(@"will close");
     if (![amtium online]) {
         [[NSApplication sharedApplication] terminate:self];
     }
