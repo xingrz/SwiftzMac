@@ -10,58 +10,87 @@
 
 #import "GCDAsyncUdpSocket.h"
 
+@class AmtiumLoginResult;
+
 @interface Amtium : NSObject<GCDAsyncUdpSocketDelegate> {
-    BOOL _online;
-    NSString *_account;
+    //BOOL _online;
+    //NSString *_account;
     
-    NSString *_server;
-    NSString *_entry;   
-    NSString *_mac;
-    NSString *_ip;
-    BOOL _dhcpEnabled;
+    //NSString *_server;
+    //NSString *_entry;
+    //NSString *_mac;
+    //NSString *_ip;
+    //BOOL _dhcpEnabled;
     
-    NSString *_session;
-    NSString *_website;
-    unsigned int _index;
-    NSTimer *_timer;
+    NSString *session;
+    //NSString *_website;
+    unsigned int index;
+    NSTimer *timer;
     
     GCDAsyncUdpSocket *socket3848;
     GCDAsyncUdpSocket *socket4999;
     long tag;
     
-    id _delegate;
+    //id _delegate;
     
-    SEL _didErrorSelector;
-    SEL _didLoginSelector;
-    SEL _didBreathSelector;
-    SEL _didLogoutSelector;
-    SEL _didEntriesSelector;
-    SEL _didCloseSelector;
-    SEL _didConfirmSelector;
-    SEL _didServerSelector;
+    //SEL _didErrorSelector;
+    //SEL _didLoginSelector;
+    //SEL _didBreathSelector;
+    //SEL _didLogoutSelector;
+    //SEL _didEntriesSelector;
+    //SEL _didCloseSelector;
+    //SEL _didConfirmSelector;
+    //SEL _didServerSelector;
 }
+
+@property (readwrite, assign) id delegate;
+
+@property (readwrite, assign) SEL didErrorSelector;
+@property (readwrite, assign) SEL didLoginSelector;
+@property (readwrite, assign) SEL didBreathSelector;
+@property (readwrite, assign) SEL didLogoutSelector;
+@property (readwrite, assign) SEL didCloseSelector;
+@property (readwrite, assign) SEL didConfirmSelector;
+@property (readwrite, assign) SEL didGetEntriesSelector;
+@property (readwrite, assign) SEL didGetServerSelector;
 
 @property (readonly) BOOL online;
 @property (readonly) NSString *account;
 @property (readonly) NSString *website;
-@property NSString *server;
-@property NSString *entry;
-@property NSString *mac;
-@property NSString *ip;
-@property BOOL dhcpEnabled;
+@property (readwrite, copy) NSString *server;
+@property (readwrite, copy) NSString *entry;
+@property (readwrite, copy) NSString *mac;
+@property (readwrite, copy) NSString *ip;
+@property (readwrite, assign) BOOL dhcpEnabled;
 
-- (id)initWithDelegate:(id)delegate
-      didErrorSelector:(SEL)didErrorSelector
-      didCloseSelector:(SEL)didCloseSelector;
++ (id)amtiumWithDelegate:(id)theDelegate
+        didErrorSelector:(SEL)didError
+        didCloseSelector:(SEL)didClose;
+
+- (id)initWithDelegate:(id)theDelegate
+      didErrorSelector:(SEL)didError
+      didCloseSelector:(SEL)didClose;
 
 - (void)loginWithUsername:(NSString *)username
                  password:(NSString *)password
-           didEndSelector:(SEL)selector;
+         didLoginSelector:(SEL)selector;
 
 - (void)logout:(SEL)selector;
 
 - (void)searchServer:(SEL)selector;
 
 - (void)fetchEntries:(SEL)selector;
+
+@end
+
+@protocol AmtiumDelegate
+@optional
+
+- (void)amtium:(Amtium *)amtium didError:(NSError *)error;
+- (void)amtium:(Amtium *)amtium didCloseWithReason:(NSNumber *)reason;
+- (void)amtium:(Amtium *)amtium didLoginWithResult:(AmtiumLoginResult *)result;
+- (void)amtium:(Amtium *)amtium didLogout:(NSNumber *)success;
+- (void)amtium:(Amtium *)amtium didGetEntries:(NSArray *)entries;
+- (void)amtium:(Amtium *)amtium didGetServer:(NSString *)server;
 
 @end

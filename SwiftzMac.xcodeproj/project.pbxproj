@@ -20,6 +20,7 @@
 		FC1DE55416DCD03D008CE989 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55216DCD03D008CE989 /* Credits.rtf */; };
 		FC1DE55716DCD03D008CE989 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE55616DCD03D008CE989 /* AppDelegate.m */; };
 		FC1DE55A16DCD03D008CE989 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55816DCD03D008CE989 /* MainMenu.xib */; };
+		FC2B0FFF16F1C3E200E6662C /* AmtiumLoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B0FFE16F1C3E200E6662C /* AmtiumLoginResult.m */; };
 		FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7716E75229006EDA2D /* MainWindow.xib */; };
 		FCAF7A7916E75239006EDA2D /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */; };
 		FCAF7A7F16E75D34006EDA2D /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */; };
@@ -67,6 +68,8 @@
 		FC1DE55316DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		FC1DE55516DCD03D008CE989 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC1DE55616DCD03D008CE989 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FC2B0FFD16F1C3E200E6662C /* AmtiumLoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumLoginResult.h; sourceTree = "<group>"; };
+		FC2B0FFE16F1C3E200E6662C /* AmtiumLoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumLoginResult.m; sourceTree = "<group>"; };
 		FCAF7A7616E75229006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		FCAF7A7A16E75239006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
@@ -123,6 +126,7 @@
 		FC1DE53416DCD03D008CE989 = {
 			isa = PBXGroup;
 			children = (
+				FCBD321816E601AD002B1ED1 /* Amtium */,
 				FCC3BB8316F064B5001ECB2E /* SSKeychain */,
 				FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */,
 				FC1DE54916DCD03D008CE989 /* SwiftzMac */,
@@ -172,7 +176,6 @@
 				FCCA8F6116F08EBD00BE16FA /* StatisticsAndUpdate.m */,
 				FCCA9C8316E9A0D70069C9E1 /* Controllers */,
 				FCAF7A8016E75D8F006EDA2D /* Resources */,
-				FCBD321816E601AD002B1ED1 /* Amtium */,
 			);
 			path = SwiftzMac;
 			sourceTree = "<group>";
@@ -232,8 +235,11 @@
 				FCCA9C7716E790370069C9E1 /* AmtiumCrypto.m */,
 				FCCA9C8416EA4D020069C9E1 /* APMutableParams.h */,
 				FCCA9C8516EA4D020069C9E1 /* APMutableParams.m */,
+				FC2B0FFD16F1C3E200E6662C /* AmtiumLoginResult.h */,
+				FC2B0FFE16F1C3E200E6662C /* AmtiumLoginResult.m */,
 			);
 			name = Amtium;
+			path = SwiftzMac;
 			sourceTree = "<group>";
 		};
 		FCC3BB8316F064B5001ECB2E /* SSKeychain */ = {
@@ -356,6 +362,7 @@
 				FCC3BB8616F064B5001ECB2E /* SSKeychain.m in Sources */,
 				FCCA8F6216F08EBD00BE16FA /* StatisticsAndUpdate.m in Sources */,
 				FCCA8F6716F098A100BE16FA /* UpdateWindow.m in Sources */,
+				FC2B0FFF16F1C3E200E6662C /* AmtiumLoginResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

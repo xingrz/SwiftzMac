@@ -11,6 +11,8 @@
 #import "SpinningWindow.h"
 
 #import "Amtium.h"
+#import "AmtiumLoginResult.h"
+
 #import "SSKeychain.h"
 #import "StatisticsAndUpdate.h"
 
@@ -31,8 +33,8 @@
         appdelegate = [[NSApplication sharedApplication] delegate];
 
         amtium = [[Amtium alloc] initWithDelegate:self
-                                 didErrorSelector:@selector(amtiumDidError:)
-                                 didCloseSelector:@selector(amtiumDidClose:)];
+                                 didErrorSelector:@selector(amtium:didError:)
+                                 didCloseSelector:@selector(amtium:didCloseWithReason:)];
     }
     
     return self;
@@ -56,7 +58,7 @@
            didEndSelector:nil
               contextInfo:nil];
 
-        [amtium searchServer:@selector(initialStepOneWithServer:)];
+        [amtium searchServer:@selector(initialWithAmtium:didGetServer:)];
     } else if (![appdelegate ipManual] && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]]) {
         // 如果不是手动指定IP且IP不在列表中，说明IP已变更，提示重新设置
         NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_IPCHANGED", @"")
@@ -101,13 +103,13 @@
     [amtium setIp:[appdelegate ip]];
 }
 
-- (void)initialStepOneWithServer:(NSString *)server
+- (void)initialWithAmtium:(Amtium *)amtium didGetServer:(NSString *)server
 {
     [appdelegate setServer:server];
-    [amtium fetchEntries:@selector(initialStepTwoWithEntries:)];
+    [[self amtium] fetchEntries:@selector(initialWithAmtium:didGetEntries:)];
 }
 
-- (void)initialStepTwoWithEntries:(NSArray *)entries
+- (void)initialWithAmtium:(Amtium *)amtium didGetEntries:(NSArray *)entries
 {
     [appdelegate setEntries:entries];
 
@@ -138,7 +140,7 @@
     NSLog(@"login");
 
     spinningWindow = [[SpinningWindow alloc]
-                      initWithMessage:NSLocalizedString(@"MSG_LOGGINGIN", @"Logging in...")
+                      initWithMessage:NSLocalizedString(@"MSG_LOGGINGIN", nil)
                       delegate:self
                       didCancelSelector:@selector(loginDidCancel:)];
 
@@ -152,7 +154,7 @@
 
     [amtium loginWithUsername:[[self username] stringValue]
                      password:[[self password] stringValue]
-               didEndSelector:@selector(didLoginWithSuccess:message:)];
+             didLoginSelector:@selector(amtium:didLoginWithResult:)];
 }
 
 - (void)loginDidCancel:(id)sender
@@ -162,17 +164,16 @@
     spinningWindow = nil;
 }
 
-- (void)didLoginWithSuccess:(NSNumber *)success
-                    message:(NSString *)message
+- (void)amtium:(Amtium *)amtium didLoginWithResult:(AmtiumLoginResult *)result
 {
     [NSApp endSheet:[spinningWindow window]];
     [spinningWindow close];
     spinningWindow = nil;
 
-    if ([success boolValue]) {
+    if ([result success]) {
         [self close];
         [appdelegate setOnline:YES];
-        [appdelegate showNotification:message];
+        [appdelegate showNotification:[result message]];
 
         if ([appdelegate shouldUseKeychain]) {
             [SSKeychain setPassword:[[self password] stringValue]
@@ -182,17 +183,17 @@
 
         NSString *update = [StatisticsAndUpdate checkUpdateWithIdenti:[[self username] stringValue]];
         if (update != nil) {
-            NSString *format = NSLocalizedString(@"MSG_UPDATE", @"");
+            NSString *format = NSLocalizedString(@"MSG_UPDATE", nil);
             [appdelegate showUpdate:[NSString stringWithFormat:format, update]];
         }
     } else {
-        NSString *title = NSLocalizedString(@"MSG_LOGINFAILED", @"Login failed.");
+        NSString *title = NSLocalizedString(@"MSG_LOGINFAILED", nil);
 
         NSAlert *alert = [NSAlert alertWithMessageText:title
-                                         defaultButton:NSLocalizedString(@"OK", @"OK")
+                                         defaultButton:NSLocalizedString(@"OK", nil)
                                        alternateButton:@""
                                            otherButton:@""
-                             informativeTextWithFormat:@"%@", message];
+                             informativeTextWithFormat:@"%@", [result message]];
 
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self
@@ -222,7 +223,7 @@
     return amtium;
 }
 
-- (void)amtiumDidClose:(NSNumber *)reason
+- (void)amtium:(Amtium *)amtium didCloseWithReason:(NSNumber *)reason
 {
     [appdelegate showMainWindow:self];
     [appdelegate setOnline:NO];
@@ -262,7 +263,7 @@
     // TODO: 自动重新登录
 }
 
-- (void)amtiumDidError:(NSError *)error
+- (void)amtium:(Amtium *)amtium didError:(NSError *)error
 {
     [appdelegate showMainWindow:self];
     [appdelegate setOnline:NO];

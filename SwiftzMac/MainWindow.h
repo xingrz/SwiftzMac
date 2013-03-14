@@ -8,11 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "Amtium.h"
+
 @class AppDelegate;
 @class SpinningWindow;
-@class Amtium;
 
-@interface MainWindow : NSWindowController <NSWindowDelegate> {
+@interface MainWindow : NSWindowController <NSWindowDelegate, AmtiumDelegate> {
     Amtium *amtium;
     AppDelegate *appdelegate;
     SpinningWindow *spinningWindow;

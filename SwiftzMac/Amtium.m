@@ -11,6 +11,7 @@
 #import "AmtiumCrypto.h"
 #import "AmtiumEncoder.h"
 #import "AmtiumPacket.h"
+#import "AmtiumLoginResult.h"
 
 #import "GCDAsyncUdpSocket.h"
 
@@ -18,13 +19,42 @@
 
 @implementation Amtium
 
-- (id)initWithDelegate:(id)delegate
-      didErrorSelector:(SEL)didErrorSelector
-      didCloseSelector:(SEL)didCloseSelector
+@synthesize delegate;
+
+@synthesize didErrorSelector;
+@synthesize didLoginSelector;
+@synthesize didBreathSelector;
+@synthesize didLogoutSelector;
+@synthesize didCloseSelector;
+@synthesize didConfirmSelector;
+@synthesize didGetEntriesSelector;
+@synthesize didGetServerSelector;
+
+@synthesize online;
+@synthesize account;
+@synthesize website;
+@synthesize server;
+@synthesize entry;
+@synthesize mac;
+@synthesize ip;
+@synthesize dhcpEnabled;
+
++ (id)amtiumWithDelegate:(id)theDelegate
+        didErrorSelector:(SEL)didError
+        didCloseSelector:(SEL)didClose
 {
-    _delegate = delegate;
-    _didErrorSelector = didErrorSelector;
-    _didCloseSelector = didCloseSelector;
+    return [[self alloc] initWithDelegate:theDelegate
+                         didErrorSelector:didError
+                         didCloseSelector:didClose];
+}
+
+- (id)initWithDelegate:(id)theDelegate
+      didErrorSelector:(SEL)didError
+      didCloseSelector:(SEL)didClose
+{
+    [self setDelegate:theDelegate];
+    [self setDidErrorSelector:didError];
+    [self setDidCloseSelector:didClose];
 
 	NSError *error = nil;
 
@@ -33,23 +63,13 @@
     
     if (![socket3848 bindToPort:3848 error:&error])
 	{
-		if ([delegate respondsToSelector:didErrorSelector]) {
-            @autoreleasepool {
-                [delegate performSelector:didErrorSelector withObject:error];
-            }
-        }
-        
+        [self performSelector:didErrorSelector onDelegateWithObject:error];
         return nil;
 	}
     
 	if (![socket3848 beginReceiving:&error])
 	{
-		if ([delegate respondsToSelector:didErrorSelector]) {
-            @autoreleasepool {
-                [delegate performSelector:didErrorSelector withObject:error];
-            }
-        }
-        
+		[self performSelector:didErrorSelector onDelegateWithObject:error];
         return nil;
 	}
 
@@ -58,23 +78,13 @@
 
     if (![socket4999 bindToPort:4999 error:&error])
 	{
-		if ([delegate respondsToSelector:didErrorSelector]) {
-            @autoreleasepool {
-                [delegate performSelector:didErrorSelector withObject:error];
-            }
-        }
-
+        [self performSelector:didErrorSelector onDelegateWithObject:error];
         return nil;
 	}
 
 	if (![socket4999 beginReceiving:&error])
 	{
-		if ([delegate respondsToSelector:didErrorSelector]) {
-            @autoreleasepool {
-                [delegate performSelector:didErrorSelector withObject:error];
-            }
-        }
-
+        [self performSelector:didErrorSelector onDelegateWithObject:error];
         return nil;
 	}
 
@@ -88,207 +98,143 @@
 
 - (void)loginWithUsername:(NSString *)username
                  password:(NSString *)password
-           didEndSelector:(SEL)selector
+         didLoginSelector:(SEL)selector
 {
-    if (_server == nil) {
+    if (server == nil) {
         return;
     }
 
-    _didLoginSelector = selector;
+    [self setDidLoginSelector:selector];
 
-    _account = username;
-    _index = 0x01000000;
+    account = username;
+    index = 0x01000000;
     
     AmtiumPacket *packet = [AmtiumPacket packetForLoggingInWithUsername:username
                                                                password:password
-                                                                  entry:_entry
-                                                                     ip:_ip
-                                                                    mac:_mac
-                                                            dhcpEnabled:_dhcpEnabled
+                                                                  entry:entry
+                                                                     ip:ip
+                                                                    mac:mac
+                                                            dhcpEnabled:dhcpEnabled
                                                                 version:@"3.6.5"];
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
-    [socket3848 sendData:data toHost:_server port:3848 withTimeout:-1 tag:tag++];
+    [socket3848 sendData:data toHost:server port:3848 withTimeout:-1 tag:tag++];
 
     NSLog(@"login: %@", data);
-    /*_online = YES;
-    _session = @"1234567890";
-    _account = username;
-    if ([_delegate respondsToSelector:_didLoginSelector]) {
-        @autoreleasepool {
-            [_delegate performSelector:_didLoginSelector
-                            withObject:[NSNumber numberWithBool:YES]
-                            withObject:@"只是测试啦"];
-        }
-    }*/
 }
 
 - (void)logout:(SEL)selector
 {
-    if (_server == nil) {
+    if (server == nil) {
         return;
     }
     
-    if (_session == nil) {
+    if (session == nil) {
         return;
     }
     
-    _didLogoutSelector = selector;
+    [self setDidLogoutSelector:selector];
 
-    [_timer invalidate];
-    _timer = nil;
+    [timer invalidate];
+    timer = nil;
 
-    AmtiumPacket *packet = [AmtiumPacket packetForLoggingOutWithSession:_session
-                                                                     ip:_ip
-                                                                    mac:_mac
-                                                                  index:_index];
+    AmtiumPacket *packet = [AmtiumPacket packetForLoggingOutWithSession:session
+                                                                     ip:ip
+                                                                    mac:mac
+                                                                  index:index];
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
-    [socket3848 sendData:data toHost:_server port:3848 withTimeout:-1 tag:tag++];
+    [socket3848 sendData:data toHost:server port:3848 withTimeout:-1 tag:tag++];
     
     NSLog(@"logout: %@", data);
-    /*if ([_delegate respondsToSelector:_didLogoutSelector]) {
-        @autoreleasepool {
-            [_delegate performSelector:_didLogoutSelector];
-        }
-    }*/
 }
 
 - (void)searchServer:(SEL)selector
 {
-    _didServerSelector = selector;
+    [self setDidGetServerSelector:selector];
 
-    NSString *session = @"0000000000";
-
-    AmtiumPacket *packet = [AmtiumPacket packetForGettingServerWithSession:session
-                                                                        ip:_ip
-                                                                       mac:_mac];
+    AmtiumPacket *packet = [AmtiumPacket packetForGettingServerWithSession:@"0000000000"
+                                                                        ip:ip
+                                                                       mac:mac];
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
     [socket3848 sendData:data toHost:@"1.1.1.8" port:3850 withTimeout:-1 tag:tag++];
 
     NSLog(@"server: %@", data);
-    /*if ([_delegate respondsToSelector:_didServerSelector]) {
-        @autoreleasepool {
-            [_delegate performSelector:_didServerSelector withObject:@"172.16.1.180"];
-        }
-    }*/
 }
 
 - (void)fetchEntries:(SEL)selector
 {
-    if (_server == nil) {
+    if (server == nil) {
         return;
     }
     
-    _didEntriesSelector = selector;
+    [self setDidGetEntriesSelector:selector];
 
-    NSString *session = @"0000000000";
-
-    AmtiumPacket *packet = [AmtiumPacket packetForGettingEntiesWithSession:session
-                                                                       mac:_mac];
+    AmtiumPacket *packet = [AmtiumPacket packetForGettingEntiesWithSession:@"0000000000"
+                                                                       mac:mac];
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
-    [socket3848 sendData:data toHost:_server port:3848 withTimeout:-1 tag:tag++];
+    [socket3848 sendData:data toHost:server port:3848 withTimeout:-1 tag:tag++];
     
     NSLog(@"enties: %@", data);
-    /*if ([_delegate respondsToSelector:_didEntriesSelector]) {
-        @autoreleasepool {
-            [_delegate performSelector:_didEntriesSelector withObject:[NSArray arrayWithObjects:@"internet", @"local", nil]];
-        }
-    }*/
 }
 
 - (void)breath
 {
-    if (_server == nil) {
+    if (server == nil) {
         return;
     }
     
-    if (_session == nil) {
+    if (session == nil) {
         return;
     }
 
-    AmtiumPacket *packet = [AmtiumPacket packetForBreathingWithSession:_session
-                                                                    ip:_ip
-                                                                   mac:_mac
-                                                                 index:_index];
+    AmtiumPacket *packet = [AmtiumPacket packetForBreathingWithSession:session
+                                                                    ip:ip
+                                                                   mac:mac
+                                                                 index:index];
     
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
-    [socket3848 sendData:data toHost:_server port:3848 withTimeout:-1 tag:tag++];
+    [socket3848 sendData:data toHost:server port:3848 withTimeout:-1 tag:tag++];
 
-    NSLog(@"breath: %i", _index);
-}
-
-- (BOOL)online
-{
-    return _online;
-}
-
-- (NSString *)account
-{
-    return _account;
+    NSLog(@"breath: %i", index);
 }
 
 - (NSString *)server
 {
-    return _server;
+    return server;
 }
 
-- (void)setServer:(NSString *)server
+- (void)setServer:(NSString *)theServer
 {
-    if (!_online) {
-        _server = server;
+    if (!online) {
+        server = theServer;
     }
-}
-
-- (NSString *)entry
-{
-    return _entry;
-}
-
-- (void)setEntry:(NSString *)entry
-{
-    _entry = entry;
 }
 
 - (NSString *)mac
 {
-    return _mac;
+    return mac;
 }
 
-- (void)setMac:(NSString *)mac
+- (void)setMac:(NSString *)theMac
 {
-    if (!_online) {
-        _mac = mac;
+    if (!online) {
+        mac = theMac;
     }
 }
 
 - (NSString *)ip
 {
-    return _ip;
+    return ip;
 }
 
-- (void)setIp:(NSString *)ip
+- (void)setIp:(NSString *)theIp
 {
-    if (!_online) {
-        _ip = ip;
+    if (!online) {
+        ip = theIp;
     }
-}
-
-- (BOOL)dhcpEnabled
-{
-    return _dhcpEnabled;
-}
-
-- (void)setDhcpEnabled:(BOOL)dhcpEnabled
-{
-    _dhcpEnabled = dhcpEnabled;
-}
-
-- (NSString *)website
-{
-    return _website;
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock
@@ -301,7 +247,7 @@ didSendDataWithTag:(long)tag
 didNotSendDataWithTag:(long)tag
        dueToError:(NSError *)error
 {
-    [_timer invalidate];
+    /*[_timer invalidate];
     _timer = nil;
     _session = nil;
     _website = nil;
@@ -311,7 +257,7 @@ didNotSendDataWithTag:(long)tag
         @autoreleasepool {
             [_delegate performSelector:_didErrorSelector withObject:error];
         }
-    }
+    }*/
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock
@@ -323,7 +269,7 @@ withFilterContext:(id)filterContext
     uint16_t port;
     [GCDAsyncUdpSocket getHost:&host port:&port fromAddress:address];
 
-    if (!([host isEqualToString:@"1.1.1.8"] || [host isEqualToString:_server])) {
+    if (!([host isEqualToString:@"1.1.1.8"] || [host isEqualToString:server])) {
         // 抛弃非服务器IP发来的包
         return;
     }
@@ -339,61 +285,48 @@ withFilterContext:(id)filterContext
     if (action == APALoginResult) {
         BOOL success = [packet boolForKey:APFSuccess];
         NSString *message = [packet stringForKey:APFMessage];
-        
+
+        AmtiumLoginResult *result = [AmtiumLoginResult result:success withMessage:message];
+
         if (success) {
-            _session = [packet stringForKey:APFSession];
-            _website = [packet stringForKey:APFWebsite];
-            _online = YES;
+            session = [packet stringForKey:APFSession];
+            website = [packet stringForKey:APFWebsite];
+            online = YES;
         } else {
-            _session = nil;
-            _website = nil;
-            _online = NO;
+            session = nil;
+            website = nil;
+            online = NO;
         }
 
-        _timer = [NSTimer scheduledTimerWithTimeInterval:30
-                                                  target:self
-                                                selector:@selector(breath)
-                                                userInfo:nil
-                                                 repeats:YES];
+        timer = [NSTimer scheduledTimerWithTimeInterval:30
+                                                 target:self
+                                               selector:@selector(breath)
+                                               userInfo:nil
+                                                repeats:YES];
 
-        if ([_delegate respondsToSelector:_didLoginSelector]) {
-            @autoreleasepool {
-                [_delegate performSelector:_didLoginSelector
-                                withObject:[NSNumber numberWithBool:success]
-                                withObject:message];
-            }
-        }
+        [self performSelector:didLoginSelector onDelegateWithObject:result];
     } else if (action == APABreathResult) {
-        _index = [packet unsignedIntForKey:APFIndex] + 3;
+        index = [packet unsignedIntForKey:APFIndex] + 3;
     } else if (action == APALogoutResult) {
-        _session = nil;
-        _website = nil;
-        _online = NO;
+        BOOL success = [packet boolForKey:APFSuccess];
+        
+        session = nil;
+        website = nil;
+        online = NO;
 
-        if ([_delegate respondsToSelector:_didLogoutSelector]) {
-            @autoreleasepool {
-                [_delegate performSelector:_didLogoutSelector];
-            }
-        }
+        [self performSelector:didLogoutSelector
+         onDelegateWithObject:[NSNumber numberWithBool:success]];
     } else if (action == APAEntriesResult) {
         NSArray *entries = [packet stringArrayForKey:APFEntry];
-
-        if ([_delegate respondsToSelector:_didEntriesSelector]) {
-            @autoreleasepool {
-                [_delegate performSelector:_didEntriesSelector
-                                withObject:entries];
-            }
-        }
+        [self performSelector:didGetEntriesSelector onDelegateWithObject:entries];
     } else if (action == APADisconnect) {
-        [_timer invalidate];
-        _timer = nil;
+        [timer invalidate];
+        timer = nil;
 
-        if ([_delegate respondsToSelector:_didCloseSelector]) {
-            @autoreleasepool {
-                [_delegate performSelector:_didCloseSelector
-                                withObject:@""];
-            }
-        }
+        unsigned char reason = [packet unsignedCharForKey:APFReason];
+
+        [self performSelector:didCloseSelector
+         onDelegateWithObject:[NSNumber numberWithUnsignedChar:reason]];
     } else if (action == APAConfirmResult) {
         // no need to do anything
     } else if (action == APAServerResult) {
@@ -402,14 +335,10 @@ withFilterContext:(id)filterContext
         unsigned char buffer[4];
         [serverIp getBytes:buffer length:4];
 
-        _server = [NSString stringWithFormat:@"%i.%i.%i.%i", buffer[0], buffer[1], buffer[2], buffer[3]];
-        
-        if ([_delegate respondsToSelector:_didServerSelector]) {
-            @autoreleasepool {
-                [_delegate performSelector:_didServerSelector
-                                withObject:_server];
-            }
-        }
+        NSString *theServer = [NSString stringWithFormat:@"%i.%i.%i.%i", buffer[0], buffer[1], buffer[2], buffer[3]];
+
+        [self setServer:theServer];
+        [self performSelector:didGetServerSelector onDelegateWithObject:theServer];
     } else {
         // do nothing
     }
@@ -418,15 +347,23 @@ withFilterContext:(id)filterContext
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock
                 withError:(NSError *)error
 {
-    [_timer invalidate];
-    _timer = nil;
-    _session = nil;
-    _website = nil;
-    _online = NO;
+    [timer invalidate];
+    timer = nil;
+    session = nil;
     
-    if ([_delegate respondsToSelector:_didErrorSelector]) {
+    website = nil;
+    online = NO;
+
+    [self performSelector:didErrorSelector onDelegateWithObject:error];
+}
+
+- (void)performSelector:(SEL)selector onDelegateWithObject:(id)object
+{
+    if ([[self delegate] respondsToSelector:selector]) {
         @autoreleasepool {
-            [_delegate performSelector:_didErrorSelector withObject:error];
+            [[self delegate] performSelector:selector
+                                  withObject:self
+                                  withObject:object];
         }
     }
 }
