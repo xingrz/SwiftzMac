@@ -20,6 +20,7 @@
 		FC1DE55416DCD03D008CE989 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55216DCD03D008CE989 /* Credits.rtf */; };
 		FC1DE55716DCD03D008CE989 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE55616DCD03D008CE989 /* AppDelegate.m */; };
 		FC1DE55A16DCD03D008CE989 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE55816DCD03D008CE989 /* MainMenu.xib */; };
+		FC26BE4316F1F87300F854FF /* swiftz.icns in Resources */ = {isa = PBXBuildFile; fileRef = FC26BE4216F1F87300F854FF /* swiftz.icns */; };
 		FC2B0FFF16F1C3E200E6662C /* AmtiumLoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B0FFE16F1C3E200E6662C /* AmtiumLoginResult.m */; };
 		FC2B100F16F1DEAB00E6662C /* MessagesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B100D16F1DEAB00E6662C /* MessagesWindow.m */; };
 		FC2B101016F1DEAB00E6662C /* MessagesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2B100E16F1DEAB00E6662C /* MessagesWindow.xib */; };
@@ -70,6 +71,7 @@
 		FC1DE55316DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		FC1DE55516DCD03D008CE989 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC1DE55616DCD03D008CE989 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FC26BE4216F1F87300F854FF /* swiftz.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = swiftz.icns; sourceTree = "<group>"; };
 		FC2B0FFD16F1C3E200E6662C /* AmtiumLoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumLoginResult.h; sourceTree = "<group>"; };
 		FC2B0FFE16F1C3E200E6662C /* AmtiumLoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumLoginResult.m; sourceTree = "<group>"; };
 		FC2B100C16F1DEAB00E6662C /* MessagesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesWindow.h; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		FC1DE53416DCD03D008CE989 = {
 			isa = PBXGroup;
 			children = (
+				FC26BE4216F1F87300F854FF /* swiftz.icns */,
 				FCBD321816E601AD002B1ED1 /* Amtium */,
 				FCC3BB8316F064B5001ECB2E /* SSKeychain */,
 				FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */,
@@ -344,6 +347,7 @@
 				FC041FCD16EDE8FF001AE293 /* NotificationWindow.xib in Resources */,
 				FCCA8F6916F09D8400BE16FA /* UpdateWindow.xib in Resources */,
 				FC2B101016F1DEAB00E6662C /* MessagesWindow.xib in Resources */,
+				FC26BE4316F1F87300F854FF /* swiftz.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
