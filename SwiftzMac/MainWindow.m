@@ -18,6 +18,9 @@
 
 @implementation MainWindow
 
+@synthesize username;
+@synthesize password;
+
 - (id)init
 {
     if (![super initWithWindowNibName:@"MainWindow"]) {
@@ -79,17 +82,17 @@
 
                 NSError *keychainError = nil;
 
-                NSString *username = [account objectForKey:@"acct"];
-                NSString *password = [SSKeychain passwordForService:@"SwiftzMac"
-                                                            account:username
-                                                              error:&keychainError];
+                NSString *_username = [account objectForKey:@"acct"];
+                NSString *_password = [SSKeychain passwordForService:@"SwiftzMac"
+                                                             account:_username
+                                                               error:&keychainError];
 
                 if (keychainError != nil) {
                     [appdelegate setShouldUseKeychain:NO];
                 }
 
-                [[self username] setStringValue:username];
-                [[self password] setStringValue:password];
+                [self setUsername:_username];
+                [self setPassword:_password];
             }
         }
     }
@@ -152,8 +155,8 @@
 
     [self applyPreferences];
 
-    [amtium loginWithUsername:[[self username] stringValue]
-                     password:[[self password] stringValue]
+    [amtium loginWithUsername:[self username]
+                     password:[self password]
              didLoginSelector:@selector(amtium:didLoginWithResult:)];
 }
 
@@ -176,12 +179,12 @@
         [appdelegate showNotification:[result message]];
 
         if ([appdelegate shouldUseKeychain]) {
-            [SSKeychain setPassword:[[self password] stringValue]
+            [SSKeychain setPassword:[self password]
                          forService:@"SwiftzMac"
-                            account:[[self username] stringValue]];
+                            account:[self username]];
         }
 
-        NSString *update = [StatisticsAndUpdate checkUpdateWithIdenti:[[self username] stringValue]];
+        NSString *update = [StatisticsAndUpdate checkUpdateWithIdenti:[self username]];
         if (update != nil) {
             NSString *format = NSLocalizedString(@"MSG_UPDATE", nil);
             [appdelegate showUpdate:[NSString stringWithFormat:format, update]];

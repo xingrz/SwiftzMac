@@ -19,8 +19,8 @@
     SpinningWindow *spinningWindow;
 }
 
-@property (weak) IBOutlet NSTextField *username;
-@property (weak) IBOutlet NSSecureTextField *password;
+@property (readwrite, copy) NSString *username;
+@property (readwrite, copy) NSString *password;
 
 - (IBAction)login:(id)sender;
 - (IBAction)logout:(id)sender;
