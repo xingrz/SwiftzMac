@@ -8,16 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "Amtium.h"
+
 @class MainWindow;
 @class PreferencesWindow;
 @class NotificationWindow;
 @class UpdateWindow;
+@class MessagesWindow;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     MainWindow *mainWindow;
     PreferencesWindow *preferencesWindow;
     NotificationWindow *notificationWindow;
     UpdateWindow *updateWindow;
+    MessagesWindow *messagesWindow;
     NSStatusItem *statusItem;
     NSArray *ipAddresses;
     NSArray *interfaces;
@@ -27,6 +31,7 @@
 
 @property (readonly) MainWindow *mainWindow;
 @property (readonly) PreferencesWindow *preferencesWindow;
+@property (readonly) MessagesWindow *messagesWindow;
 
 @property BOOL initialUse;
 @property NSString *server;
@@ -44,6 +49,7 @@
 - (IBAction)showMainWindow:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
 - (IBAction)showAccount:(id)sender;
+- (IBAction)showMessagesWindow:(id)sender;
 - (IBAction)logout:(id)sender;
 
 - (void)showNotification:(NSString *)message;

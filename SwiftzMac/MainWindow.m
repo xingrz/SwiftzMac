@@ -174,16 +174,27 @@
     spinningWindow = nil;
 
     if ([result success]) {
+
+        // 隐藏主窗口
         [self close];
+
+        // 更新状态栏菜单
         [appdelegate setOnline:YES];
+
+        // 显示消息通知
         [appdelegate showNotification:[result message]];
 
+        // 写入消息记录
+        //[appdelegate managedObjectContext]
+        
+        // 写入钥匙串
         if ([appdelegate shouldUseKeychain]) {
             [SSKeychain setPassword:[self password]
                          forService:@"SwiftzMac"
                             account:[self username]];
         }
 
+        // 检测更新
         NSString *update = [StatisticsAndUpdate checkUpdateWithIdenti:[self username]];
         if (update != nil) {
             NSString *format = NSLocalizedString(@"MSG_UPDATE", nil);

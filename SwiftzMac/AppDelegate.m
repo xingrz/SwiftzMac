@@ -16,6 +16,7 @@
 #import "PreferencesWindow.h"
 #import "NotificationWindow.h"
 #import "UpdateWindow.h"
+#import "MessagesWindow.h"
 
 @implementation AppDelegate
 
@@ -45,6 +46,13 @@
     interfaces = [NetworkInterface getAllInterfaces];
 
     [self showMainWindow:self];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+    if (mainWindow && [[[self mainWindow] amtium] online]) {
+        [[[self mainWindow] amtium] logout:nil];
+    }
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
@@ -95,6 +103,15 @@
     return preferencesWindow;
 }
 
+- (MessagesWindow *)messagesWindow
+{
+    if (!messagesWindow) {
+        messagesWindow = [[MessagesWindow alloc] init];
+    }
+
+    return messagesWindow;
+}
+
 - (IBAction)showMainWindow:(id)sender
 {
     [NSApp activateIgnoringOtherApps:YES];
@@ -105,6 +122,11 @@
 {
     [NSApp activateIgnoringOtherApps:YES];
     [[self preferencesWindow] showWindow:self];
+}
+
+- (void)showMessagesWindow:(id)sender
+{
+    [[self messagesWindow] showWindow:self];
 }
 
 - (void)showNotification:(NSString *)message

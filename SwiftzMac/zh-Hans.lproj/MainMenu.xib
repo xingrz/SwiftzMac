@@ -81,6 +81,15 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
+								<object class="NSMenuItem" id="984422153">
+									<reference key="NSMenu" ref="110575045"/>
+									<bool key="NSIsHidden">YES</bool>
+									<string key="NSTitle">消息...</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
 								<object class="NSMenuItem" id="55555587">
 									<reference key="NSMenu" ref="110575045"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -432,6 +441,14 @@
 					</object>
 					<int key="connectionID">981</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showMessagesWindow:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="984422153"/>
+					</object>
+					<int key="connectionID">983</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -495,6 +512,7 @@
 							<reference ref="905726123"/>
 							<reference ref="504468008"/>
 							<reference ref="555145498"/>
+							<reference ref="984422153"/>
 						</array>
 						<reference key="parent" ref="694149608"/>
 					</object>
@@ -655,6 +673,11 @@
 						<reference key="object" ref="555145498"/>
 						<reference key="parent" ref="110575045"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">982</int>
+						<reference key="object" ref="984422153"/>
+						<reference key="parent" ref="110575045"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -694,12 +717,13 @@
 				<string key="976.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="977.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="978.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="982.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">981</int>
+			<int key="maxID">983</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -710,6 +734,7 @@
 						<string key="logout:">id</string>
 						<string key="showAccount:">id</string>
 						<string key="showMainWindow:">id</string>
+						<string key="showMessagesWindow:">id</string>
 						<string key="showPreferencesWindow:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -723,6 +748,10 @@
 						</object>
 						<object class="IBActionInfo" key="showMainWindow:">
 							<string key="name">showMainWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showMessagesWindow:">
+							<string key="name">showMessagesWindow:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showPreferencesWindow:">
