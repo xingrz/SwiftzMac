@@ -18,6 +18,7 @@ NSString * const SMInterfaceKey = @"Interface";
 NSString * const SMIpKey = @"IP";
 NSString * const SMIpManualKey = @"IPManualFlag";
 NSString * const SMKeychainKey = @"KeychainFlag";
+NSString * const SMStatusBarKey = @"StatusBarFlag";
 
 @implementation PreferencesWindow
 

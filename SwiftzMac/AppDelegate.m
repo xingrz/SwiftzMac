@@ -26,19 +26,20 @@
     [defaults setObject:[NSNumber numberWithBool:YES] forKey:SMInitialKey];
     [defaults setObject:[NSNumber numberWithBool:NO] forKey:SMIpManualKey];
     [defaults setObject:[NSNumber numberWithBool:YES] forKey:SMKeychainKey];
+    [defaults setObject:[NSNumber numberWithBool:YES] forKey:SMStatusBarKey];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // 初始化状态栏菜单
-    statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    [statusItem setMenu:[self statusMenu]];
-    [statusItem setAlternateImage:[NSImage imageNamed:@"statusAlternate.png"]];
-    [statusItem setHighlightMode:YES];
-
-    [self setOnline:NO];
+    if ([self shouldShowStatusBarMenu]) {
+        statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+        [statusItem setMenu:[self statusMenu]];
+        [statusItem setAlternateImage:[NSImage imageNamed:@"statusAlternate.png"]];
+        [statusItem setHighlightMode:YES];
+        [self setOnline:NO];
+    }
 
     ipAddresses = [NetworkInterface getAllIpAddresses];
     interfaces = [NetworkInterface getAllInterfaces];
@@ -63,7 +64,7 @@
     if ([menuItem action] == @selector(showAccount:)) {
         if ([amtium online]) {
             NSString *account = [[mainWindow amtium] account];
-            NSString *format = NSLocalizedString(@"MENU_ACCOUNT", @"Online: %@");
+            NSString *format = NSLocalizedString(@"MENU_ACCOUNT", nil);
             [menuItem setTitle:[NSString stringWithFormat:format, account]];
             [menuItem setHidden:NO];
         } else {
@@ -230,7 +231,6 @@
 
 - (void)setIp:(NSString *)_ip
 {
-    NSLog(@"set ip: %@", _ip);
     [[NSUserDefaults standardUserDefaults] setObject:_ip
                                               forKey:SMIpKey];
 
@@ -278,6 +278,17 @@
     }
 }
 
+- (BOOL)shouldShowStatusBarMenu
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SMStatusBarKey];
+}
+
+- (void)setShouldShowStatusBarMenu:(BOOL)_shouldShowStatusBarMenu
+{
+    [[NSUserDefaults standardUserDefaults] setBool:_shouldShowStatusBarMenu
+                                            forKey:SMStatusBarKey];
+}
+
 - (NSArray *)ipAddresses
 {
     return ipAddresses;
@@ -292,8 +303,10 @@
 {
     if (online) {
         [statusItem setImage:[NSImage imageNamed:@"status.png"]];
+        [statusItem setToolTip:[[[self mainWindow] amtium] account]];
     } else {
         [statusItem setImage:[NSImage imageNamed:@"statusOffline.png"]];
+        [statusItem setToolTip:nil];
     }
 }
 

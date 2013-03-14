@@ -39,6 +39,7 @@
 @property BOOL shouldUseKeychain;
 @property (readonly) NSArray *ipAddresses;
 @property (readonly) NSArray *interfaces;
+@property BOOL shouldShowStatusBarMenu;
 
 - (IBAction)showMainWindow:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;

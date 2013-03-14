@@ -16,6 +16,7 @@ extern NSString * const SMInterfaceKey;
 extern NSString * const SMIpKey;
 extern NSString * const SMIpManualKey;
 extern NSString * const SMKeychainKey;
+extern NSString * const SMStatusBarKey;
 
 @class AppDelegate;
 
