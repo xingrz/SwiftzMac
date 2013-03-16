@@ -96,6 +96,15 @@
     return [super init];
 }
 
+- (void)close
+{
+    [socket3848 close];
+    socket3848 = nil;
+    
+    [socket4999 close];
+    socket4999 = nil;
+}
+
 - (void)loginWithUsername:(NSString *)username
                  password:(NSString *)password
          didLoginSelector:(SEL)selector

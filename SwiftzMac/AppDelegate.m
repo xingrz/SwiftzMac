@@ -74,17 +74,16 @@
 
 - (void)workspaceWillSleep:(NSNotification *)aNotification
 {
-    if (mainWindow && [[[self mainWindow] amtium] online]) {
-        isLoggedOutBySleeping = YES;
-        [[self mainWindow] logout:self];
+    if (mainWindow) {
+        [mainWindow sleep];
     }
 }
 
 - (void)workspaceDidWake:(NSNotification *)aNotification
 {
-    /*if (isLoggedOutBySleeping) {
-        [[self mainWindow] login:self];
-    }*/
+    if (mainWindow) {
+        [mainWindow wake];
+    }
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem

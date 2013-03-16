@@ -17,6 +17,7 @@
     Amtium *amtium;
     AppDelegate *appdelegate;
     SpinningWindow *spinningWindow;
+    BOOL sleptWhileOnline;
 }
 
 @property (readwrite, copy) NSString *username;
@@ -25,6 +26,8 @@
 - (IBAction)login:(id)sender;
 - (IBAction)logout:(id)sender;
 - (IBAction)account:(id)sender;
+- (void)sleep;
+- (void)wake;
 
 - (Amtium *)amtium;
 

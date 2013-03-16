@@ -25,7 +25,6 @@
     NSStatusItem *statusItem;
     NSArray *ipAddresses;
     NSArray *interfaces;
-    BOOL isLoggedOutBySleeping;
 }
 
 @property (weak) IBOutlet NSMenu *statusMenu;

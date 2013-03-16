@@ -35,9 +35,9 @@
     if (self) {
         appdelegate = [[NSApplication sharedApplication] delegate];
 
-        amtium = [[Amtium alloc] initWithDelegate:self
-                                 didErrorSelector:@selector(amtium:didError:)
-                                 didCloseSelector:@selector(amtium:didCloseWithReason:)];
+        amtium = [Amtium amtiumWithDelegate:self
+                           didErrorSelector:@selector(amtium:didError:)
+                           didCloseSelector:@selector(amtium:didCloseWithReason:)];
     }
     
     return self;
@@ -279,11 +279,16 @@
 
 - (void)amtium:(Amtium *)amtium didError:(NSError *)error
 {
+    NSLog(@"error code: %ld", [error code]);
+    NSLog(@"%@", error);
+
+    if ([error code] == 0) {
+        return; // ignore 0 error
+    }
+
     [appdelegate showMainWindow:self];
     [appdelegate setOnline:NO];
 
-    NSLog(@"error code: %ld", [error code]);
-    
     NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_ERROR", nil)
                                      defaultButton:NSLocalizedString(@"OK", nil)
                                    alternateButton:@""
@@ -300,6 +305,70 @@
 {
     if (![amtium online]) {
         [[NSApplication sharedApplication] terminate:self];
+    }
+}
+
+- (void)sleep
+{
+    if (amtium && [amtium online]) {
+        sleptWhileOnline = YES;
+        [amtium logout:nil];
+        [amtium close];
+        [appdelegate setOnline:NO];
+    } else {
+        sleptWhileOnline = NO;
+    }
+}
+
+- (void)wake
+{
+    if (sleptWhileOnline) {
+        // 延迟3秒重新登录
+        [NSTimer scheduledTimerWithTimeInterval:3
+                                         target:self
+                                       selector:@selector(timerHandler:)
+                                       userInfo:nil
+                                        repeats:NO];
+    }
+}
+
+- (void)timerHandler:(NSTimer *)timer
+{
+    [self applyPreferences];
+    
+    amtium = [amtium initWithDelegate:self
+                     didErrorSelector:@selector(amtium:didError:)
+                     didCloseSelector:@selector(amtium:didCloseWithReason:)];
+    
+    [amtium loginWithUsername:[self username]
+                     password:[self password]
+             didLoginSelector:@selector(wakeWithAmtium:didLoginWithResult:)];
+}
+
+- (void)wakeWithAmtium:(Amtium *)amtium didLoginWithResult:(AmtiumLoginResult *)result
+{
+    if ([result success]) {
+        // 更新状态栏菜单
+        [appdelegate setOnline:YES];
+
+        // 显示消息通知
+        //[appdelegate showNotification:[result message]];
+
+        // 写入消息记录
+        //[appdelegate managedObjectContext]
+    } else {
+        NSString *title = NSLocalizedString(@"MSG_LOGINFAILED", nil);
+
+        NSAlert *alert = [NSAlert alertWithMessageText:title
+                                         defaultButton:NSLocalizedString(@"OK", nil)
+                                       alternateButton:@""
+                                           otherButton:@""
+                             informativeTextWithFormat:@"%@", [result message]];
+
+        [alert beginSheetModalForWindow:[self window]
+                          modalDelegate:self
+                         didEndSelector:nil
+                            contextInfo:nil];
     }
 }
 
