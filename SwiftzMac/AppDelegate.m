@@ -20,16 +20,36 @@
 
 @implementation AppDelegate
 
-+ (void)initialize
+- (id)init
 {
+    self = [super init];
+
+    // 注册默认设定
     NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
-    
+
     [defaults setObject:[NSNumber numberWithBool:YES] forKey:SMInitialKey];
     [defaults setObject:[NSNumber numberWithBool:NO] forKey:SMIpManualKey];
     [defaults setObject:[NSNumber numberWithBool:YES] forKey:SMKeychainKey];
     [defaults setObject:[NSNumber numberWithBool:YES] forKey:SMStatusBarKey];
-    
+
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+
+    // 注册睡眠通知
+    NSNotificationCenter *notification = [[NSWorkspace sharedWorkspace] notificationCenter];
+    [notification addObserver:self
+                     selector:@selector(workspaceWillSleep:)
+                         name:NSWorkspaceWillSleepNotification
+                       object:nil];
+    [notification addObserver:self
+                     selector:@selector(workspaceDidWake:)
+                         name:NSWorkspaceDidWakeNotification
+                       object:nil];
+
+    // 加载网络参数
+    ipAddresses = [NetworkInterface getAllIpAddresses];
+    interfaces = [NetworkInterface getAllInterfaces];
+
+    return self;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -42,9 +62,6 @@
         [self setOnline:NO];
     }
 
-    ipAddresses = [NetworkInterface getAllIpAddresses];
-    interfaces = [NetworkInterface getAllInterfaces];
-
     [self showMainWindow:self];
 }
 
@@ -53,6 +70,21 @@
     if (mainWindow && [[[self mainWindow] amtium] online]) {
         [[[self mainWindow] amtium] logout:nil];
     }
+}
+
+- (void)workspaceWillSleep:(NSNotification *)aNotification
+{
+    if (mainWindow && [[[self mainWindow] amtium] online]) {
+        isLoggedOutBySleeping = YES;
+        [[self mainWindow] logout:self];
+    }
+}
+
+- (void)workspaceDidWake:(NSNotification *)aNotification
+{
+    /*if (isLoggedOutBySleeping) {
+        [[self mainWindow] login:self];
+    }*/
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
