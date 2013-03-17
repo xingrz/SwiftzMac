@@ -19,6 +19,7 @@ NSString * const SMIpKey = @"IP";
 NSString * const SMIpManualKey = @"IPManualFlag";
 NSString * const SMKeychainKey = @"KeychainFlag";
 NSString * const SMStatusBarKey = @"StatusBarFlag";
+NSString * const SMUsernameKey = @"Username";
 
 @implementation PreferencesWindow
 
@@ -59,11 +60,11 @@ NSString * const SMStatusBarKey = @"StatusBarFlag";
 
 - (IBAction)ok:(id)sender {
     if ([appdelegate ipManual]) {
-        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_MANUALIP", @"")
-                                         defaultButton:NSLocalizedString(@"MSG_MANUALIP_YES", @"")
-                                       alternateButton:NSLocalizedString(@"MSG_MANUALIP_NO", @"")
+        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_MANUALIP", nil)
+                                         defaultButton:NSLocalizedString(@"MSG_MANUALIP_YES", nil)
+                                       alternateButton:NSLocalizedString(@"MSG_MANUALIP_NO", nil)
                                            otherButton:@""
-                             informativeTextWithFormat:NSLocalizedString(@"MSG_MANUALIP_DESC", @"")];
+                             informativeTextWithFormat:NSLocalizedString(@"MSG_MANUALIP_DESC", nil)];
 
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self
@@ -77,7 +78,9 @@ NSString * const SMStatusBarKey = @"StatusBarFlag";
     [self close];
 }
 
-- (void)manualIpAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+- (void)manualIpAlertDidEnd:(NSAlert *)alert
+                 returnCode:(NSInteger)returnCode
+                contextInfo:(void *)contextInfo
 {
     if (returnCode == NSAlertDefaultReturn) {
         [NSApp endSheet:[self window]];

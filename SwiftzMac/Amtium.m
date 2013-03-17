@@ -115,7 +115,10 @@
 
     [self setDidLoginSelector:selector];
 
+    [self willChangeValueForKey:@"account"];
     account = username;
+    [self didChangeValueForKey:@"account"];
+    
     index = 0x01000000;
     
     AmtiumPacket *packet = [AmtiumPacket packetForLoggingInWithUsername:username
@@ -218,7 +221,9 @@
 - (void)setServer:(NSString *)theServer
 {
     if (!online) {
+        [self willChangeValueForKey:@"server"];
         server = theServer;
+        [self didChangeValueForKey:@"server"];
     }
 }
 
@@ -230,7 +235,9 @@
 - (void)setMac:(NSString *)theMac
 {
     if (!online) {
+        [self willChangeValueForKey:@"mac"];
         mac = theMac;
+        [self didChangeValueForKey:@"mac"];
     }
 }
 
@@ -242,7 +249,9 @@
 - (void)setIp:(NSString *)theIp
 {
     if (!online) {
+        [self willChangeValueForKey:@"ip"];
         ip = theIp;
+        [self didChangeValueForKey:@"ip"];
     }
 }
 
@@ -297,6 +306,9 @@ withFilterContext:(id)filterContext
 
         AmtiumLoginResult *result = [AmtiumLoginResult result:success withMessage:message];
 
+        [self willChangeValueForKey:@"website"];
+        [self willChangeValueForKey:@"online"];
+        
         if (success) {
             session = [packet stringForKey:APFSession];
             website = [packet stringForKey:APFWebsite];
@@ -306,6 +318,9 @@ withFilterContext:(id)filterContext
             website = nil;
             online = NO;
         }
+        
+        [self didChangeValueForKey:@"website"];
+        [self didChangeValueForKey:@"online"];
 
         timer = [NSTimer scheduledTimerWithTimeInterval:30
                                                  target:self
@@ -318,10 +333,16 @@ withFilterContext:(id)filterContext
         index = [packet unsignedIntForKey:APFIndex] + 3;
     } else if (action == APALogoutResult) {
         BOOL success = [packet boolForKey:APFSuccess];
-        
+
+        [self willChangeValueForKey:@"website"];
+        [self willChangeValueForKey:@"online"];
+
         session = nil;
         website = nil;
         online = NO;
+
+        [self didChangeValueForKey:@"website"];
+        [self didChangeValueForKey:@"online"];
 
         [self performSelector:didLogoutSelector
          onDelegateWithObject:[NSNumber numberWithBool:success]];
@@ -359,9 +380,15 @@ withFilterContext:(id)filterContext
     [timer invalidate];
     timer = nil;
     session = nil;
+
+    [self willChangeValueForKey:@"website"];
+    [self willChangeValueForKey:@"online"];
     
     website = nil;
     online = NO;
+
+    [self didChangeValueForKey:@"website"];
+    [self didChangeValueForKey:@"online"];
 
     [self performSelector:didErrorSelector onDelegateWithObject:error];
 }

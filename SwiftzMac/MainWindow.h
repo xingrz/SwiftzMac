@@ -20,6 +20,7 @@
     BOOL sleptWhileOnline;
 }
 
+@property (readonly) NSArray *accounts;
 @property (readwrite, copy) NSString *username;
 @property (readwrite, copy) NSString *password;
 

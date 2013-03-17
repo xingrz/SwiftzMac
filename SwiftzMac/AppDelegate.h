@@ -34,6 +34,7 @@
 @property (readonly) MessagesWindow *messagesWindow;
 
 @property BOOL initialUse;
+@property NSString *username;
 @property NSString *server;
 @property NSString *entry;
 @property NSArray *entries;
@@ -42,9 +43,9 @@
 @property (readonly) NSString *mac;
 @property (readonly) BOOL ipManual;
 @property BOOL shouldUseKeychain;
+@property BOOL shouldShowStatusBarMenu;
 @property (readonly) NSArray *ipAddresses;
 @property (readonly) NSArray *interfaces;
-@property BOOL shouldShowStatusBarMenu;
 
 - (IBAction)showMainWindow:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;

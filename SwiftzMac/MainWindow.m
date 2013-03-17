@@ -18,6 +18,7 @@
 
 @implementation MainWindow
 
+@synthesize accounts;
 @synthesize username;
 @synthesize password;
 
@@ -76,24 +77,22 @@
         [self applyPreferences];
         
         if ([appdelegate shouldUseKeychain]) {
-            NSArray *accounts = [SSKeychain accountsForService:@"SwiftzMac"];
-            if (accounts != nil && [accounts count] > 0) {
-                NSDictionary *account = [accounts objectAtIndex:0];
-
-                NSError *keychainError = nil;
-
-                NSString *_username = [account objectForKey:@"acct"];
-                NSString *_password = [SSKeychain passwordForService:@"SwiftzMac"
-                                                             account:_username
-                                                               error:&keychainError];
-
-                if (keychainError != nil) {
-                    [appdelegate setShouldUseKeychain:NO];
+            [self willChangeValueForKey:@"accounts"];
+            
+            NSMutableArray *result = [[NSMutableArray alloc] init];
+            NSArray *keychain = [SSKeychain accountsForService:@"SwiftzMac"];
+            if (keychain != nil && [keychain count] > 0) {
+                for (NSDictionary *account in keychain) {
+                    [result addObject:[account objectForKey:@"acct"]];
                 }
-
-                [self setUsername:_username];
-                [self setPassword:_password];
             }
+            accounts = result;
+            
+            [self didChangeValueForKey:@"accounts"];
+
+            NSString *theUsername = [appdelegate username];
+            if (theUsername == nil) theUsername = [result objectAtIndex:0];
+            [self setUsername:theUsername];
         }
     }
 }
@@ -370,6 +369,30 @@
                          didEndSelector:nil
                             contextInfo:nil];
     }
+}
+
+- (NSString *)username
+{
+    return username;
+}
+
+- (void)setUsername:(NSString *)theUsername
+{
+    [self willChangeValueForKey:@"username"];
+    username = theUsername;
+    [appdelegate setUsername:theUsername];
+    [self didChangeValueForKey:@"username"];
+
+    NSError *error = nil;
+    NSString *thePassword = [SSKeychain passwordForService:@"SwiftzMac"
+                                                   account:theUsername
+                                                     error:&error];
+
+    if (error != nil) {
+        [appdelegate setShouldUseKeychain:NO];
+    }
+
+    [self setPassword:thePassword];
 }
 
 @end

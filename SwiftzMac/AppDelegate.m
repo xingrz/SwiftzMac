@@ -46,8 +46,13 @@
                        object:nil];
 
     // 加载网络参数
+    [self willChangeValueForKey:@"ipAddresses"];
     ipAddresses = [NetworkInterface getAllIpAddresses];
+    [self didChangeValueForKey:@"ipAddresses"];
+
+    [self willChangeValueForKey:@"interfaces"];
     interfaces = [NetworkInterface getAllInterfaces];
+    [self didChangeValueForKey:@"interfaces"];
 
     return self;
 }
@@ -198,8 +203,27 @@
 
 - (void)setInitialUse:(BOOL)_initialUse
 {
+    [self willChangeValueForKey:@"initialUse"];
+    
     [[NSUserDefaults standardUserDefaults] setBool:_initialUse
                                             forKey:SMInitialKey];
+
+    [self didChangeValueForKey:@"initialUse"];
+}
+
+- (NSString *)username
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:SMUsernameKey];
+}
+
+- (void)setUsername:(NSString *)_username
+{
+    [self willChangeValueForKey:@"username"];
+
+    [[NSUserDefaults standardUserDefaults] setObject:_username
+                                              forKey:SMUsernameKey];
+
+    [self didChangeValueForKey:@"username"];
 }
 
 - (NSString *)server
@@ -209,8 +233,12 @@
 
 - (void)setServer:(NSString *)_server
 {
+    [self willChangeValueForKey:@"server"];
+
     [[NSUserDefaults standardUserDefaults] setObject:_server
                                               forKey:SMServerKey];
+
+    [self didChangeValueForKey:@"server"];
 
     if (mainWindow) {
         [[mainWindow amtium] setServer:_server];
@@ -231,8 +259,12 @@
 
 - (void)setEntry:(NSString *)_entry
 {
+    [self willChangeValueForKey:@"entry"];
+    
     [[NSUserDefaults standardUserDefaults] setObject:_entry
                                               forKey:SMEntryKey];
+
+    [self didChangeValueForKey:@"entry"];
 
     if (mainWindow) {
         [[mainWindow amtium] setEntry:_entry];
@@ -246,8 +278,12 @@
 
 - (void)setEntries:(NSArray *)_entries
 {
+    [self willChangeValueForKey:@"entries"];
+    
     [[NSUserDefaults standardUserDefaults] setObject:_entries
                                               forKey:SMEntryListKey];
+
+    [self didChangeValueForKey:@"entries"];
 }
 
 - (NSString *)interface
@@ -263,9 +299,13 @@
 
 - (void)setInterface:(NSString *)_interface
 {
+    [self willChangeValueForKey:@"interface"];
+    
     [[NSUserDefaults standardUserDefaults] setObject:_interface
                                               forKey:SMInterfaceKey];
-
+    
+    [self didChangeValueForKey:@"interface"];
+    
     if (mainWindow) {
         [[mainWindow amtium] setMac:[self mac]];
     }
@@ -284,11 +324,19 @@
 
 - (void)setIp:(NSString *)_ip
 {
+    [self willChangeValueForKey:@"ip"];
+    
     [[NSUserDefaults standardUserDefaults] setObject:_ip
                                               forKey:SMIpKey];
+    
+    [self didChangeValueForKey:@"ip"];
+
+    [self willChangeValueForKey:@"ipManual"];
 
     [[NSUserDefaults standardUserDefaults] setBool:![ipAddresses containsObject:_ip]
                                             forKey:SMIpManualKey];
+
+    [self didChangeValueForKey:@"ipManual"];
     
     if (mainWindow) {
         [[mainWindow amtium] setIp:_ip];
@@ -318,6 +366,8 @@
 
 - (void)setShouldUseKeychain:(BOOL)_shouldUseKeychain
 {
+    [self willChangeValueForKey:@"shouldUseKeychain"];
+    
     [[NSUserDefaults standardUserDefaults] setBool:_shouldUseKeychain
                                             forKey:SMKeychainKey];
 
@@ -329,6 +379,8 @@
             }
         }
     }
+
+    [self didChangeValueForKey:@"shouldUseKeychain"];
 }
 
 - (BOOL)shouldShowStatusBarMenu
@@ -338,8 +390,12 @@
 
 - (void)setShouldShowStatusBarMenu:(BOOL)_shouldShowStatusBarMenu
 {
+    [self willChangeValueForKey:@"shouldShowStatusBarMenu"];
+    
     [[NSUserDefaults standardUserDefaults] setBool:_shouldShowStatusBarMenu
                                             forKey:SMStatusBarKey];
+
+    [self didChangeValueForKey:@"shouldShowStatusBarMenu"];
 }
 
 - (NSArray *)ipAddresses
