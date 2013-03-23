@@ -24,9 +24,6 @@
 		FC2B0FFF16F1C3E200E6662C /* AmtiumLoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B0FFE16F1C3E200E6662C /* AmtiumLoginResult.m */; };
 		FC2B100F16F1DEAB00E6662C /* MessagesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B100D16F1DEAB00E6662C /* MessagesWindow.m */; };
 		FC2B101016F1DEAB00E6662C /* MessagesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2B100E16F1DEAB00E6662C /* MessagesWindow.xib */; };
-		FC79F1B116FDAD7300B32AAA /* banner2lines.tiff in Resources */ = {isa = PBXBuildFile; fileRef = FC79F1AC16FDAD7300B32AAA /* banner2lines.tiff */; };
-		FC79F1B216FDAD7300B32AAA /* McAnimationUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = FC79F1AE16FDAD7300B32AAA /* McAnimationUtility.m */; };
-		FC79F1B316FDAD7300B32AAA /* THUserNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FC79F1B016FDAD7300B32AAA /* THUserNotification.m */; };
 		FC79F1B516FDADB400B32AAA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC79F1B416FDADB400B32AAA /* QuartzCore.framework */; };
 		FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7716E75229006EDA2D /* MainWindow.xib */; };
 		FCAF7A7916E75239006EDA2D /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */; };
@@ -75,17 +72,12 @@
 		FC1DE55316DCD03D008CE989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		FC1DE55516DCD03D008CE989 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC1DE55616DCD03D008CE989 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FC26BE4216F1F87300F854FF /* swiftz.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = swiftz.icns; sourceTree = "<group>"; };
+		FC26BE4216F1F87300F854FF /* swiftz.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = swiftz.icns; path = ../swiftz.icns; sourceTree = "<group>"; };
 		FC2B0FFD16F1C3E200E6662C /* AmtiumLoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumLoginResult.h; sourceTree = "<group>"; };
 		FC2B0FFE16F1C3E200E6662C /* AmtiumLoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumLoginResult.m; sourceTree = "<group>"; };
 		FC2B100C16F1DEAB00E6662C /* MessagesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesWindow.h; sourceTree = "<group>"; };
 		FC2B100D16F1DEAB00E6662C /* MessagesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesWindow.m; sourceTree = "<group>"; };
 		FC2B100E16F1DEAB00E6662C /* MessagesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesWindow.xib; sourceTree = "<group>"; };
-		FC79F1AC16FDAD7300B32AAA /* banner2lines.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = banner2lines.tiff; path = SwiftzMac/banner2lines.tiff; sourceTree = SOURCE_ROOT; };
-		FC79F1AD16FDAD7300B32AAA /* McAnimationUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = McAnimationUtility.h; path = SwiftzMac/McAnimationUtility.h; sourceTree = SOURCE_ROOT; };
-		FC79F1AE16FDAD7300B32AAA /* McAnimationUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = McAnimationUtility.m; path = SwiftzMac/McAnimationUtility.m; sourceTree = SOURCE_ROOT; };
-		FC79F1AF16FDAD7300B32AAA /* THUserNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THUserNotification.h; path = SwiftzMac/THUserNotification.h; sourceTree = SOURCE_ROOT; };
-		FC79F1B016FDAD7300B32AAA /* THUserNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THUserNotification.m; path = SwiftzMac/THUserNotification.m; sourceTree = SOURCE_ROOT; };
 		FC79F1B416FDADB400B32AAA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FCAF7A7616E75229006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		FCAF7A7A16E75239006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
@@ -144,8 +136,6 @@
 		FC1DE53416DCD03D008CE989 = {
 			isa = PBXGroup;
 			children = (
-				FC79F1A316FDACE700B32AAA /* THUserNotification */,
-				FC26BE4216F1F87300F854FF /* swiftz.icns */,
 				FCBD321816E601AD002B1ED1 /* Amtium */,
 				FCC3BB8316F064B5001ECB2E /* SSKeychain */,
 				FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */,
@@ -213,18 +203,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FC79F1A316FDACE700B32AAA /* THUserNotification */ = {
-			isa = PBXGroup;
-			children = (
-				FC79F1AC16FDAD7300B32AAA /* banner2lines.tiff */,
-				FC79F1AD16FDAD7300B32AAA /* McAnimationUtility.h */,
-				FC79F1AE16FDAD7300B32AAA /* McAnimationUtility.m */,
-				FC79F1AF16FDAD7300B32AAA /* THUserNotification.h */,
-				FC79F1B016FDAD7300B32AAA /* THUserNotification.m */,
-			);
-			path = THUserNotification;
-			sourceTree = "<group>";
-		};
 		FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +216,7 @@
 		FCAF7A8016E75D8F006EDA2D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FC26BE4216F1F87300F854FF /* swiftz.icns */,
 				FC041FBE16EDD6D4001AE293 /* statusOffline.png */,
 				FC041FBC16EDA4F2001AE293 /* statusAlternate.png */,
 				FC041FBA16EDA3C7001AE293 /* status.png */,
@@ -373,7 +352,6 @@
 				FCCA8F6916F09D8400BE16FA /* UpdateWindow.xib in Resources */,
 				FC2B101016F1DEAB00E6662C /* MessagesWindow.xib in Resources */,
 				FC26BE4316F1F87300F854FF /* swiftz.icns in Resources */,
-				FC79F1B116FDAD7300B32AAA /* banner2lines.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,8 +381,6 @@
 				FCCA8F6716F098A100BE16FA /* UpdateWindow.m in Sources */,
 				FC2B0FFF16F1C3E200E6662C /* AmtiumLoginResult.m in Sources */,
 				FC2B100F16F1DEAB00E6662C /* MessagesWindow.m in Sources */,
-				FC79F1B216FDAD7300B32AAA /* McAnimationUtility.m in Sources */,
-				FC79F1B316FDAD7300B32AAA /* THUserNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

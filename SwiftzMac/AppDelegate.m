@@ -11,7 +11,6 @@
 #import "Amtium.h"
 #import "NetworkInterface.h"
 #import "SSKeychain.h"
-#import "THUserNotification.h"
 
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
@@ -45,10 +44,6 @@
                      selector:@selector(workspaceDidWake:)
                          name:NSWorkspaceDidWakeNotification
                        object:nil];
-
-    THUserNotificationCenter *userNotificationCenter = [THUserNotificationCenter defaultUserNotificationCenter];
-    [userNotificationCenter setDelegate:(id<THUserNotificationCenterDelegate>)self];
-    [userNotificationCenter setCenterType:THUserNotificationCenterTypeBanner];
 
     // 加载网络参数
     [self willChangeValueForKey:@"ipAddresses"];
@@ -126,12 +121,6 @@
     return YES;
 }
 
-- (BOOL)userNotificationCenter:(THUserNotificationCenter *)center
-     shouldPresentNotification:(THUserNotification *)notification
-{
-    return YES;
-}
-
 - (MainWindow *)mainWindow
 {
     if (!mainWindow) {
@@ -178,30 +167,23 @@
 
 - (void)showNotification:(NSString *)message
 {
-    /*if (!notificationWindow) {
-        notificationWindow = [[NotificationWindow alloc] init];
-    }
-
-    [notificationWindow setMessage:message];
-    [notificationWindow showWindow:self];*/
-
-    THUserNotification *userNotification = [[THUserNotification notification] init];
+    NSUserNotification *userNotification = [[NSUserNotification alloc] init];
     [userNotification setTitle:NSLocalizedString(@"MSG_LOGGEDIN", nil)];
     [userNotification setInformativeText:message];
     [userNotification setHasActionButton:NO];
 
-    [[THUserNotificationCenter defaultUserNotificationCenter] deliverNotification:userNotification];
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:userNotification];
 }
 
 - (void)showUpdate:(NSString *)update
 {
-    /*if (!updateWindow) {
+    if (!updateWindow) {
         updateWindow = [[UpdateWindow alloc] init];
     }
 
     [NSApp activateIgnoringOtherApps:YES];
     [updateWindow setUpdate:update];
-    [updateWindow showWindow:self];*/
+    [updateWindow showWindow:self];
 }
 
 - (IBAction)showAccount:(id)sender
