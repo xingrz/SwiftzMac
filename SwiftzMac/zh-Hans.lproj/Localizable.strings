@@ -25,3 +25,4 @@
 "MSG_MANUALIP_NO" = "更改设置";
 "MSG_IPCHANGED" = "您的 IP 地址已发送变化，请在偏好设置中重新设定 IP 地址";
 "MSG_UPDATE" = "最新版本 %@ 已发布，要去下载吗？";
+"MSG_LOGGEDIN" = "登录成功";

@@ -25,3 +25,4 @@
 "MSG_MANUALIP_NO" = "Change it";
 "MSG_IPCHANGED" = "Your IP is changed. Please select your new IP.";
 "MSG_UPDATE" = "The newest version %@ is available now. Would you like to download it now?";
+"MSG_LOGGEDIN" = "Logged in successfully.";
