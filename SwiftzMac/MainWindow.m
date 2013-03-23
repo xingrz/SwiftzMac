@@ -388,7 +388,7 @@
                                                    account:theUsername
                                                      error:&error];
 
-    if (error != nil) {
+    if (error != nil && [error code] != -25300) {
         [appdelegate setShouldUseKeychain:NO];
     }
 
