@@ -40,6 +40,32 @@
     return self;
 }
 
+- (void)windowDidLoad
+{
+    // 应用偏好设置
+    [self applyPreferences];
+
+    // 加载钥匙串
+    if ([appdelegate shouldUseKeychain]) {
+        [self willChangeValueForKey:@"accounts"];
+
+        NSMutableArray *result = [[NSMutableArray alloc] init];
+        NSArray *keychain = [SSKeychain accountsForService:@"SwiftzMac"];
+        if (keychain != nil && [keychain count] > 0) {
+            for (NSDictionary *account in keychain) {
+                [result addObject:[account objectForKey:@"acct"]];
+            }
+        }
+        accounts = result;
+
+        [self didChangeValueForKey:@"accounts"];
+
+        NSString *theUsername = [appdelegate username];
+        if (theUsername == nil) theUsername = [result objectAtIndex:0];
+        [self setUsername:theUsername];
+    }
+}
+
 - (void)applyPreferences
 {
     [amtium setServer:[appdelegate server]];
@@ -264,23 +290,21 @@
 
 - (void)wake
 {
-    if (sleptWhileOnline) {
-        // 延迟3秒重新登录
-        [NSTimer scheduledTimerWithTimeInterval:3
-                                         target:self
-                                       selector:@selector(timerHandler:)
-                                       userInfo:nil
-                                        repeats:NO];
-    }
+    // 什么都不用做，等待网络接通
 }
 
 - (void)connect
 {
+    // 初始化协议类
     amtium = [Amtium amtiumWithDelegate:self
                        didErrorSelector:@selector(amtium:didError:)
                        didCloseSelector:@selector(amtium:didCloseWithReason:)];
 
-    if ([appdelegate initialUse]) {
+    BOOL isInitialUse = [appdelegate initialUse];
+    BOOL isIpChanged = ![appdelegate ipManual]
+                    && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]];
+
+    if (isInitialUse) {
         // 如果是初次使用，执行初始化过程
 
         spinningWindow = [[SpinningWindow alloc]
@@ -295,7 +319,7 @@
               contextInfo:nil];
 
         [amtium searchServer:@selector(initialWithAmtium:didGetServer:)];
-    } else if (![appdelegate ipManual] && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]]) {
+    } else if (isIpChanged) {
         // 如果不是手动指定IP且IP不在列表中，说明IP已变更，提示重新设置
         NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_IPCHANGED", @"")
                                          defaultButton:NSLocalizedString(@"OK", @"")
@@ -306,25 +330,14 @@
         [alert runModal];
         [appdelegate showPreferencesWindow:self];
     } else {
+        // 应用偏好设置
         [self applyPreferences];
 
-        if ([appdelegate shouldUseKeychain]) {
-            [self willChangeValueForKey:@"accounts"];
-
-            NSMutableArray *result = [[NSMutableArray alloc] init];
-            NSArray *keychain = [SSKeychain accountsForService:@"SwiftzMac"];
-            if (keychain != nil && [keychain count] > 0) {
-                for (NSDictionary *account in keychain) {
-                    [result addObject:[account objectForKey:@"acct"]];
-                }
-            }
-            accounts = result;
-
-            [self didChangeValueForKey:@"accounts"];
-
-            NSString *theUsername = [appdelegate username];
-            if (theUsername == nil) theUsername = [result objectAtIndex:0];
-            [self setUsername:theUsername];
+        // 如果是在线时休眠，则重新登录
+        if (sleptWhileOnline) {
+            [amtium loginWithUsername:[self username]
+                             password:[self password]
+                     didLoginSelector:@selector(wakeWithAmtium:didLoginWithResult:)];
         }
     }
 }
@@ -335,19 +348,6 @@
         [amtium close];
         [appdelegate setOnline:NO];
     }
-}
-
-- (void)timerHandler:(NSTimer *)timer
-{
-    [self applyPreferences];
-    
-    amtium = [amtium initWithDelegate:self
-                     didErrorSelector:@selector(amtium:didError:)
-                     didCloseSelector:@selector(amtium:didCloseWithReason:)];
-    
-    [amtium loginWithUsername:[self username]
-                     password:[self password]
-             didLoginSelector:@selector(wakeWithAmtium:didLoginWithResult:)];
 }
 
 - (void)wakeWithAmtium:(Amtium *)amtium didLoginWithResult:(AmtiumLoginResult *)result
