@@ -16,7 +16,13 @@
     NSString *session;
     unsigned int index;
     NSTimer *timer;
-    
+
+    NSTimer *loginRetryTimer;
+    BOOL loginCouldRetry;
+
+    NSString *usernameLogged;
+    NSString *passwordLogged;
+
     GCDAsyncUdpSocket *socket3848;
     GCDAsyncUdpSocket *socket4999;
     long tag;

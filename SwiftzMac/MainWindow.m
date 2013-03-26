@@ -333,8 +333,8 @@
         // 应用偏好设置
         [self applyPreferences];
 
-        // 如果是在线时休眠，则重新登录
-        if (sleptWhileOnline) {
+        // 如果是在线时休眠或断开网络，则重新登录
+        if (sleptWhileOnline || disconnectedWhileOnline) {
             [amtium loginWithUsername:[self username]
                              password:[self password]
                      didLoginSelector:@selector(wakeWithAmtium:didLoginWithResult:)];
@@ -345,6 +345,7 @@
 - (void)disconnect
 {
     if (amtium) {
+        disconnectedWhileOnline = [amtium online];
         [amtium close];
         [appdelegate setOnline:NO];
     }

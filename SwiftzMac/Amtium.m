@@ -125,14 +125,25 @@
 
     [self setDidLoginSelector:selector];
 
-    [self willChangeValueForKey:@"account"];
-    account = username;
-    [self didChangeValueForKey:@"account"];
-    
+    usernameLogged = username;
+    passwordLogged = password;
+
     index = 0x01000000;
+
+    [self doLogin];
     
-    AmtiumPacket *packet = [AmtiumPacket packetForLoggingInWithUsername:username
-                                                               password:password
+    loginCouldRetry = YES;
+    loginRetryTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                       target:self
+                                                     selector:@selector(loginTimeout:)
+                                                     userInfo:nil
+                                                      repeats:NO];
+}
+
+- (void)doLogin
+{
+    AmtiumPacket *packet = [AmtiumPacket packetForLoggingInWithUsername:usernameLogged
+                                                               password:passwordLogged
                                                                   entry:entry
                                                                      ip:ip
                                                                     mac:mac
@@ -143,6 +154,17 @@
     [socket3848 sendData:data toHost:server port:3848 withTimeout:-1 tag:tag++];
 
     NSLog(@"login: %@", data);
+}
+
+- (void)loginTimeout:(NSTimer *)aTimer
+{
+    [loginRetryTimer invalidate];
+    loginRetryTimer = nil;
+    
+    if (loginCouldRetry) {
+        [self doLogin];
+        loginCouldRetry = NO;
+    }
 }
 
 - (void)logout:(SEL)selector
@@ -311,24 +333,31 @@ withFilterContext:(id)filterContext
 
     unsigned char action = [packet action];
     if (action == APALoginResult) {
+        [loginRetryTimer invalidate];
+        loginRetryTimer = nil;
+
         BOOL success = [packet boolForKey:APFSuccess];
         NSString *message = [packet stringForKey:APFMessage];
 
         AmtiumLoginResult *result = [AmtiumLoginResult result:success withMessage:message];
 
+        [self willChangeValueForKey:@"account"];
         [self willChangeValueForKey:@"website"];
         [self willChangeValueForKey:@"online"];
-        
+
         if (success) {
+            account = usernameLogged;
             session = [packet stringForKey:APFSession];
             website = [packet stringForKey:APFWebsite];
             online = YES;
         } else {
+            account = nil;
             session = nil;
             website = nil;
             online = NO;
         }
-        
+
+        [self didChangeValueForKey:@"account"];
         [self didChangeValueForKey:@"website"];
         [self didChangeValueForKey:@"online"];
 

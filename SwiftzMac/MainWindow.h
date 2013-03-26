@@ -18,6 +18,7 @@
     AppDelegate *appdelegate;
     SpinningWindow *spinningWindow;
     BOOL sleptWhileOnline;
+    BOOL disconnectedWhileOnline;
 }
 
 @property (readonly) NSArray *accounts;
