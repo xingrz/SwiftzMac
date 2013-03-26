@@ -25,6 +25,7 @@
 		FC2B100F16F1DEAB00E6662C /* MessagesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B100D16F1DEAB00E6662C /* MessagesWindow.m */; };
 		FC2B101016F1DEAB00E6662C /* MessagesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2B100E16F1DEAB00E6662C /* MessagesWindow.xib */; };
 		FC79F1B516FDADB400B32AAA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC79F1B416FDADB400B32AAA /* QuartzCore.framework */; };
+		FCAA27AB1701C06A00E61696 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA27AA1701C06A00E61696 /* Reachability.m */; };
 		FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7716E75229006EDA2D /* MainWindow.xib */; };
 		FCAF7A7916E75239006EDA2D /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */; };
 		FCAF7A7F16E75D34006EDA2D /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */; };
@@ -79,6 +80,8 @@
 		FC2B100D16F1DEAB00E6662C /* MessagesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesWindow.m; sourceTree = "<group>"; };
 		FC2B100E16F1DEAB00E6662C /* MessagesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesWindow.xib; sourceTree = "<group>"; };
 		FC79F1B416FDADB400B32AAA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FCAA27A91701C06A00E61696 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		FCAA27AA1701C06A00E61696 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		FCAF7A7616E75229006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		FCAF7A7A16E75239006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
@@ -137,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				FCBD321816E601AD002B1ED1 /* Amtium */,
+				FCAA27AD1701C07600E61696 /* Reachability */,
 				FCC3BB8316F064B5001ECB2E /* SSKeychain */,
 				FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */,
 				FC1DE54916DCD03D008CE989 /* SwiftzMac */,
@@ -201,6 +205,15 @@
 				FC1DE55216DCD03D008CE989 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FCAA27AD1701C07600E61696 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				FCAA27A91701C06A00E61696 /* Reachability.h */,
+				FCAA27AA1701C06A00E61696 /* Reachability.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		FCAF7A7C16E75D19006EDA2D /* CocoaAsyncSocket */ = {
@@ -381,6 +394,7 @@
 				FCCA8F6716F098A100BE16FA /* UpdateWindow.m in Sources */,
 				FC2B0FFF16F1C3E200E6662C /* AmtiumLoginResult.m in Sources */,
 				FC2B100F16F1DEAB00E6662C /* MessagesWindow.m in Sources */,
+				FCAA27AB1701C06A00E61696 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

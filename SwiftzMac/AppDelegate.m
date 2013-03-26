@@ -11,6 +11,7 @@
 #import "Amtium.h"
 #import "NetworkInterface.h"
 #import "SSKeychain.h"
+#import "Reachability.h"
 
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
@@ -45,14 +46,15 @@
                          name:NSWorkspaceDidWakeNotification
                        object:nil];
 
-    // 加载网络参数
-    [self willChangeValueForKey:@"ipAddresses"];
-    ipAddresses = [NetworkInterface getAllIpAddresses];
-    [self didChangeValueForKey:@"ipAddresses"];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
 
-    [self willChangeValueForKey:@"interfaces"];
-    interfaces = [NetworkInterface getAllInterfaces];
-    [self didChangeValueForKey:@"interfaces"];
+    // 监听网络连通性
+    reachability = [Reachability reachabilityForInternetConnection];
+    [reachability setReachableOnWWAN:NO];
+    [reachability startNotifier];
 
     return self;
 }
@@ -68,12 +70,17 @@
     }
 
     [self showMainWindow:self];
+    
+    if ([reachability currentReachabilityStatus] != NotReachable) {
+        [self determineNetwork];
+        [mainWindow connect];
+    }
 }
 
-- (void)applicationWillTerminate:(NSNotification *)notification
+- (void)applicationWillTerminate:(NSNotification *)aNotification
 {
-    if (mainWindow && [[[self mainWindow] amtium] online]) {
-        [[[self mainWindow] amtium] logout:nil];
+    if (mainWindow && [[mainWindow amtium] online]) {
+        [[mainWindow amtium] logout:nil];
     }
 }
 
@@ -88,6 +95,16 @@
 {
     if (mainWindow) {
         [mainWindow wake];
+    }
+}
+
+- (void)reachabilityChanged:(NSNotification *)aNotification
+{
+    if ([reachability currentReachabilityStatus] == NotReachable) {
+        [mainWindow disconnect];
+    } else {
+        [self determineNetwork];
+        [mainWindow connect];
     }
 }
 
@@ -119,6 +136,17 @@
     }
     
     return YES;
+}
+
+- (void)determineNetwork
+{
+    [self willChangeValueForKey:@"ipAddresses"];
+    ipAddresses = [NetworkInterface getAllIpAddresses];
+    [self didChangeValueForKey:@"ipAddresses"];
+
+    [self willChangeValueForKey:@"interfaces"];
+    interfaces = [NetworkInterface getAllInterfaces];
+    [self didChangeValueForKey:@"interfaces"];
 }
 
 - (MainWindow *)mainWindow

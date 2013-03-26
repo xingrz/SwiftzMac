@@ -15,6 +15,7 @@
 @class NotificationWindow;
 @class UpdateWindow;
 @class MessagesWindow;
+@class Reachability;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     MainWindow *mainWindow;
@@ -25,6 +26,7 @@
     NSStatusItem *statusItem;
     NSArray *ipAddresses;
     NSArray *interfaces;
+    Reachability *reachability;
 }
 
 @property (weak) IBOutlet NSMenu *statusMenu;

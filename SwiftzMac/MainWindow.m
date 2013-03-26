@@ -35,66 +35,9 @@
     self = [super initWithWindow:window];
     if (self) {
         appdelegate = [[NSApplication sharedApplication] delegate];
-
-        amtium = [Amtium amtiumWithDelegate:self
-                           didErrorSelector:@selector(amtium:didError:)
-                           didCloseSelector:@selector(amtium:didCloseWithReason:)];
     }
     
     return self;
-}
-
-- (void)windowDidLoad
-{
-    [super windowDidLoad];
-
-    if ([appdelegate initialUse]) {
-        // 如果是初次使用，执行初始化过程
-
-        spinningWindow = [[SpinningWindow alloc]
-                          initWithMessage:NSLocalizedString(@"MSG_PREPARING", @"Preparing...")
-                          delegate:self
-                          didCancelSelector:@selector(initialDidCancel:)];
-
-        [NSApp beginSheet:[spinningWindow window]
-           modalForWindow:[self window]
-            modalDelegate:self
-           didEndSelector:nil
-              contextInfo:nil];
-
-        [amtium searchServer:@selector(initialWithAmtium:didGetServer:)];
-    } else if (![appdelegate ipManual] && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]]) {
-        // 如果不是手动指定IP且IP不在列表中，说明IP已变更，提示重新设置
-        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_IPCHANGED", @"")
-                                         defaultButton:NSLocalizedString(@"OK", @"")
-                                       alternateButton:@""
-                                           otherButton:@""
-                             informativeTextWithFormat:@""];
-
-        [alert runModal];
-        [appdelegate showPreferencesWindow:self];
-    } else {
-        [self applyPreferences];
-        
-        if ([appdelegate shouldUseKeychain]) {
-            [self willChangeValueForKey:@"accounts"];
-            
-            NSMutableArray *result = [[NSMutableArray alloc] init];
-            NSArray *keychain = [SSKeychain accountsForService:@"SwiftzMac"];
-            if (keychain != nil && [keychain count] > 0) {
-                for (NSDictionary *account in keychain) {
-                    [result addObject:[account objectForKey:@"acct"]];
-                }
-            }
-            accounts = result;
-            
-            [self didChangeValueForKey:@"accounts"];
-
-            NSString *theUsername = [appdelegate username];
-            if (theUsername == nil) theUsername = [result objectAtIndex:0];
-            [self setUsername:theUsername];
-        }
-    }
 }
 
 - (void)applyPreferences
@@ -328,6 +271,69 @@
                                        selector:@selector(timerHandler:)
                                        userInfo:nil
                                         repeats:NO];
+    }
+}
+
+- (void)connect
+{
+    amtium = [Amtium amtiumWithDelegate:self
+                       didErrorSelector:@selector(amtium:didError:)
+                       didCloseSelector:@selector(amtium:didCloseWithReason:)];
+
+    if ([appdelegate initialUse]) {
+        // 如果是初次使用，执行初始化过程
+
+        spinningWindow = [[SpinningWindow alloc]
+                          initWithMessage:NSLocalizedString(@"MSG_PREPARING", @"Preparing...")
+                          delegate:self
+                          didCancelSelector:@selector(initialDidCancel:)];
+
+        [NSApp beginSheet:[spinningWindow window]
+           modalForWindow:[self window]
+            modalDelegate:self
+           didEndSelector:nil
+              contextInfo:nil];
+
+        [amtium searchServer:@selector(initialWithAmtium:didGetServer:)];
+    } else if (![appdelegate ipManual] && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]]) {
+        // 如果不是手动指定IP且IP不在列表中，说明IP已变更，提示重新设置
+        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_IPCHANGED", @"")
+                                         defaultButton:NSLocalizedString(@"OK", @"")
+                                       alternateButton:@""
+                                           otherButton:@""
+                             informativeTextWithFormat:@""];
+
+        [alert runModal];
+        [appdelegate showPreferencesWindow:self];
+    } else {
+        [self applyPreferences];
+
+        if ([appdelegate shouldUseKeychain]) {
+            [self willChangeValueForKey:@"accounts"];
+
+            NSMutableArray *result = [[NSMutableArray alloc] init];
+            NSArray *keychain = [SSKeychain accountsForService:@"SwiftzMac"];
+            if (keychain != nil && [keychain count] > 0) {
+                for (NSDictionary *account in keychain) {
+                    [result addObject:[account objectForKey:@"acct"]];
+                }
+            }
+            accounts = result;
+
+            [self didChangeValueForKey:@"accounts"];
+
+            NSString *theUsername = [appdelegate username];
+            if (theUsername == nil) theUsername = [result objectAtIndex:0];
+            [self setUsername:theUsername];
+        }
+    }
+}
+
+- (void)disconnect
+{
+    if (amtium) {
+        [amtium close];
+        [appdelegate setOnline:NO];
     }
 }
 

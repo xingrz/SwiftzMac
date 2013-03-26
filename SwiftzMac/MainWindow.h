@@ -29,6 +29,8 @@
 - (IBAction)account:(id)sender;
 - (void)sleep;
 - (void)wake;
+- (void)connect;
+- (void)disconnect;
 
 - (Amtium *)amtium;
 

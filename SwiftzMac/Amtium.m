@@ -103,6 +103,16 @@
     
     [socket4999 close];
     socket4999 = nil;
+
+    [self willChangeValueForKey:@"website"];
+    [self willChangeValueForKey:@"online"];
+
+    session = nil;
+    website = nil;
+    online = NO;
+
+    [self didChangeValueForKey:@"website"];
+    [self didChangeValueForKey:@"online"];
 }
 
 - (void)loginWithUsername:(NSString *)username
