@@ -24,6 +24,8 @@
 		FC2B0FFF16F1C3E200E6662C /* AmtiumLoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B0FFE16F1C3E200E6662C /* AmtiumLoginResult.m */; };
 		FC2B100F16F1DEAB00E6662C /* MessagesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2B100D16F1DEAB00E6662C /* MessagesWindow.m */; };
 		FC2B101016F1DEAB00E6662C /* MessagesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2B100E16F1DEAB00E6662C /* MessagesWindow.xib */; };
+		FC34425E170330A5001D80CD /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34425B170330A5001D80CD /* SSKeychain.m */; };
+		FC34425F170330A5001D80CD /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34425D170330A5001D80CD /* SSKeychainQuery.m */; };
 		FC79F1B516FDADB400B32AAA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC79F1B416FDADB400B32AAA /* QuartzCore.framework */; };
 		FCAA27AB1701C06A00E61696 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA27AA1701C06A00E61696 /* Reachability.m */; };
 		FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7716E75229006EDA2D /* MainWindow.xib */; };
@@ -37,7 +39,6 @@
 		FCBD321B16E6115E002B1ED1 /* NetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */; };
 		FCBD322116E6209E002B1ED1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */; };
 		FCC3BB8116F0630B001ECB2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC3BB8016F0630B001ECB2E /* Security.framework */; };
-		FCC3BB8616F064B5001ECB2E /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC3BB8516F064B5001ECB2E /* SSKeychain.m */; };
 		FCCA8F6216F08EBD00BE16FA /* StatisticsAndUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA8F6116F08EBD00BE16FA /* StatisticsAndUpdate.m */; };
 		FCCA8F6716F098A100BE16FA /* UpdateWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCA8F6516F098A000BE16FA /* UpdateWindow.m */; };
 		FCCA8F6916F09D8400BE16FA /* UpdateWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCA8F6B16F09D8400BE16FA /* UpdateWindow.xib */; };
@@ -79,6 +80,10 @@
 		FC2B100C16F1DEAB00E6662C /* MessagesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesWindow.h; sourceTree = "<group>"; };
 		FC2B100D16F1DEAB00E6662C /* MessagesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesWindow.m; sourceTree = "<group>"; };
 		FC2B100E16F1DEAB00E6662C /* MessagesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesWindow.xib; sourceTree = "<group>"; };
+		FC34425A170330A5001D80CD /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychain.h; path = SwiftzMac/SSKeychain.h; sourceTree = SOURCE_ROOT; };
+		FC34425B170330A5001D80CD /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychain.m; path = SwiftzMac/SSKeychain.m; sourceTree = SOURCE_ROOT; };
+		FC34425C170330A5001D80CD /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychainQuery.h; path = SwiftzMac/SSKeychainQuery.h; sourceTree = SOURCE_ROOT; };
+		FC34425D170330A5001D80CD /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychainQuery.m; path = SwiftzMac/SSKeychainQuery.m; sourceTree = SOURCE_ROOT; };
 		FC79F1B416FDADB400B32AAA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FCAA27A91701C06A00E61696 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		FCAA27AA1701C06A00E61696 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -101,8 +106,6 @@
 		FCBD321F16E61B52002B1ED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCC3BB8016F0630B001ECB2E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		FCC3BB8416F064B5001ECB2E /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
-		FCC3BB8516F064B5001ECB2E /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		FCC3BB8716F083D9001ECB2E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/PreferencesWindow.xib"; sourceTree = "<group>"; };
 		FCCA8F6016F08EBD00BE16FA /* StatisticsAndUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsAndUpdate.h; sourceTree = "<group>"; };
 		FCCA8F6116F08EBD00BE16FA /* StatisticsAndUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsAndUpdate.m; sourceTree = "<group>"; };
@@ -271,8 +274,10 @@
 		FCC3BB8316F064B5001ECB2E /* SSKeychain */ = {
 			isa = PBXGroup;
 			children = (
-				FCC3BB8416F064B5001ECB2E /* SSKeychain.h */,
-				FCC3BB8516F064B5001ECB2E /* SSKeychain.m */,
+				FC34425A170330A5001D80CD /* SSKeychain.h */,
+				FC34425B170330A5001D80CD /* SSKeychain.m */,
+				FC34425C170330A5001D80CD /* SSKeychainQuery.h */,
+				FC34425D170330A5001D80CD /* SSKeychainQuery.m */,
 			);
 			name = SSKeychain;
 			path = "../../Downloads/sskeychain-master/SSKeychain";
@@ -389,12 +394,13 @@
 				FCCA9C8116E9A0B70069C9E1 /* SpinningWindow.m in Sources */,
 				FCCA9C8616EA4D030069C9E1 /* APMutableParams.m in Sources */,
 				FC041FCC16EDE8FF001AE293 /* NotificationWindow.m in Sources */,
-				FCC3BB8616F064B5001ECB2E /* SSKeychain.m in Sources */,
 				FCCA8F6216F08EBD00BE16FA /* StatisticsAndUpdate.m in Sources */,
 				FCCA8F6716F098A100BE16FA /* UpdateWindow.m in Sources */,
 				FC2B0FFF16F1C3E200E6662C /* AmtiumLoginResult.m in Sources */,
 				FC2B100F16F1DEAB00E6662C /* MessagesWindow.m in Sources */,
 				FCAA27AB1701C06A00E61696 /* Reachability.m in Sources */,
+				FC34425E170330A5001D80CD /* SSKeychain.m in Sources */,
+				FC34425F170330A5001D80CD /* SSKeychainQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
