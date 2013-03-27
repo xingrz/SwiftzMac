@@ -390,14 +390,8 @@
     [appdelegate setUsername:theUsername];
     [self didChangeValueForKey:@"username"];
 
-    NSError *error = nil;
     NSString *thePassword = [SSKeychain passwordForService:@"SwiftzMac"
-                                                   account:theUsername
-                                                     error:&error];
-
-    if (error != nil && [error code] != -25300) {
-        [appdelegate setShouldUseKeychain:NO];
-    }
+                                                   account:theUsername];
 
     [self setPassword:thePassword];
 }
