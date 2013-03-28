@@ -40,20 +40,25 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 
     // 注册睡眠通知
-    NSNotificationCenter *notification = [[NSWorkspace sharedWorkspace] notificationCenter];
-    [notification addObserver:self
-                     selector:@selector(workspaceWillSleep:)
-                         name:NSWorkspaceWillSleepNotification
-                       object:nil];
-    [notification addObserver:self
-                     selector:@selector(workspaceDidWake:)
-                         name:NSWorkspaceDidWakeNotification
-                       object:nil];
+    NSNotificationCenter *notificationCenter = [[NSWorkspace sharedWorkspace] notificationCenter];
+    [notificationCenter addObserver:self
+                           selector:@selector(workspaceWillSleep:)
+                               name:NSWorkspaceWillSleepNotification
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(workspaceDidWake:)
+                               name:NSWorkspaceDidWakeNotification
+                             object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityChanged:)
-                                                 name:kReachabilityChangedNotification
-                                               object:nil];
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self
+                      selector:@selector(reachabilityChanged:)
+                          name:kReachabilityChangedNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(onlineChanged:)
+                          name:kSMOnlineChangedNotification
+                        object:nil];
 
     // 监听网络连通性
     reachability = [Reachability reachabilityForInternetConnection];
@@ -68,9 +73,10 @@
     if ([self shouldShowStatusBarMenu]) {
         statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
         [statusItem setMenu:[self statusMenu]];
+        [statusItem setImage:[NSImage imageNamed:@"statusOffline.png"]];
         [statusItem setAlternateImage:[NSImage imageNamed:@"statusAlternate.png"]];
         [statusItem setHighlightMode:YES];
-        [self setOnline:NO];
+        [statusItem setToolTip:nil];
     }
 
     [controller showMain];
@@ -101,8 +107,11 @@
 - (void)reachabilityChanged:(NSNotification *)aNotification
 {
     if ([reachability currentReachabilityStatus] == NotReachable) {
+        NSLog(@"offline");
         [controller offline];
     } else {
+        NSLog(@"online");
+        [controller offline];
         [self determineNetwork];
         [controller online];
     }
@@ -388,9 +397,9 @@
     return interfaces;
 }
 
-- (void)setOnline:(BOOL)online
+- (void)onlineChanged:(id)sender
 {
-    if (online) {
+    if ([[controller amtium] online]) {
         [statusItem setImage:[NSImage imageNamed:@"status.png"]];
         [statusItem setToolTip:[[controller amtium] account]];
     } else {

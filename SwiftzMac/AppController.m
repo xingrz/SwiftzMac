@@ -22,6 +22,8 @@
 
 #import "StatisticsAndUpdate.h"
 
+NSString * const kSMOnlineChangedNotification = @"SMOnlineChanged";
+
 @implementation AppController
 
 static AppController *controller = nil;
@@ -220,8 +222,8 @@ static AppController *controller = nil;
         }
         
         [amtium close];
-        
-        [appdelegate setOnline:NO];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSMOnlineChangedNotification object:self];
     }
 }
 
@@ -242,7 +244,7 @@ static AppController *controller = nil;
 {
     [amtium logout:nil];
     [self showMain];
-    [appdelegate setOnline:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSMOnlineChangedNotification object:self];
 }
 
 - (void)account
@@ -261,8 +263,8 @@ static AppController *controller = nil;
 
         [amtium logout:nil];
         [amtium close];
-        
-        [appdelegate setOnline:NO];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSMOnlineChangedNotification object:self];
     }
 }
 
@@ -329,7 +331,8 @@ static AppController *controller = nil;
     }
 
     [self showMain];
-    [appdelegate setOnline:NO];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSMOnlineChangedNotification object:self];
 
     NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_ERROR", nil)
                                      defaultButton:NSLocalizedString(@"OK", nil)
@@ -346,7 +349,8 @@ static AppController *controller = nil;
 - (void)amtium:(Amtium *)aAmtium didCloseWithReason:(NSNumber *)reason
 {
     [self showMain];
-    [appdelegate setOnline:NO];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSMOnlineChangedNotification object:self];
 
     NSString *title = NSLocalizedString(@"MSG_DISCONNECTED", nil);
     NSString *message;
@@ -390,7 +394,7 @@ static AppController *controller = nil;
         [mainWindow close];
 
         // 更新状态栏菜单
-        [appdelegate setOnline:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSMOnlineChangedNotification object:self];
 
         // 显示通知
         [self showNotification:[result message]];
@@ -417,13 +421,10 @@ static AppController *controller = nil;
 {
     if ([result success]) {
         // 更新状态栏菜单
-        [appdelegate setOnline:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSMOnlineChangedNotification object:self];
 
         // 显示通知
         [self showNotification:[result message]];
-
-        // 检查更新
-        [self checkUpdate];
     } else {
         [self showMain];
     }

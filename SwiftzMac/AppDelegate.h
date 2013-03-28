@@ -46,6 +46,4 @@
 - (IBAction)showMessagesWindow:(id)sender;
 - (IBAction)logout:(id)sender;
 
-- (void)setOnline:(BOOL)online;
-
 @end

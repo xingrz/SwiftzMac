@@ -10,6 +10,8 @@
 
 #import "Amtium.h"
 
+extern NSString * const kSMOnlineChangedNotification;
+
 @class MainWindow;
 @class PreferencesWindow;
 @class NotificationWindow;
