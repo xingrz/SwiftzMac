@@ -133,7 +133,7 @@
     [self doLogin];
     
     loginCouldRetry = YES;
-    loginRetryTimer = [NSTimer scheduledTimerWithTimeInterval:5
+    loginRetryTimer = [NSTimer scheduledTimerWithTimeInterval:3
                                                        target:self
                                                      selector:@selector(loginTimeout:)
                                                      userInfo:nil
