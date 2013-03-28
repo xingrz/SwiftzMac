@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AppController.h"
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 
@@ -47,9 +48,11 @@ NSString * const SMUsernameKey = @"Username";
 
 - (void)showWindow:(id)sender
 {
-    if ([appdelegate mainWindow] && [[[appdelegate mainWindow] window] isVisible]) {
-        [NSApp beginSheet:[[appdelegate preferencesWindow] window]
-           modalForWindow:[[appdelegate mainWindow] window]
+    MainWindow *mainWinodw = [[AppController sharedController] mainWindow];
+    
+    if (mainWinodw != nil && [[mainWinodw window] isVisible]) {
+        [NSApp beginSheet:[self window]
+           modalForWindow:[mainWinodw window]
             modalDelegate:self
            didEndSelector:nil
               contextInfo:nil];

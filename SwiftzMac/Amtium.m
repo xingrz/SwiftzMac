@@ -167,6 +167,14 @@
     }
 }
 
+- (void)cancelLogin
+{
+    if (loginRetryTimer != nil) {
+        [loginRetryTimer invalidate];
+        loginRetryTimer = nil;
+    }
+}
+
 - (void)logout:(SEL)selector
 {
     if (server == nil) {

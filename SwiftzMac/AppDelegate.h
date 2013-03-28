@@ -8,21 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "Amtium.h"
-
-@class MainWindow;
-@class PreferencesWindow;
 @class NotificationWindow;
 @class UpdateWindow;
 @class MessagesWindow;
 @class Reachability;
 
+@class AppController;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
-    MainWindow *mainWindow;
-    PreferencesWindow *preferencesWindow;
-    NotificationWindow *notificationWindow;
-    UpdateWindow *updateWindow;
-    MessagesWindow *messagesWindow;
+    AppController *controller;
+
     NSStatusItem *statusItem;
     NSArray *ipAddresses;
     NSArray *interfaces;
@@ -30,10 +25,6 @@
 }
 
 @property (weak) IBOutlet NSMenu *statusMenu;
-
-@property (readonly) MainWindow *mainWindow;
-@property (readonly) PreferencesWindow *preferencesWindow;
-@property (readonly) MessagesWindow *messagesWindow;
 
 @property BOOL initialUse;
 @property NSString *username;
@@ -55,8 +46,6 @@
 - (IBAction)showMessagesWindow:(id)sender;
 - (IBAction)logout:(id)sender;
 
-- (void)showNotification:(NSString *)message;
-- (void)showUpdate:(NSString *)update;
 - (void)setOnline:(BOOL)online;
 
 @end

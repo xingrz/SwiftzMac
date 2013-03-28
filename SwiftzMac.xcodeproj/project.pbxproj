@@ -26,6 +26,7 @@
 		FC2B101016F1DEAB00E6662C /* MessagesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2B100E16F1DEAB00E6662C /* MessagesWindow.xib */; };
 		FC34425E170330A5001D80CD /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34425B170330A5001D80CD /* SSKeychain.m */; };
 		FC34425F170330A5001D80CD /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34425D170330A5001D80CD /* SSKeychainQuery.m */; };
+		FC344266170346CD001D80CD /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC344265170346CD001D80CD /* AppController.m */; };
 		FC79F1B516FDADB400B32AAA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC79F1B416FDADB400B32AAA /* QuartzCore.framework */; };
 		FCAA27AB1701C06A00E61696 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA27AA1701C06A00E61696 /* Reachability.m */; };
 		FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7716E75229006EDA2D /* MainWindow.xib */; };
@@ -84,6 +85,8 @@
 		FC34425B170330A5001D80CD /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychain.m; path = SwiftzMac/SSKeychain.m; sourceTree = SOURCE_ROOT; };
 		FC34425C170330A5001D80CD /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychainQuery.h; path = SwiftzMac/SSKeychainQuery.h; sourceTree = SOURCE_ROOT; };
 		FC34425D170330A5001D80CD /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychainQuery.m; path = SwiftzMac/SSKeychainQuery.m; sourceTree = SOURCE_ROOT; };
+		FC344264170346CD001D80CD /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		FC344265170346CD001D80CD /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		FC79F1B416FDADB400B32AAA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FCAA27A91701C06A00E61696 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		FCAA27AA1701C06A00E61696 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 				FC1DE54A16DCD03D008CE989 /* Supporting Files */,
 				FC1DE55516DCD03D008CE989 /* AppDelegate.h */,
 				FC1DE55616DCD03D008CE989 /* AppDelegate.m */,
+				FC344264170346CD001D80CD /* AppController.h */,
+				FC344265170346CD001D80CD /* AppController.m */,
 				FCBD321916E6115E002B1ED1 /* NetworkInterface.h */,
 				FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */,
 				FCCA8F6016F08EBD00BE16FA /* StatisticsAndUpdate.h */,
@@ -401,6 +406,7 @@
 				FCAA27AB1701C06A00E61696 /* Reachability.m in Sources */,
 				FC34425E170330A5001D80CD /* SSKeychain.m in Sources */,
 				FC34425F170330A5001D80CD /* SSKeychainQuery.m in Sources */,
+				FC344266170346CD001D80CD /* AppController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

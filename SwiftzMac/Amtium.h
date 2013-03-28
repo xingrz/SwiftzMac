@@ -60,6 +60,8 @@
                  password:(NSString *)password
          didLoginSelector:(SEL)selector;
 
+- (void)cancelLogin;
+
 - (void)logout:(SEL)selector;
 
 - (void)searchServer:(SEL)selector;

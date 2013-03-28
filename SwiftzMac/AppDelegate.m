@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "AppController.h"
+
 #import "Amtium.h"
 #import "NetworkInterface.h"
 #import "SSKeychain.h"
@@ -24,6 +26,8 @@
 - (id)init
 {
     self = [super init];
+
+    controller = [AppController sharedController];
 
     // 注册默认设定
     NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
@@ -69,48 +73,44 @@
         [self setOnline:NO];
     }
 
-    [self showMainWindow:self];
-    
+    [controller showMain];
+
     if ([reachability currentReachabilityStatus] != NotReachable) {
         [self determineNetwork];
-        [mainWindow connect];
+        [controller online];
     }
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
-    if (mainWindow && [[mainWindow amtium] online]) {
-        [[mainWindow amtium] logout:nil];
+    if ([[[AppController sharedController] amtium] online]) {
+        [[[AppController sharedController] amtium] logout:nil];
     }
 }
 
 - (void)workspaceWillSleep:(NSNotification *)aNotification
 {
-    if (mainWindow) {
-        [mainWindow sleep];
-    }
+    [controller sleep];
 }
 
 - (void)workspaceDidWake:(NSNotification *)aNotification
 {
-    if (mainWindow) {
-        [mainWindow wake];
-    }
+    [controller wake];
 }
 
 - (void)reachabilityChanged:(NSNotification *)aNotification
 {
     if ([reachability currentReachabilityStatus] == NotReachable) {
-        [mainWindow disconnect];
+        [controller offline];
     } else {
         [self determineNetwork];
-        [mainWindow connect];
+        [controller online];
     }
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    Amtium *amtium = [mainWindow amtium];
+    Amtium *amtium = [controller amtium];
     
     if ([menuItem action] == @selector(showMainWindow:)) {
         [menuItem setHidden:[amtium online]];
@@ -124,7 +124,7 @@
     
     if ([menuItem action] == @selector(showAccount:)) {
         if ([amtium online]) {
-            NSString *account = [[mainWindow amtium] account];
+            NSString *account = [amtium account];
             NSString *format = NSLocalizedString(@"MENU_ACCOUNT", nil);
             [menuItem setTitle:[NSString stringWithFormat:format, account]];
             [menuItem setHidden:NO];
@@ -149,50 +149,6 @@
     [self didChangeValueForKey:@"interfaces"];
 }
 
-- (MainWindow *)mainWindow
-{
-    if (!mainWindow) {
-        mainWindow = [[MainWindow alloc] init];
-    }
-    
-    return mainWindow;
-}
-
-- (PreferencesWindow *)preferencesWindow
-{
-    if (!preferencesWindow) {
-        preferencesWindow = [[PreferencesWindow alloc] init];
-    }
-    
-    return preferencesWindow;
-}
-
-- (MessagesWindow *)messagesWindow
-{
-    if (!messagesWindow) {
-        messagesWindow = [[MessagesWindow alloc] init];
-    }
-
-    return messagesWindow;
-}
-
-- (IBAction)showMainWindow:(id)sender
-{
-    [NSApp activateIgnoringOtherApps:YES];
-    [[self mainWindow] showWindow:self];
-}
-
-- (IBAction)showPreferencesWindow:(id)sender
-{
-    [NSApp activateIgnoringOtherApps:YES];
-    [[self preferencesWindow] showWindow:self];
-}
-
-- (void)showMessagesWindow:(id)sender
-{
-    [[self messagesWindow] showWindow:self];
-}
-
 - (void)showNotification:(NSString *)message
 {
     NSUserNotification *userNotification = [[NSUserNotification alloc] init];
@@ -203,25 +159,29 @@
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:userNotification];
 }
 
-- (void)showUpdate:(NSString *)update
+- (void)showMainWindow:(id)sender
 {
-    if (!updateWindow) {
-        updateWindow = [[UpdateWindow alloc] init];
-    }
+    [controller showMain];
+}
 
-    [NSApp activateIgnoringOtherApps:YES];
-    [updateWindow setUpdate:update];
-    [updateWindow showWindow:self];
+- (void)showPreferencesWindow:(id)sender
+{
+    [controller showPreferences];
 }
 
 - (IBAction)showAccount:(id)sender
 {
-    [mainWindow account:sender];
+    [controller account];
+}
+
+- (void)showMessagesWindow:(id)sender
+{
+    // ...
 }
 
 - (IBAction)logout:(id)sender
 {
-    [mainWindow logout:sender];
+    [controller logout];
 }
 
 - (BOOL)initialUse
@@ -268,9 +228,7 @@
 
     [self didChangeValueForKey:@"server"];
 
-    if (mainWindow) {
-        [[mainWindow amtium] setServer:_server];
-    }
+    [[controller amtium] setServer:_server];
 }
 
 - (NSString *)entry
@@ -294,9 +252,7 @@
 
     [self didChangeValueForKey:@"entry"];
 
-    if (mainWindow) {
-        [[mainWindow amtium] setEntry:_entry];
-    }
+    [[controller amtium] setEntry:_entry];
 }
 
 - (NSArray *)entries
@@ -334,9 +290,7 @@
     
     [self didChangeValueForKey:@"interface"];
     
-    if (mainWindow) {
-        [[mainWindow amtium] setMac:[self mac]];
-    }
+    [[controller amtium] setMac:[self mac]];
 }
 
 - (NSString *)ip
@@ -366,9 +320,7 @@
 
     [self didChangeValueForKey:@"ipManual"];
     
-    if (mainWindow) {
-        [[mainWindow amtium] setIp:_ip];
-    }
+    [[controller amtium] setIp:_ip];
 }
 
 - (NSString *)mac
@@ -440,7 +392,7 @@
 {
     if (online) {
         [statusItem setImage:[NSImage imageNamed:@"status.png"]];
-        [statusItem setToolTip:[[[self mainWindow] amtium] account]];
+        [statusItem setToolTip:[[controller amtium] account]];
     } else {
         [statusItem setImage:[NSImage imageNamed:@"statusOffline.png"]];
         [statusItem setToolTip:nil];
