@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AppController.h"
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 
@@ -19,6 +20,7 @@ NSString * const SMIpKey = @"IP";
 NSString * const SMIpManualKey = @"IPManualFlag";
 NSString * const SMKeychainKey = @"KeychainFlag";
 NSString * const SMStatusBarKey = @"StatusBarFlag";
+NSString * const SMUsernameKey = @"Username";
 
 @implementation PreferencesWindow
 
@@ -46,9 +48,11 @@ NSString * const SMStatusBarKey = @"StatusBarFlag";
 
 - (void)showWindow:(id)sender
 {
-    if ([appdelegate mainWindow] && [[[appdelegate mainWindow] window] isVisible]) {
-        [NSApp beginSheet:[[appdelegate preferencesWindow] window]
-           modalForWindow:[[appdelegate mainWindow] window]
+    MainWindow *mainWinodw = [[AppController sharedController] mainWindow];
+    
+    if (mainWinodw != nil && [[mainWinodw window] isVisible]) {
+        [NSApp beginSheet:[self window]
+           modalForWindow:[mainWinodw window]
             modalDelegate:self
            didEndSelector:nil
               contextInfo:nil];
@@ -59,11 +63,11 @@ NSString * const SMStatusBarKey = @"StatusBarFlag";
 
 - (IBAction)ok:(id)sender {
     if ([appdelegate ipManual]) {
-        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_MANUALIP", @"")
-                                         defaultButton:NSLocalizedString(@"MSG_MANUALIP_YES", @"")
-                                       alternateButton:NSLocalizedString(@"MSG_MANUALIP_NO", @"")
+        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_MANUALIP", nil)
+                                         defaultButton:NSLocalizedString(@"MSG_MANUALIP_YES", nil)
+                                       alternateButton:NSLocalizedString(@"MSG_MANUALIP_NO", nil)
                                            otherButton:@""
-                             informativeTextWithFormat:NSLocalizedString(@"MSG_MANUALIP_DESC", @"")];
+                             informativeTextWithFormat:NSLocalizedString(@"MSG_MANUALIP_DESC", nil)];
 
         [alert beginSheetModalForWindow:[self window]
                           modalDelegate:self
@@ -77,7 +81,9 @@ NSString * const SMStatusBarKey = @"StatusBarFlag";
     [self close];
 }
 
-- (void)manualIpAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+- (void)manualIpAlertDidEnd:(NSAlert *)alert
+                 returnCode:(NSInteger)returnCode
+                contextInfo:(void *)contextInfo
 {
     if (returnCode == NSAlertDefaultReturn) {
         [NSApp endSheet:[self window]];

@@ -14,20 +14,13 @@
 
 - (id)init
 {
-    if (![super initWithWindowNibName:@"SpinningWindow"]) {
-        return nil;
-    }
-
+    self = [super initWithWindowNibName:@"SpinningWindow"];
     return self;
 }
 
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
-    if (self) {
-        // Initialization code here.
-    }
-    
     return self;
 }
 
@@ -36,25 +29,22 @@
     didCancelSelector:(SEL)selector
 {
     self = [self init];
-    
-    _delegate = delegate;
-    _selector = selector;
-    _label = message;
-    
+    [self setMessage:message];
+    [self setDelegate:delegate];
+    [self setDidCancelSelector:selector];
     return self;
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    [[self message] setStringValue:_label];
     [[self indicator] startAnimation:self];
 }
 
 - (IBAction)cancel:(id)sender
 {
-    if (_delegate != nil && [_delegate respondsToSelector:_selector]) {
-        [_delegate performSelector:_selector withObject:self];
+    if ([self delegate] != nil && [[self delegate] respondsToSelector:[self didCancelSelector]]) {
+        [[self delegate] performSelector:[self didCancelSelector] withObject:self];
     }
 }
 

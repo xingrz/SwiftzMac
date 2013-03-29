@@ -13,34 +13,19 @@
 @class AmtiumLoginResult;
 
 @interface Amtium : NSObject<GCDAsyncUdpSocketDelegate> {
-    //BOOL _online;
-    //NSString *_account;
-    
-    //NSString *_server;
-    //NSString *_entry;
-    //NSString *_mac;
-    //NSString *_ip;
-    //BOOL _dhcpEnabled;
-    
     NSString *session;
-    //NSString *_website;
     unsigned int index;
     NSTimer *timer;
-    
+
+    NSTimer *loginRetryTimer;
+    BOOL loginCouldRetry;
+
+    NSString *usernameLogged;
+    NSString *passwordLogged;
+
     GCDAsyncUdpSocket *socket3848;
     GCDAsyncUdpSocket *socket4999;
     long tag;
-    
-    //id _delegate;
-    
-    //SEL _didErrorSelector;
-    //SEL _didLoginSelector;
-    //SEL _didBreathSelector;
-    //SEL _didLogoutSelector;
-    //SEL _didEntriesSelector;
-    //SEL _didCloseSelector;
-    //SEL _didConfirmSelector;
-    //SEL _didServerSelector;
 }
 
 @property (readwrite, assign) id delegate;
@@ -75,11 +60,15 @@
                  password:(NSString *)password
          didLoginSelector:(SEL)selector;
 
+- (void)cancelLogin;
+
 - (void)logout:(SEL)selector;
 
 - (void)searchServer:(SEL)selector;
 
 - (void)fetchEntries:(SEL)selector;
+
+- (void)close;
 
 @end
 

@@ -8,24 +8,18 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "Amtium.h"
-
 @class AppDelegate;
 @class SpinningWindow;
 
-@interface MainWindow : NSWindowController <NSWindowDelegate, AmtiumDelegate> {
-    Amtium *amtium;
-    AppDelegate *appdelegate;
+@interface MainWindow : NSWindowController <NSWindowDelegate> {
     SpinningWindow *spinningWindow;
+    AppDelegate *appdelegate;
 }
 
+@property (readonly) NSArray *accounts;
 @property (readwrite, copy) NSString *username;
 @property (readwrite, copy) NSString *password;
 
 - (IBAction)login:(id)sender;
-- (IBAction)logout:(id)sender;
-- (IBAction)account:(id)sender;
-
-- (Amtium *)amtium;
 
 @end

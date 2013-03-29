@@ -96,6 +96,25 @@
     return [super init];
 }
 
+- (void)close
+{
+    [socket3848 close];
+    socket3848 = nil;
+    
+    [socket4999 close];
+    socket4999 = nil;
+
+    [self willChangeValueForKey:@"website"];
+    [self willChangeValueForKey:@"online"];
+
+    session = nil;
+    website = nil;
+    online = NO;
+
+    [self didChangeValueForKey:@"website"];
+    [self didChangeValueForKey:@"online"];
+}
+
 - (void)loginWithUsername:(NSString *)username
                  password:(NSString *)password
          didLoginSelector:(SEL)selector
@@ -106,11 +125,25 @@
 
     [self setDidLoginSelector:selector];
 
-    account = username;
+    usernameLogged = username;
+    passwordLogged = password;
+
     index = 0x01000000;
+
+    [self doLogin];
     
-    AmtiumPacket *packet = [AmtiumPacket packetForLoggingInWithUsername:username
-                                                               password:password
+    loginCouldRetry = YES;
+    loginRetryTimer = [NSTimer scheduledTimerWithTimeInterval:3
+                                                       target:self
+                                                     selector:@selector(loginTimeout:)
+                                                     userInfo:nil
+                                                      repeats:NO];
+}
+
+- (void)doLogin
+{
+    AmtiumPacket *packet = [AmtiumPacket packetForLoggingInWithUsername:usernameLogged
+                                                               password:passwordLogged
                                                                   entry:entry
                                                                      ip:ip
                                                                     mac:mac
@@ -121,6 +154,25 @@
     [socket3848 sendData:data toHost:server port:3848 withTimeout:-1 tag:tag++];
 
     NSLog(@"login: %@", data);
+}
+
+- (void)loginTimeout:(NSTimer *)aTimer
+{
+    [loginRetryTimer invalidate];
+    loginRetryTimer = nil;
+    
+    if (loginCouldRetry) {
+        [self doLogin];
+        loginCouldRetry = NO;
+    }
+}
+
+- (void)cancelLogin
+{
+    if (loginRetryTimer != nil) {
+        [loginRetryTimer invalidate];
+        loginRetryTimer = nil;
+    }
 }
 
 - (void)logout:(SEL)selector
@@ -209,7 +261,9 @@
 - (void)setServer:(NSString *)theServer
 {
     if (!online) {
+        [self willChangeValueForKey:@"server"];
         server = theServer;
+        [self didChangeValueForKey:@"server"];
     }
 }
 
@@ -221,7 +275,9 @@
 - (void)setMac:(NSString *)theMac
 {
     if (!online) {
+        [self willChangeValueForKey:@"mac"];
         mac = theMac;
+        [self didChangeValueForKey:@"mac"];
     }
 }
 
@@ -233,7 +289,9 @@
 - (void)setIp:(NSString *)theIp
 {
     if (!online) {
+        [self willChangeValueForKey:@"ip"];
         ip = theIp;
+        [self didChangeValueForKey:@"ip"];
     }
 }
 
@@ -283,20 +341,33 @@ withFilterContext:(id)filterContext
 
     unsigned char action = [packet action];
     if (action == APALoginResult) {
+        [loginRetryTimer invalidate];
+        loginRetryTimer = nil;
+
         BOOL success = [packet boolForKey:APFSuccess];
         NSString *message = [packet stringForKey:APFMessage];
 
         AmtiumLoginResult *result = [AmtiumLoginResult result:success withMessage:message];
 
+        [self willChangeValueForKey:@"account"];
+        [self willChangeValueForKey:@"website"];
+        [self willChangeValueForKey:@"online"];
+
         if (success) {
+            account = usernameLogged;
             session = [packet stringForKey:APFSession];
             website = [packet stringForKey:APFWebsite];
             online = YES;
         } else {
+            account = nil;
             session = nil;
             website = nil;
             online = NO;
         }
+
+        [self didChangeValueForKey:@"account"];
+        [self didChangeValueForKey:@"website"];
+        [self didChangeValueForKey:@"online"];
 
         timer = [NSTimer scheduledTimerWithTimeInterval:30
                                                  target:self
@@ -309,10 +380,16 @@ withFilterContext:(id)filterContext
         index = [packet unsignedIntForKey:APFIndex] + 3;
     } else if (action == APALogoutResult) {
         BOOL success = [packet boolForKey:APFSuccess];
-        
+
+        [self willChangeValueForKey:@"website"];
+        [self willChangeValueForKey:@"online"];
+
         session = nil;
         website = nil;
         online = NO;
+
+        [self didChangeValueForKey:@"website"];
+        [self didChangeValueForKey:@"online"];
 
         [self performSelector:didLogoutSelector
          onDelegateWithObject:[NSNumber numberWithBool:success]];
@@ -350,9 +427,15 @@ withFilterContext:(id)filterContext
     [timer invalidate];
     timer = nil;
     session = nil;
+
+    [self willChangeValueForKey:@"website"];
+    [self willChangeValueForKey:@"online"];
     
     website = nil;
     online = NO;
+
+    [self didChangeValueForKey:@"website"];
+    [self didChangeValueForKey:@"online"];
 
     [self performSelector:didErrorSelector onDelegateWithObject:error];
 }

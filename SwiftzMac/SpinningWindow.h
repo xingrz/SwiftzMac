@@ -8,14 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SpinningWindow : NSWindowController <NSWindowDelegate> {
-    id _delegate;
-    SEL _selector;
-    NSString *_label;
-}
+@interface SpinningWindow : NSWindowController <NSWindowDelegate>
+
+@property (assign) NSString *message;
+@property (assign) id delegate;
+@property (assign) SEL didCancelSelector;
 
 @property (weak) IBOutlet NSProgressIndicator *indicator;
-@property (weak) IBOutlet NSTextField *message;
 
 - (id)initWithMessage:(NSString *)message
              delegate:(id)delegate
