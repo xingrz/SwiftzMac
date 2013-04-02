@@ -27,8 +27,8 @@
 		FC34425E170330A5001D80CD /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34425B170330A5001D80CD /* SSKeychain.m */; };
 		FC34425F170330A5001D80CD /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34425D170330A5001D80CD /* SSKeychainQuery.m */; };
 		FC344266170346CD001D80CD /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC344265170346CD001D80CD /* AppController.m */; };
+		FC66798C170ACA6A00757009 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC66798B170ACA4D00757009 /* Reachability.m */; };
 		FC79F1B516FDADB400B32AAA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC79F1B416FDADB400B32AAA /* QuartzCore.framework */; };
-		FCAA27AB1701C06A00E61696 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA27AA1701C06A00E61696 /* Reachability.m */; };
 		FCAF7A7516E75229006EDA2D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7716E75229006EDA2D /* MainWindow.xib */; };
 		FCAF7A7916E75239006EDA2D /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */; };
 		FCAF7A7F16E75D34006EDA2D /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */; };
@@ -87,9 +87,9 @@
 		FC34425D170330A5001D80CD /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychainQuery.m; path = SwiftzMac/SSKeychainQuery.m; sourceTree = SOURCE_ROOT; };
 		FC344264170346CD001D80CD /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		FC344265170346CD001D80CD /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		FC66798A170ACA4D00757009 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = SwiftzMac/Reachability.h; sourceTree = "<group>"; };
+		FC66798B170ACA4D00757009 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = SwiftzMac/Reachability.m; sourceTree = "<group>"; };
 		FC79F1B416FDADB400B32AAA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		FCAA27A91701C06A00E61696 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		FCAA27AA1701C06A00E61696 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		FCAF7A7616E75229006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		FCAF7A7A16E75239006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		FCAF7A7D16E75D34006EDA2D /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
@@ -218,8 +218,8 @@
 		FCAA27AD1701C07600E61696 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				FCAA27A91701C06A00E61696 /* Reachability.h */,
-				FCAA27AA1701C06A00E61696 /* Reachability.m */,
+				FC66798A170ACA4D00757009 /* Reachability.h */,
+				FC66798B170ACA4D00757009 /* Reachability.m */,
 			);
 			name = Reachability;
 			sourceTree = "<group>";
@@ -403,10 +403,10 @@
 				FCCA8F6716F098A100BE16FA /* UpdateWindow.m in Sources */,
 				FC2B0FFF16F1C3E200E6662C /* AmtiumLoginResult.m in Sources */,
 				FC2B100F16F1DEAB00E6662C /* MessagesWindow.m in Sources */,
-				FCAA27AB1701C06A00E61696 /* Reachability.m in Sources */,
 				FC34425E170330A5001D80CD /* SSKeychain.m in Sources */,
 				FC34425F170330A5001D80CD /* SSKeychainQuery.m in Sources */,
 				FC344266170346CD001D80CD /* AppController.m in Sources */,
+				FC66798C170ACA6A00757009 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
