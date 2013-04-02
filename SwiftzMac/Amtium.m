@@ -148,7 +148,7 @@
                                                                      ip:ip
                                                                     mac:mac
                                                             dhcpEnabled:dhcpEnabled
-                                                                version:@"3.6.5"];
+                                                                version:@"3.7.8"];
 
     NSData *data = [AmtiumCrypto encrypt:[packet data]];
     [socket3848 sendData:data toHost:server port:3848 withTimeout:-1 tag:tag++];
@@ -358,6 +358,7 @@ withFilterContext:(id)filterContext
             session = [packet stringForKey:APFSession];
             website = [packet stringForKey:APFWebsite];
             online = YES;
+            NSLog(@"session: %@", session);
         } else {
             account = nil;
             session = nil;
