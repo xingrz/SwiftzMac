@@ -14,6 +14,7 @@
 		FC041FBF16EDD6D5001AE293 /* statusOffline.png in Resources */ = {isa = PBXBuildFile; fileRef = FC041FBE16EDD6D4001AE293 /* statusOffline.png */; };
 		FC041FCC16EDE8FF001AE293 /* NotificationWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FC041FCA16EDE8FE001AE293 /* NotificationWindow.m */; };
 		FC041FCD16EDE8FF001AE293 /* NotificationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC041FCB16EDE8FF001AE293 /* NotificationWindow.xib */; };
+		FC1A0FE11711700500DA8215 /* AmtiumCryptoB.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A0FE01711700500DA8215 /* AmtiumCryptoB.m */; };
 		FC1DE54416DCD03D008CE989 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1DE54316DCD03D008CE989 /* Cocoa.framework */; };
 		FC1DE54E16DCD03D008CE989 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */; };
 		FC1DE55016DCD03D008CE989 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1DE54F16DCD03D008CE989 /* main.m */; };
@@ -63,6 +64,8 @@
 		FC041FC916EDE8FE001AE293 /* NotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationWindow.h; sourceTree = "<group>"; };
 		FC041FCA16EDE8FE001AE293 /* NotificationWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationWindow.m; sourceTree = "<group>"; };
 		FC041FCB16EDE8FF001AE293 /* NotificationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationWindow.xib; sourceTree = "<group>"; };
+		FC1A0FDF1711700500DA8215 /* AmtiumCryptoB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumCryptoB.h; sourceTree = "<group>"; };
+		FC1A0FE01711700500DA8215 /* AmtiumCryptoB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumCryptoB.m; sourceTree = "<group>"; };
 		FC1DE53F16DCD03D008CE989 /* SwiftzMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftzMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1DE54316DCD03D008CE989 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FC1DE54616DCD03D008CE989 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -267,6 +270,8 @@
 				FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */,
 				FCCA9C7616E790370069C9E1 /* AmtiumCrypto.h */,
 				FCCA9C7716E790370069C9E1 /* AmtiumCrypto.m */,
+				FC1A0FDF1711700500DA8215 /* AmtiumCryptoB.h */,
+				FC1A0FE01711700500DA8215 /* AmtiumCryptoB.m */,
 				FCCA9C8416EA4D020069C9E1 /* APMutableParams.h */,
 				FCCA9C8516EA4D020069C9E1 /* APMutableParams.m */,
 				FC2B0FFD16F1C3E200E6662C /* AmtiumLoginResult.h */,
@@ -407,6 +412,7 @@
 				FC34425F170330A5001D80CD /* SSKeychainQuery.m in Sources */,
 				FC344266170346CD001D80CD /* AppController.m in Sources */,
 				FC66798C170ACA6A00757009 /* Reachability.m in Sources */,
+				FC1A0FE11711700500DA8215 /* AmtiumCryptoB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

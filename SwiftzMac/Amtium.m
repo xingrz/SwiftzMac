@@ -9,6 +9,7 @@
 #import "Amtium.h"
 #import "AmtiumConstants.h"
 #import "AmtiumCrypto.h"
+#import "AmtiumCryptoB.h"
 #import "AmtiumEncoder.h"
 #import "AmtiumPacket.h"
 #import "AmtiumLoginResult.h"
@@ -154,6 +155,19 @@
     [socket3848 sendData:data toHost:server port:3848 withTimeout:-1 tag:tag++];
 
     NSLog(@"login: %@", data);
+}
+
+- (void)confirm
+{
+    AmtiumPacket *packet = [AmtiumPacket packetForConfirmingWithUsername:usernameLogged
+                                                                     mac:mac
+                                                                      ip:ip
+                                                                   entry:entry];
+
+    NSData *data = [AmtiumCryptoB encrypt:[packet data]];
+    [socket3848 sendData:data toHost:server port:3849 withTimeout:-1 tag:tag++];
+
+    NSLog(@"confirm: %@", data);
 }
 
 - (void)loginTimeout:(NSTimer *)aTimer
@@ -332,7 +346,14 @@ withFilterContext:(id)filterContext
         return;
     }
 
-    NSData *decrypted = [AmtiumCrypto decrypt:data];
+    NSData *decrypted;
+
+    if (port == 3849) {
+        decrypted = [AmtiumCryptoB decrypt:data];
+    } else {
+        decrypted = [AmtiumCrypto decrypt:data];
+    }
+
     AmtiumPacket *packet = [AmtiumPacket packetWithData:decrypted];
     if (packet == nil) {
         // 抛弃解码失败的包
@@ -354,10 +375,13 @@ withFilterContext:(id)filterContext
         [self willChangeValueForKey:@"online"];
 
         if (success) {
+            [self confirm];
+            
             account = usernameLogged;
             session = [packet stringForKey:APFSession];
             website = [packet stringForKey:APFWebsite];
             online = YES;
+            
             NSLog(@"session: %@", session);
         } else {
             account = nil;

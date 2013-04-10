@@ -48,8 +48,8 @@
     return [AmtiumPacket packetWithAction:APAServer parameters:params];
 }
 
-+ (AmtiumPacket *)packetForGettingEntiesWithSession:(NSString *)session
-                                                mac:(NSString *)mac
++ (id)packetForGettingEntiesWithSession:(NSString *)session
+                                    mac:(NSString *)mac
 {
     APMutableParams *params = [[APMutableParams alloc] init];
 
@@ -59,13 +59,13 @@
     return [AmtiumPacket packetWithAction:APAEntries parameters:params];
 }
 
-+ (AmtiumPacket *)packetForLoggingInWithUsername:(NSString *)username
-                                        password:(NSString *)password
-                                           entry:(NSString *)entry
-                                              ip:(NSString *)ip
-                                             mac:(NSString *)mac
-                                     dhcpEnabled:(BOOL)dhcpEnabled
-                                         version:(NSString *)version
++ (id)packetForLoggingInWithUsername:(NSString *)username
+                            password:(NSString *)password
+                               entry:(NSString *)entry
+                                  ip:(NSString *)ip
+                                 mac:(NSString *)mac
+                         dhcpEnabled:(BOOL)dhcpEnabled
+                             version:(NSString *)version
 {
     APMutableParams *params = [[APMutableParams alloc] init];
 
@@ -80,10 +80,25 @@
     return [AmtiumPacket packetWithAction:APALogin parameters:params];
 }
 
-+ (AmtiumPacket *)packetForBreathingWithSession:(NSString *)session
-                                             ip:(NSString *)ip
-                                            mac:(NSString *)mac
-                                          index:(unsigned int)index
++ (id)packetForConfirmingWithUsername:(NSString *)username
+                                  mac:(NSString *)mac
+                                   ip:(NSString *)ip
+                                entry:(NSString *)entry
+{
+    APMutableParams *params = [[APMutableParams alloc] init];
+
+    [params addString:username forKey:APFUsername];
+    [params addHexadecimal:mac forKey:APFMac];
+    [params addString:ip forKey:APFIp];
+    [params addString:entry forKey:APFEntry];
+
+    return [AmtiumPacket packetWithAction:APAConfirm parameters:params];
+}
+
++ (id)packetForBreathingWithSession:(NSString *)session
+                                 ip:(NSString *)ip
+                                mac:(NSString *)mac
+                              index:(unsigned int)index
 {
     // NOTE: index 是从 0x01000000 起算的，每次递增 3。
     APMutableParams *params = [[APMutableParams alloc] init];
@@ -102,10 +117,10 @@
     return [AmtiumPacket packetWithAction:APABreath parameters:params];
 }
 
-+ (AmtiumPacket *)packetForLoggingOutWithSession:(NSString *)session
-                                              ip:(NSString *)ip
-                                             mac:(NSString *)mac
-                                           index:(unsigned int)index
++ (id)packetForLoggingOutWithSession:(NSString *)session
+                                  ip:(NSString *)ip
+                                 mac:(NSString *)mac
+                               index:(unsigned int)index
 {
     APMutableParams *params = [[APMutableParams alloc] init];
 
@@ -140,7 +155,7 @@
     [self setAction:buffer[0]];
 
     unsigned char offset = 18;
-    
+
     // adapt to a bug of the server
     if ([self action] == APAConfirmResult) {
         offset += 3;

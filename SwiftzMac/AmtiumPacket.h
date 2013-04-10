@@ -37,6 +37,11 @@
                          dhcpEnabled:(BOOL)dhcpEnabled
                              version:(NSString *)version;
 
++ (id)packetForConfirmingWithUsername:(NSString *)username
+                                  mac:(NSString *)mac
+                                   ip:(NSString *)ip
+                                entry:(NSString *)entry;
+
 + (id)packetForBreathingWithSession:(NSString *)session
                                  ip:(NSString *)ip
                                 mac:(NSString *)mac
