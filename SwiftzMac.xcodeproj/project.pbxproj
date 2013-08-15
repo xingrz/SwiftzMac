@@ -13,7 +13,6 @@
 		FC041FBD16EDA4F2001AE293 /* statusAlternate.png in Resources */ = {isa = PBXBuildFile; fileRef = FC041FBC16EDA4F2001AE293 /* statusAlternate.png */; };
 		FC041FBF16EDD6D5001AE293 /* statusOffline.png in Resources */ = {isa = PBXBuildFile; fileRef = FC041FBE16EDD6D4001AE293 /* statusOffline.png */; };
 		FC041FCC16EDE8FF001AE293 /* NotificationWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = FC041FCA16EDE8FE001AE293 /* NotificationWindow.m */; };
-		FC041FCD16EDE8FF001AE293 /* NotificationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC041FCB16EDE8FF001AE293 /* NotificationWindow.xib */; };
 		FC1A0FE11711700500DA8215 /* AmtiumCryptoB.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A0FE01711700500DA8215 /* AmtiumCryptoB.m */; };
 		FC1DE54416DCD03D008CE989 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1DE54316DCD03D008CE989 /* Cocoa.framework */; };
 		FC1DE54E16DCD03D008CE989 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */; };
@@ -63,7 +62,6 @@
 		FC041FBE16EDD6D4001AE293 /* statusOffline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = statusOffline.png; sourceTree = "<group>"; };
 		FC041FC916EDE8FE001AE293 /* NotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationWindow.h; sourceTree = "<group>"; };
 		FC041FCA16EDE8FE001AE293 /* NotificationWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationWindow.m; sourceTree = "<group>"; };
-		FC041FCB16EDE8FF001AE293 /* NotificationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationWindow.xib; sourceTree = "<group>"; };
 		FC1A0FDF1711700500DA8215 /* AmtiumCryptoB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumCryptoB.h; sourceTree = "<group>"; };
 		FC1A0FE01711700500DA8215 /* AmtiumCryptoB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumCryptoB.m; sourceTree = "<group>"; };
 		FC1DE53F16DCD03D008CE989 /* SwiftzMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftzMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,7 +248,6 @@
 				FC041FAF16ED6743001AE293 /* SpinningWindow.xib */,
 				FCAF7A7716E75229006EDA2D /* MainWindow.xib */,
 				FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */,
-				FC041FCB16EDE8FF001AE293 /* NotificationWindow.xib */,
 				FC2B100E16F1DEAB00E6662C /* MessagesWindow.xib */,
 				FC041FB516ED974C001AE293 /* Localizable.strings */,
 			);
@@ -376,7 +373,6 @@
 				FC041FBB16EDA3C7001AE293 /* status.png in Resources */,
 				FC041FBD16EDA4F2001AE293 /* statusAlternate.png in Resources */,
 				FC041FBF16EDD6D5001AE293 /* statusOffline.png in Resources */,
-				FC041FCD16EDE8FF001AE293 /* NotificationWindow.xib in Resources */,
 				FCCA8F6916F09D8400BE16FA /* UpdateWindow.xib in Resources */,
 				FC2B101016F1DEAB00E6662C /* MessagesWindow.xib in Resources */,
 				FC26BE4316F1F87300F854FF /* swiftz.icns in Resources */,
