@@ -39,4 +39,4 @@ $ git clone https://github.com/xingrz/SwiftzMac.git
 
 ## 协议
 
-本项目遵守 BSD License 发布。
+本项目遵守 [Apache v2 License](LICENSE) 发布。
