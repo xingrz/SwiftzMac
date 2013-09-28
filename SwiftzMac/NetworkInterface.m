@@ -40,6 +40,8 @@
             [interface setHardwareAddress:_hardwareAddress];
             [interface setDescription:[NSString stringWithFormat:@"%@ (%@)", _localizedDisplayName, _name]];
             
+            NSLog(@"eth itf: %@ %@ %@", _name, _localizedDisplayName, _hardwareAddress);
+            
             [result addObject:interface];
         }
 	}
@@ -68,6 +70,8 @@
                                                        options:0
                                                          range:NSMakeRange(0, [ip length])];
         if (!match) continue;
+        
+        NSLog(@"ip addr: %@", ip);
         
         [result addObject:ip];
     }

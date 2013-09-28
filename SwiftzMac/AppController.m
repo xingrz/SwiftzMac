@@ -15,7 +15,6 @@
 #import "PreferencesWindow.h"
 #import "NotificationWindow.h"
 #import "UpdateWindow.h"
-#import "MessagesWindow.h"
 #import "SpinningWindow.h"
 
 #import "AppDelegate.h"
@@ -33,7 +32,6 @@ static AppController *controller = nil;
 @synthesize preferencesWindow;
 @synthesize notificationWindow;
 @synthesize updateWindow;
-@synthesize messagesWinodw;
 
 + (AppController *)sharedController
 {
@@ -66,13 +64,19 @@ static AppController *controller = nil;
 - (void)showMain
 {
     [NSApp activateIgnoringOtherApps:YES];
-    [[self mainWindow] showWindow:self];
+    [self.mainWindow showWindow:self];
 }
 
 - (void)showPreferences
 {
     [NSApp activateIgnoringOtherApps:YES];
-    [[self preferencesWindow] showWindow:self];
+    [self.preferencesWindow showWindow:self];
+}
+
+- (void)showPreferencesWithTab:(id)identifier
+{
+    [NSApp activateIgnoringOtherApps:YES];
+    [self.preferencesWindow showWindow:self withTabIdentifier:identifier];
 }
 
 - (void)showNotification:(NSString *)notification
@@ -82,21 +86,14 @@ static AppController *controller = nil;
     [userNotification setInformativeText:notification];
     [userNotification setHasActionButton:NO];
 
-    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:userNotification];
+    [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:userNotification];
 }
 
 - (void)showUpdate:(NSString *)update
 {
     [NSApp activateIgnoringOtherApps:YES];
-    [[self updateWindow] setUpdate:update];
-    [[self updateWindow] showWindow:self];
-    /*NSUserNotification *userNotification = [[NSUserNotification alloc] init];
-    [userNotification setTitle:@"Update Avaliable"];
-    [userNotification setInformativeText:update];
-    [userNotification setHasActionButton:YES];
-    [userNotification setActionButtonTitle:@"Update"];
-
-    [[NSUserNotificationCenter defaultUserNotificationCenter] scheduleNotification:userNotification];*/
+    [self.updateWindow setUpdate:update];
+    [self.updateWindow showWindow:self];
 }
 
 - (void)showSpinning:(NSString *)message didCancelSelector:(SEL)selector
@@ -160,21 +157,23 @@ static AppController *controller = nil;
     return updateWindow;
 }
 
-- (MessagesWindow *)messagesWinodw
-{
-    if (messagesWindow == nil) {
-        messagesWindow = [[MessagesWindow alloc] init];
-    }
-
-    return messagesWindow;
-}
-
 - (void)apply
 {
-    [amtium setServer:[appdelegate server]];
-    [amtium setEntry:[appdelegate entry]];
-    [amtium setMac:[appdelegate mac]];
-    [amtium setIp:[appdelegate ip]];
+    NSLog(@"apply server:%@ entry:%@ mac:%@ ip:%@", appdelegate.server, appdelegate.entry, appdelegate.mac, appdelegate.ip);
+    
+    [amtium setMac:appdelegate.mac];
+    [amtium setIp:appdelegate.ip];
+    
+    if (!appdelegate.server || !appdelegate.entry) {
+        NSLog(@"mac or entry not set, start initialize");
+        NSString *preparing = NSLocalizedString(@"MSG_PREPARING", nil);
+        [self showSpinning:preparing didCancelSelector:@selector(firstRunDidCancel:)];
+        [amtium searchServer:@selector(firstRunWithAmtium:didGetServer:)];
+    }
+    else {
+        [amtium setServer:appdelegate.server];
+        [amtium setEntry:appdelegate.entry];
+    }
 }
 
 - (void)online
@@ -186,12 +185,12 @@ static AppController *controller = nil;
     BOOL isFirstRun = [appdelegate initialUse];
     BOOL ipDidChange = ![appdelegate ipManual] && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]];
 
+    // 如果是第一次运行则开始初始化
     if (isFirstRun) {
-        NSString *preparing = NSLocalizedString(@"MSG_PREPARING", nil);
-        [self showSpinning:preparing didCancelSelector:@selector(firstRunDidCancel:)];
-        
-        [amtium searchServer:@selector(firstRunWithAmtium:didGetServer:)];
-    } else if (ipDidChange) {
+        [self showPreferencesWithTab:@"network"];
+    }
+    // 如果 IP 已变更，则提示用户重新设置 IP
+    else if (ipDidChange) {
         NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_IPCHANGED", nil)
                                          defaultButton:NSLocalizedString(@"OK", nil)
                                        alternateButton:@""
@@ -200,7 +199,9 @@ static AppController *controller = nil;
         [alert runModal];
         
         [self showPreferences];
-    } else {
+    }
+    // 普通启动
+    else {
         [self apply];
         
         if (didOffline || didSleep) {
@@ -282,13 +283,6 @@ static AppController *controller = nil;
     }
 }
 
-- (void)userNotificationCenter:(NSUserNotificationCenter *)center
-       didActivateNotification:(NSUserNotification *)notification
-{
-    /*if ([notification hasActionButton])
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://xingrz.github.com/SwiftzMac"]];*/
-}
-
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center
      shouldPresentNotification:(NSUserNotification *)notification
 {
@@ -321,7 +315,7 @@ static AppController *controller = nil;
 
     [self closeSpinning];
     [self apply];
-    [self showPreferences];
+    [self showPreferencesWithTab:@"connection"];
 }
 
 - (void)amtium:(Amtium *)aAmtium didError:(NSError *)error

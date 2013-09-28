@@ -19,7 +19,6 @@
 #import "PreferencesWindow.h"
 #import "NotificationWindow.h"
 #import "UpdateWindow.h"
-#import "MessagesWindow.h"
 
 @implementation AppDelegate
 
@@ -82,7 +81,6 @@
     [controller showMain];
 
     if ([reachability currentReachabilityStatus] != NotReachable) {
-        [self determineNetwork];
         [controller online];
     }
 }
@@ -112,7 +110,6 @@
     } else {
         NSLog(@"online");
         [controller offline];
-        [self determineNetwork];
         [controller online];
     }
 }
@@ -147,17 +144,6 @@
     return YES;
 }
 
-- (void)determineNetwork
-{
-    [self willChangeValueForKey:@"ipAddresses"];
-    ipAddresses = [NetworkInterface getAllIpAddresses];
-    [self didChangeValueForKey:@"ipAddresses"];
-
-    [self willChangeValueForKey:@"interfaces"];
-    interfaces = [NetworkInterface getAllInterfaces];
-    [self didChangeValueForKey:@"interfaces"];
-}
-
 - (void)showNotification:(NSString *)message
 {
     NSUserNotification *userNotification = [[NSUserNotification alloc] init];
@@ -173,9 +159,14 @@
     [controller showMain];
 }
 
-- (void)showPreferencesWindow:(id)sender
+- (IBAction)showGeneralSettings:(id)sender
 {
-    [controller showPreferences];
+    [controller showPreferencesWithTab:@"connection"];
+}
+
+- (IBAction)showNetworkSettings:(id)sender
+{
+    [controller showPreferencesWithTab:@"network"];
 }
 
 - (IBAction)showAccount:(id)sender
@@ -183,14 +174,14 @@
     [controller account];
 }
 
-- (void)showMessagesWindow:(id)sender
-{
-    // ...
-}
-
 - (IBAction)logout:(id)sender
 {
     [controller logout];
+}
+
+- (void)apply
+{
+    [controller apply];
 }
 
 - (BOOL)initialUse
@@ -324,7 +315,8 @@
 
     [self willChangeValueForKey:@"ipManual"];
 
-    [[NSUserDefaults standardUserDefaults] setBool:![ipAddresses containsObject:_ip]
+    NSLog(@"ip addr: %@ in %@", _ip, self.ipAddresses);
+    [[NSUserDefaults standardUserDefaults] setBool:![self.ipAddresses containsObject:_ip]
                                             forKey:SMIpManualKey];
 
     [self didChangeValueForKey:@"ipManual"];
@@ -389,12 +381,12 @@
 
 - (NSArray *)ipAddresses
 {
-    return ipAddresses;
+    return [NetworkInterface getAllIpAddresses];
 }
 
 - (NSArray *)interfaces
 {
-    return interfaces;
+    return [NetworkInterface getAllInterfaces];
 }
 
 - (void)onlineChanged:(id)sender

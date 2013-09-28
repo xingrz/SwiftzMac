@@ -16,7 +16,6 @@ extern NSString * const kSMOnlineChangedNotification;
 @class PreferencesWindow;
 @class NotificationWindow;
 @class UpdateWindow;
-@class MessagesWindow;
 @class SpinningWindow;
 
 @class AppDelegate;
@@ -28,7 +27,6 @@ extern NSString * const kSMOnlineChangedNotification;
     PreferencesWindow *preferencesWindow;
     NotificationWindow *notificationWindow;
     UpdateWindow *updateWindow;
-    MessagesWindow *messagesWindow;
     SpinningWindow *spinningWindow;
 
     AppDelegate *appdelegate;
@@ -42,12 +40,12 @@ extern NSString * const kSMOnlineChangedNotification;
 @property (readonly) PreferencesWindow *preferencesWindow;
 @property (readonly) NotificationWindow *notificationWindow;
 @property (readonly) UpdateWindow *updateWindow;
-@property (readonly) MessagesWindow *messagesWinodw;
 
 + (AppController *)sharedController;
 
 - (void)showMain;
 - (void)showPreferences;
+- (void)showPreferencesWithTab:(id)identifier;
 - (void)showNotification:(NSString *)notification;
 - (void)showUpdate:(NSString *)update;
 - (void)showSpinning:(NSString *)message didCancelSelector:(SEL)selector;
@@ -62,5 +60,7 @@ extern NSString * const kSMOnlineChangedNotification;
 
 - (void)sleep;
 - (void)wake;
+
+- (void)apply;
 
 @end

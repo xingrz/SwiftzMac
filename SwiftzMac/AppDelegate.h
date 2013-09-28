@@ -41,9 +41,11 @@
 @property (readonly) NSArray *interfaces;
 
 - (IBAction)showMainWindow:(id)sender;
-- (IBAction)showPreferencesWindow:(id)sender;
+- (IBAction)showGeneralSettings:(id)sender;
+- (IBAction)showNetworkSettings:(id)sender;
 - (IBAction)showAccount:(id)sender;
-- (IBAction)showMessagesWindow:(id)sender;
 - (IBAction)logout:(id)sender;
+
+- (void)apply;
 
 @end

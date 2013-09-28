@@ -61,8 +61,14 @@ NSString * const SMUsernameKey = @"Username";
     }
 }
 
+- (void)showWindow:(id)sender withTabIdentifier:(id)identifier
+{
+    [self showWindow:sender];
+    [self.tab selectTabViewItemWithIdentifier:identifier];
+}
+
 - (IBAction)ok:(id)sender {
-    if ([appdelegate ipManual]) {
+    if (![appdelegate.ipAddresses containsObject:appdelegate.ip]) {
         NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_MANUALIP", nil)
                                          defaultButton:NSLocalizedString(@"MSG_MANUALIP_YES", nil)
                                        alternateButton:NSLocalizedString(@"MSG_MANUALIP_NO", nil)
@@ -79,6 +85,7 @@ NSString * const SMUsernameKey = @"Username";
 
     [NSApp endSheet:[self window]];
     [self close];
+    [appdelegate apply];
 }
 
 - (void)manualIpAlertDidEnd:(NSAlert *)alert
@@ -88,6 +95,7 @@ NSString * const SMUsernameKey = @"Username";
     if (returnCode == NSAlertDefaultReturn) {
         [NSApp endSheet:[self window]];
         [self close];
+        [appdelegate apply];
     }
 }
 

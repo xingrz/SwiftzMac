@@ -28,7 +28,12 @@ extern NSString * const SMUsernameKey;
     NSArray *ips;
 }
 
+@property (weak) IBOutlet NSTabView *tab;
+
 - (IBAction)ok:(id)sender;
 - (IBAction)restore:(id)sender;
+
+- (void)showWindow:(id)sender
+ withTabIdentifier:(id)identifier;
 
 @end
