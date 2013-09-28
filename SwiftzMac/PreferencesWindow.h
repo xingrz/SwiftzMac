@@ -23,12 +23,11 @@ extern NSString * const SMUsernameKey;
 
 @interface PreferencesWindow : NSWindowController <NSWindowDelegate> {
     AppDelegate *appdelegate;
-    NSArray *entries;
-    NSArray *interfaces;
-    NSArray *ips;
 }
 
 @property (weak) IBOutlet NSTabView *tab;
+@property (weak) IBOutlet NSTextField *server;
+@property (weak) IBOutlet NSPopUpButton *entries;
 
 - (IBAction)ok:(id)sender;
 - (IBAction)restore:(id)sender;

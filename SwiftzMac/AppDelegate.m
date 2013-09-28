@@ -225,6 +225,8 @@
 
     [[NSUserDefaults standardUserDefaults] setObject:_server
                                               forKey:SMServerKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"written server: %@", [[NSUserDefaults standardUserDefaults] stringForKey:SMServerKey]);
 
     [self didChangeValueForKey:@"server"];
 
@@ -266,6 +268,7 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:_entries
                                               forKey:SMEntryListKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 
     [self didChangeValueForKey:@"entries"];
 }
@@ -326,7 +329,7 @@
 
 - (NSString *)mac
 {
-    for (NetworkInterface *ni in interfaces) {
+    for (NetworkInterface *ni in self.interfaces) {
         if ([[ni name] isEqualToString:[self interface]]) {
             return [ni hardwareAddress];
         }

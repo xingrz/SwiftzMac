@@ -38,16 +38,19 @@ NSString * const SMUsernameKey = @"Username";
     self = [super initWithWindow:window];
     if (self) {
         appdelegate = [[NSApplication sharedApplication] delegate];
-
-        entries = [appdelegate entries];
-        interfaces = [appdelegate interfaces];
-        ips = [appdelegate ipAddresses];
     }
     return self;
 }
 
 - (void)showWindow:(id)sender
 {
+    // 艹他个蛋，谁能告诉我为什么 App Delegate 的值变化之后这些文本框的值不会跟着变？！
+    if ([self.server.stringValue isEqual: @""] || self.entries.itemTitles.count == 0) {
+        [self.server setStringValue:appdelegate.server];
+        [self.entries addItemsWithTitles:appdelegate.entries];
+        //[self.entries setStringValue:appdelegate.entries[0]];
+    }
+    
     MainWindow *mainWinodw = [[AppController sharedController] mainWindow];
     
     if (mainWinodw != nil && [[mainWinodw window] isVisible]) {

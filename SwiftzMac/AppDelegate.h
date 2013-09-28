@@ -19,8 +19,8 @@
     AppController *controller;
 
     NSStatusItem *statusItem;
-    NSArray *ipAddresses;
-    NSArray *interfaces;
+    NSArray *entries;
+    NSString *server;
     Reachability *reachability;
 }
 
