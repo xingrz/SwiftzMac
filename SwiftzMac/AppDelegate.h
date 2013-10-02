@@ -26,20 +26,6 @@
 
 @property (weak) IBOutlet NSMenu *statusMenu;
 
-@property BOOL initialUse;
-@property NSString *username;
-@property NSString *server;
-@property NSString *entry;
-@property NSArray *entries;
-@property NSString *interface;
-@property NSString *ip;
-@property (readonly) NSString *mac;
-@property (readonly) BOOL ipManual;
-@property BOOL shouldUseKeychain;
-@property BOOL shouldShowStatusBarMenu;
-@property (readonly) NSArray *ipAddresses;
-@property (readonly) NSArray *interfaces;
-
 - (IBAction)showMainWindow:(id)sender;
 - (IBAction)showGeneralSettings:(id)sender;
 - (IBAction)showNetworkSettings:(id)sender;

@@ -11,17 +11,6 @@
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 
-NSString * const SMInitialKey = @"InitialFlag";
-NSString * const SMServerKey = @"Server";
-NSString * const SMEntryKey = @"Entry";
-NSString * const SMEntryListKey = @"EntryList";
-NSString * const SMInterfaceKey = @"Interface";
-NSString * const SMIpKey = @"IP";
-NSString * const SMIpManualKey = @"IPManualFlag";
-NSString * const SMKeychainKey = @"KeychainFlag";
-NSString * const SMStatusBarKey = @"StatusBarFlag";
-NSString * const SMUsernameKey = @"Username";
-
 @implementation PreferencesWindow
 
 - (id)init

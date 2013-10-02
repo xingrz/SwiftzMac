@@ -11,6 +11,7 @@
 		022F2F8217FBFBC0004A1E87 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F2F8017FBFBC0004A1E87 /* SSKeychainQuery.m */; };
 		022F2F8617FBFBF6004A1E87 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F2F8517FBFBF6004A1E87 /* Reachability.m */; };
 		022F2F8A17FBFC25004A1E87 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F2F8917FBFC25004A1E87 /* GCDAsyncUdpSocket.m */; };
+		022F2F9017FC00DD004A1E87 /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 022F2F8F17FC00DD004A1E87 /* AppData.m */; };
 		FC041FAD16ED6743001AE293 /* SpinningWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC041FAF16ED6743001AE293 /* SpinningWindow.xib */; };
 		FC041FB316ED974C001AE293 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC041FB516ED974C001AE293 /* Localizable.strings */; };
 		FC041FBB16EDA3C7001AE293 /* status.png in Resources */ = {isa = PBXBuildFile; fileRef = FC041FBA16EDA3C7001AE293 /* status.png */; };
@@ -57,7 +58,8 @@
 		022F2F8517FBFBF6004A1E87 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = "<group>"; };
 		022F2F8817FBFC25004A1E87 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		022F2F8917FBFC25004A1E87 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
-		FC041FAE16ED6743001AE293 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SpinningWindow.xib; sourceTree = "<group>"; };
+		022F2F8E17FC00DD004A1E87 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
+		022F2F8F17FC00DD004A1E87 /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
 		FC041FB416ED974C001AE293 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FC041FB616ED9E7A001AE293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindow.xib"; sourceTree = "<group>"; };
 		FC041FB716ED9E7A001AE293 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -88,8 +90,6 @@
 		FC344264170346CD001D80CD /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		FC344265170346CD001D80CD /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		FC79F1B416FDADB400B32AAA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		FCAF7A7616E75229006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		FCAF7A7A16E75239006EDA2D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		FCAF7A8916E767E6006EDA2D /* AmtiumPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumPacket.h; sourceTree = "<group>"; };
 		FCAF7A8A16E767E6006EDA2D /* AmtiumPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumPacket.m; sourceTree = "<group>"; };
 		FCAF7A8C16E77128006EDA2D /* AmtiumConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumConstants.h; sourceTree = "<group>"; };
@@ -102,7 +102,6 @@
 		FCBD320816E5BAD4002B1ED1 /* Amtium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Amtium.m; sourceTree = "<group>"; };
 		FCBD321916E6115E002B1ED1 /* NetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkInterface.h; sourceTree = "<group>"; };
 		FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkInterface.m; sourceTree = "<group>"; };
-		FCBD321F16E61B52002B1ED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FCBD322016E6209D002B1ED1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCC3BB8016F0630B001ECB2E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FCC3BB8716F083D9001ECB2E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/PreferencesWindow.xib"; sourceTree = "<group>"; };
@@ -110,7 +109,6 @@
 		FCCA8F6116F08EBD00BE16FA /* StatisticsAndUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsAndUpdate.m; sourceTree = "<group>"; };
 		FCCA8F6416F098A000BE16FA /* UpdateWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateWindow.h; sourceTree = "<group>"; };
 		FCCA8F6516F098A000BE16FA /* UpdateWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateWindow.m; sourceTree = "<group>"; };
-		FCCA8F6A16F09D8400BE16FA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/UpdateWindow.xib; sourceTree = "<group>"; };
 		FCCA8F6C16F09D8600BE16FA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/UpdateWindow.xib"; sourceTree = "<group>"; };
 		FCCA9C7216E77F350069C9E1 /* AmtiumEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmtiumEncoder.h; sourceTree = "<group>"; };
 		FCCA9C7316E77F350069C9E1 /* AmtiumEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmtiumEncoder.m; sourceTree = "<group>"; };
@@ -167,6 +165,27 @@
 			name = AsyncUdpSocket;
 			sourceTree = "<group>";
 		};
+		022F2F9117FC03D3004A1E87 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FC1DE55816DCD03D008CE989 /* MainMenu.xib */,
+				FCCA8F6B16F09D8400BE16FA /* UpdateWindow.xib */,
+				FC041FAF16ED6743001AE293 /* SpinningWindow.xib */,
+				FCAF7A7716E75229006EDA2D /* MainWindow.xib */,
+				FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		022F2F9217FC047F004A1E87 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				022F2F8E17FC00DD004A1E87 /* AppData.h */,
+				022F2F8F17FC00DD004A1E87 /* AppData.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		02F976B217F69250006B97A4 /* Extras */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +233,10 @@
 			isa = PBXGroup;
 			children = (
 				FC1DE54A16DCD03D008CE989 /* Supporting Files */,
+				FCAF7A8016E75D8F006EDA2D /* Resources */,
+				022F2F9217FC047F004A1E87 /* Models */,
+				022F2F9117FC03D3004A1E87 /* Views */,
+				FCCA9C8316E9A0D70069C9E1 /* Controllers */,
 				FC1DE55516DCD03D008CE989 /* AppDelegate.h */,
 				FC1DE55616DCD03D008CE989 /* AppDelegate.m */,
 				FC344264170346CD001D80CD /* AppController.h */,
@@ -222,8 +245,6 @@
 				FCBD321A16E6115E002B1ED1 /* NetworkInterface.m */,
 				FCCA8F6016F08EBD00BE16FA /* StatisticsAndUpdate.h */,
 				FCCA8F6116F08EBD00BE16FA /* StatisticsAndUpdate.m */,
-				FCCA9C8316E9A0D70069C9E1 /* Controllers */,
-				FCAF7A8016E75D8F006EDA2D /* Resources */,
 			);
 			path = SwiftzMac;
 			sourceTree = "<group>";
@@ -248,11 +269,6 @@
 				FC041FBC16EDA4F2001AE293 /* statusAlternate.png */,
 				FC041FBA16EDA3C7001AE293 /* status.png */,
 				FCCA9C8716EC1E490069C9E1 /* Swiftz.png */,
-				FC1DE55816DCD03D008CE989 /* MainMenu.xib */,
-				FCCA8F6B16F09D8400BE16FA /* UpdateWindow.xib */,
-				FC041FAF16ED6743001AE293 /* SpinningWindow.xib */,
-				FCAF7A7716E75229006EDA2D /* MainWindow.xib */,
-				FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */,
 				FC041FB516ED974C001AE293 /* Localizable.strings */,
 			);
 			name = Resources;
@@ -381,6 +397,7 @@
 				FCBD31F316E4E200002B1ED1 /* MainWindow.m in Sources */,
 				FCBD31F816E4E224002B1ED1 /* PreferencesWindow.m in Sources */,
 				FCBD320916E5BAD4002B1ED1 /* Amtium.m in Sources */,
+				022F2F9017FC00DD004A1E87 /* AppData.m in Sources */,
 				FCBD321B16E6115E002B1ED1 /* NetworkInterface.m in Sources */,
 				FCAF7A8B16E767E6006EDA2D /* AmtiumPacket.m in Sources */,
 				FCAF7A8E16E77128006EDA2D /* AmtiumConstants.m in Sources */,
@@ -406,7 +423,6 @@
 		FC041FAF16ED6743001AE293 /* SpinningWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FC041FAE16ED6743001AE293 /* en */,
 				FC041FB916ED9FDD001AE293 /* zh-Hans */,
 			);
 			name = SpinningWindow.xib;
@@ -440,7 +456,6 @@
 		FC1DE55816DCD03D008CE989 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FCBD321F16E61B52002B1ED1 /* en */,
 				FC041FB816ED9F21001AE293 /* zh-Hans */,
 			);
 			name = MainMenu.xib;
@@ -449,7 +464,6 @@
 		FCAF7A7716E75229006EDA2D /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FCAF7A7616E75229006EDA2D /* en */,
 				FC041FB616ED9E7A001AE293 /* zh-Hans */,
 			);
 			name = MainWindow.xib;
@@ -458,7 +472,6 @@
 		FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FCAF7A7A16E75239006EDA2D /* en */,
 				FCC3BB8716F083D9001ECB2E /* zh-Hans */,
 			);
 			name = PreferencesWindow.xib;
@@ -467,7 +480,6 @@
 		FCCA8F6B16F09D8400BE16FA /* UpdateWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FCCA8F6A16F09D8400BE16FA /* en */,
 				FCCA8F6C16F09D8600BE16FA /* zh-Hans */,
 			);
 			name = UpdateWindow.xib;

@@ -19,7 +19,6 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="499" y="290" width="330" height="240"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <value key="minSize" type="size" width="340" height="220"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="330" height="240"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -74,9 +73,8 @@ DQ
                                                 <menu key="menu" title="OtherViews" id="83"/>
                                             </popUpButtonCell>
                                             <connections>
-                                                <binding destination="441" name="content" keyPath="entries" id="cYk-hG-emF"/>
-                                                <binding destination="441" name="contentValues" keyPath="entries" previousBinding="cYk-hG-emF" id="wtV-MO-L8U"/>
-                                                <binding destination="441" name="selectedObject" keyPath="entry" previousBinding="wtV-MO-L8U" id="nj3-It-P6Q"/>
+                                                <binding destination="djh-TR-RQA" name="contentValues" keyPath="entries" id="hw3-Wx-LEh"/>
+                                                <binding destination="djh-TR-RQA" name="selectedValue" keyPath="entry" previousBinding="hw3-Wx-LEh" id="kzT-JW-g28"/>
                                             </connections>
                                         </popUpButton>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="92">
@@ -120,12 +118,7 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <connections>
-                                                <binding destination="441" name="value" keyPath="server" id="5jh-sZ-1Jg">
-                                                    <dictionary key="options">
-                                                        <string key="NSNullPlaceholder">未设置</string>
-                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                    </dictionary>
-                                                </binding>
+                                                <binding destination="djh-TR-RQA" name="value" keyPath="server" id="jye-GX-8Lg"/>
                                             </connections>
                                         </textField>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="234">
@@ -135,9 +128,6 @@ DQ
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <connections>
-                                                <binding destination="441" name="value" keyPath="shouldUseKeychain" id="483"/>
-                                            </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="486">
                                             <rect key="frame" x="93" y="37" width="174" height="18"/>
@@ -146,9 +136,6 @@ DQ
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
-                                            <connections>
-                                                <binding destination="441" name="value" keyPath="shouldShowStatusBarMenu" id="497"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -194,7 +181,7 @@ DQ
                                                 <binding destination="399" name="content" keyPath="arrangedObjects" id="442"/>
                                                 <binding destination="399" name="contentValues" keyPath="arrangedObjects.description" previousBinding="469" id="480"/>
                                                 <binding destination="399" name="contentObjects" keyPath="arrangedObjects.name" previousBinding="442" id="469"/>
-                                                <binding destination="441" name="selectedObject" keyPath="interface" previousBinding="480" id="481"/>
+                                                <binding destination="djh-TR-RQA" name="selectedValue" keyPath="interface" previousBinding="480" id="YPu-4y-C3x"/>
                                             </connections>
                                         </popUpButton>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="130">
@@ -227,14 +214,8 @@ DQ
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </comboBoxCell>
                                             <connections>
-                                                <binding destination="441" name="value" keyPath="ip" previousBinding="INB-ur-RUP" id="eHM-fR-8oa">
-                                                    <dictionary key="options">
-                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <bool key="NSValidatesImmediately" value="YES"/>
-                                                    </dictionary>
-                                                </binding>
-                                                <binding destination="441" name="content" keyPath="ipAddresses" id="Gnk-dO-6gM"/>
-                                                <binding destination="441" name="contentValues" keyPath="ipAddresses" previousBinding="Gnk-dO-6gM" id="INB-ur-RUP"/>
+                                                <binding destination="djh-TR-RQA" name="contentValues" keyPath="addresses" id="vxl-5u-uhD"/>
+                                                <binding destination="djh-TR-RQA" name="value" keyPath="address" previousBinding="vxl-5u-uhD" id="13m-kZ-97I"/>
                                             </connections>
                                         </comboBox>
                                     </subviews>
@@ -270,17 +251,14 @@ DQ
                 <outlet property="delegate" destination="-2" id="4"/>
             </connections>
         </window>
-        <arrayController objectClassName="NetworkInterface" editable="NO" id="399">
+        <arrayController objectClassName="NetworkInterfaces" editable="NO" id="399">
             <declaredKeys>
                 <string>name</string>
                 <string>localizedDisplayName</string>
                 <string>hardwareAddress</string>
                 <string>description</string>
             </declaredKeys>
-            <connections>
-                <binding destination="441" name="contentArray" keyPath="interfaces" id="hQp-b4-4ne"/>
-            </connections>
         </arrayController>
-        <customObject id="441" customClass="AppDelegate"/>
+        <customObject id="djh-TR-RQA" customClass="AppData"/>
     </objects>
 </document>

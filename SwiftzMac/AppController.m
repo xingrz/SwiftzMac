@@ -25,8 +25,6 @@ NSString * const kSMOnlineChangedNotification = @"SMOnlineChanged";
 
 @implementation AppController
 
-static AppController *controller = nil;
-
 @synthesize amtium;
 @synthesize mainWindow;
 @synthesize preferencesWindow;
@@ -35,8 +33,12 @@ static AppController *controller = nil;
 
 + (AppController *)sharedController
 {
-    if (controller == nil) {
-        controller = [[super allocWithZone:NULL] init];
+    static AppController *controller;
+    
+    @synchronized(self) {
+        if (!controller) {
+            controller = [[super alloc] init];
+        }
     }
 
     return controller;
