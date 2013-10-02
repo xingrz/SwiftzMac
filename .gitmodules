@@ -1,0 +1,9 @@
+[submodule "sskeychain"]
+	path = sskeychain
+	url = https://github.com/soffes/sskeychain.git
+[submodule "Reachability"]
+	path = Reachability
+	url = https://github.com/tonymillion/Reachability.git
+[submodule "CocoaAsyncSocket"]
+	path = CocoaAsyncSocket
+	url = https://github.com/robbiehanson/CocoaAsyncSocket.git
