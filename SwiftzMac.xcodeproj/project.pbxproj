@@ -425,7 +425,7 @@
 				FC041FB916ED9FDD001AE293 /* zh-Hans */,
 			);
 			name = SpinningWindow.xib;
-			path = Resources;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 		FC041FB516ED974C001AE293 /* Localizable.strings */ = {
@@ -434,7 +434,7 @@
 				FC041FB716ED9E7A001AE293 /* zh-Hans */,
 			);
 			name = Localizable.strings;
-			path = Resources;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 		FC1DE54C16DCD03D008CE989 /* InfoPlist.strings */ = {
@@ -459,7 +459,7 @@
 				FC041FB816ED9F21001AE293 /* zh-Hans */,
 			);
 			name = MainMenu.xib;
-			path = Resources;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 		FCAF7A7716E75229006EDA2D /* MainWindow.xib */ = {
@@ -468,7 +468,7 @@
 				FC041FB616ED9E7A001AE293 /* zh-Hans */,
 			);
 			name = MainWindow.xib;
-			path = Resources;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 		FCAF7A7B16E75239006EDA2D /* PreferencesWindow.xib */ = {
@@ -477,7 +477,7 @@
 				FCC3BB8716F083D9001ECB2E /* zh-Hans */,
 			);
 			name = PreferencesWindow.xib;
-			path = Resources;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 		FCCA8F6B16F09D8400BE16FA /* UpdateWindow.xib */ = {
@@ -486,7 +486,7 @@
 				FCCA8F6C16F09D8600BE16FA /* zh-Hans */,
 			);
 			name = UpdateWindow.xib;
-			path = Resources;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
