@@ -28,17 +28,19 @@ extern NSString * const SMUsernameKey;
     NSUserDefaults *_defaults;
 }
 
++ (AppData *)instance;
+
 // flags
 @property (readonly) BOOL firstrun;
 
 // caches
-@property (readonly) NSArray *entries;
-@property (readonly) NSArray *addresses;
-@property (readonly) NSArray *interfaces;
+@property NSArray *entries;
+@property NSArray *addresses;
+@property NSArray *interfaces;
 
 // network info
-@property (readonly) BOOL allowManualIp;
-@property (readonly) NSString *mac;
+@property BOOL allowManualIp;
+@property NSString *mac;
 
 // login params
 @property NSString *username;

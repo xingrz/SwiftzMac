@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "AppController.h"
 
+#import "AppData.h"
+
 #import "MainWindow.h"
 #import "SpinningWindow.h"
 
@@ -36,7 +38,7 @@
 - (void)windowDidLoad
 {
     // 加载钥匙串
-    if ([appdelegate shouldUseKeychain]) {
+    if ([[AppData instance] shouldUseKeychain]) {
         [self willChangeValueForKey:@"accounts"];
 
         NSMutableArray *result = [[NSMutableArray alloc] init];
@@ -50,7 +52,7 @@
 
         [self didChangeValueForKey:@"accounts"];
 
-        NSString *theUsername = [appdelegate username];
+        NSString *theUsername = [AppData instance].username;
         if (theUsername == nil) theUsername = [result objectAtIndex:0];
         [self setUsername:theUsername];
     }
@@ -65,7 +67,7 @@
 
 - (void)login:(id)sender
 {
-    if ([appdelegate shouldUseKeychain]) {
+    if ([[AppData instance] shouldUseKeychain]) {
         [SSKeychain setPassword:[self password]
                      forService:@"SwiftzMac"
                         account:[self username]];
@@ -83,7 +85,7 @@
 {
     [self willChangeValueForKey:@"username"];
     username = theUsername;
-    [appdelegate setUsername:theUsername];
+    [[AppData instance] setUsername:theUsername];
     [self didChangeValueForKey:@"username"];
 
     NSString *thePassword = [SSKeychain passwordForService:@"SwiftzMac"

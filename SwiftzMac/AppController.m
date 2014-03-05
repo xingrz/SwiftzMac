@@ -7,6 +7,7 @@
 //
 
 #import "AppController.h"
+#import "AppData.h"
 
 #import "Amtium.h"
 #import "AmtiumLoginResult.h"
@@ -161,20 +162,20 @@ NSString * const kSMOnlineChangedNotification = @"SMOnlineChanged";
 
 - (void)apply
 {
-    NSLog(@"apply server:%@ entry:%@ mac:%@ ip:%@", appdelegate.server, appdelegate.entry, appdelegate.mac, appdelegate.ip);
+    NSLog(@"apply server:%@ entry:%@ mac:%@ ip:%@", [AppData instance].server, [AppData instance].entry, [AppData instance].mac, [AppData instance].address);
     
     [amtium setMac:appdelegate.mac];
     [amtium setIp:appdelegate.ip];
     
-    if (!appdelegate.server || !appdelegate.entry) {
+    if (![AppData instance].server || ![AppData instance].entry) {
         NSLog(@"mac or entry not set, start initialize");
         NSString *preparing = NSLocalizedString(@"MSG_PREPARING", nil);
         [self showSpinning:preparing didCancelSelector:@selector(firstRunDidCancel:)];
         [amtium searchServer:@selector(firstRunWithAmtium:didGetServer:)];
     }
     else {
-        [amtium setServer:appdelegate.server];
-        [amtium setEntry:appdelegate.entry];
+        [amtium setServer:[AppData instance].server];
+        [amtium setEntry:[AppData instance].entry];
     }
 }
 
@@ -184,8 +185,8 @@ NSString * const kSMOnlineChangedNotification = @"SMOnlineChanged";
                        didErrorSelector:@selector(amtium:didError:)
                        didCloseSelector:@selector(amtium:didCloseWithReason:)];
 
-    BOOL isFirstRun = [appdelegate initialUse];
-    BOOL ipDidChange = ![appdelegate ipManual] && ![[appdelegate ipAddresses] containsObject:[appdelegate ip]];
+    BOOL isFirstRun = [AppData instance].firstrun;
+    BOOL ipDidChange = ![AppData instance].allowManualIp && ![[AppData instance].addresses containsObject:[AppData instance].address];
 
     // 如果是第一次运行则开始初始化
     if (isFirstRun) {
@@ -305,15 +306,15 @@ NSString * const kSMOnlineChangedNotification = @"SMOnlineChanged";
 
 - (void)firstRunWithAmtium:(Amtium *)aAmtium didGetServer:(NSString *)server
 {
-    [appdelegate setServer:server];
+    [[AppData instance] setServer:server];
     [amtium fetchEntries:@selector(firstRunWithAmtium:didGetEntries:)];
 }
 
 - (void)firstRunWithAmtium:(Amtium *)aAmtium didGetEntries:(NSArray *)entries
 {
-    [appdelegate setEntries:entries];
-    [appdelegate setEntry:[entries objectAtIndex:0]];
-    [appdelegate setInitialUse:NO];
+    [AppData instance].entries = entries;
+    [[AppData instance] setEntry:[entries objectAtIndex:0]];
+    [[AppData instance] setInitialUse:NO];
 
     [self closeSpinning];
     [self apply];

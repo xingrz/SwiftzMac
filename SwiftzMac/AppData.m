@@ -66,6 +66,12 @@ NSString * const SMUsernameKey = @"Username";
     return _entries;
 }
 
+- (void)setEntries:(NSArray *)entries {
+    [self willChangeValueForKey:@"entries"];
+    [_defaults setObject:entries forKey:SMEntryListKey];
+    [self didChangeValueForKey:@"entries"];
+}
+
 - (NSArray *)addresses {
     return _addresses;
 }

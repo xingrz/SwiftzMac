@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "AppController.h"
+
+#import "AppData.h"
+
 #import "MainWindow.h"
 #import "PreferencesWindow.h"
 
@@ -35,8 +38,8 @@
 {
     // 艹他个蛋，谁能告诉我为什么 App Delegate 的值变化之后这些文本框的值不会跟着变？！
     if ([self.server.stringValue isEqual: @""] || self.entries.itemTitles.count == 0) {
-        [self.server setStringValue:appdelegate.server];
-        [self.entries addItemsWithTitles:appdelegate.entries];
+        [self.server setStringValue:[AppData instance].server];
+        [self.entries addItemsWithTitles:[AppData instance].entries];
         //[self.entries setStringValue:appdelegate.entries[0]];
     }
     
@@ -60,7 +63,7 @@
 }
 
 - (IBAction)ok:(id)sender {
-    if (![appdelegate.ipAddresses containsObject:appdelegate.ip]) {
+    if (![[AppData instance].addresses containsObject:[AppData instance].address]) {
         NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"MSG_MANUALIP", nil)
                                          defaultButton:NSLocalizedString(@"MSG_MANUALIP_YES", nil)
                                        alternateButton:NSLocalizedString(@"MSG_MANUALIP_NO", nil)
