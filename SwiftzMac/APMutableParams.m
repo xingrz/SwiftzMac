@@ -32,9 +32,9 @@
     unsigned char buffer[length];
     [data getBytes:buffer length:length];
 
-    unsigned char offset = 0;
+    unsigned int offset = 0;
     
-    while (offset < sizeof(buffer)) {
+    while (offset < sizeof(buffer) -2) {
         unsigned char key = buffer[offset];
         unsigned char length = buffer[offset + 1];
 
